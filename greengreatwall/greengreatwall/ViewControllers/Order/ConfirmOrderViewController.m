@@ -193,7 +193,9 @@
     
     HPWeak;
     self.bottomView.AccountBlock = ^{
-        [weakSelf netRequest];
+        if (weakSelf.deliveryAddressModelSelected) {
+            [weakSelf netRequest];
+        }
     };
 }
 
@@ -304,15 +306,19 @@
             NSArray *dataArray = [NSArray arrayWithArray:response[@"result"][@"store_cart_list_api"]];
             self->_string_vat_hash = response[@"result"][@"vat_hash"];
             
-            NSDictionary *dicAddress = response[@"result"][@"address_info"];
-            DeliveryAddressModel *model = [[DeliveryAddressModel alloc]init];
-            [model setValuesForKeysWithDictionary:dicAddress];
+            if (![response[@"result"][@"address_info"] isEqual:[NSNull null]]) {
+                
+                NSDictionary *dicAddress = response[@"result"][@"address_info"];
+                DeliveryAddressModel *model = [[DeliveryAddressModel alloc]init];
+                [model setValuesForKeysWithDictionary:dicAddress];
+                
+                self.deliveryAddressModelSelected = model;
+                
+                [self.labelAddress setText:model.address_detail];
+                [self.labelRealname setText:model.address_realname];
+                [self.labelMobile setText:model.address_mob_phone];
+            }
             
-            self.deliveryAddressModelSelected = model;
-            
-            [self.labelAddress setText:model.address_detail];
-            [self.labelRealname setText:model.address_realname];
-            [self.labelMobile setText:model.address_mob_phone];
             
             [self.bottomView.labelTotalPrice setText:[NSString stringWithFormat:@"共计 ¥ %@",response[@"result"][@"order_amount"]]];
             

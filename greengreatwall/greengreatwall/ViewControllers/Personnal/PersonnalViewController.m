@@ -279,7 +279,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_viewContent[0] addSubview:_labelContentFirstTitle];
     _labelContentFirstTitle.text = @"我的订单";
 //    imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-    NSArray *arrayImageName = @[@"待付款",@"代发货",@"代发货",@"完成"];//,@"取消"
+    NSArray *arrayImageName = @[@"待付款",@"代发货",@"完成",@"取消"];//,@"取消"
     NSArray *arrayTitleName = @[@"待付款",@"待发货",@"待收货",@"已完成"];//,@"已取消"
     
     NSInteger lieContent = arrayTitleName.count;

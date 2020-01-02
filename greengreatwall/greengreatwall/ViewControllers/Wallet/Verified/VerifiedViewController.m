@@ -34,6 +34,10 @@
     NSMutableArray          *area_dataArray2;
     NSMutableArray          *area_dataArray3;
     
+    NSString                *stringProvince_id;
+    NSString                *stringCity_id;
+    NSString                *stringRegion_id;
+    
     NSMutableArray<ProvinceModel *>          *_arrayDataSource;
     
     UIImagePickerController *pickerController;
@@ -54,6 +58,8 @@
     
     //初始化pickController
     [self createData];
+    
+    [self netRequest];
 }
 
 -(instancetype)init
@@ -61,6 +67,7 @@
     if (self = [super init]) {
         _arrayDataSourcePhoto = [[NSMutableArray alloc]initWithObjects:@"0",@"0", nil];
         _arrayDataSource = [[NSMutableArray alloc]init];
+        areaIndex1 = 99999999;
         areaIndex = 0;
         area_dataArray1 = [[NSMutableArray alloc]init];
         area_dataArray2 = [[NSMutableArray alloc]init];
@@ -161,7 +168,7 @@
     
     [_viewContent[2] addSubview:_textFieldTemp[4]];
     [_textFieldTemp[4] setFrame:CGRectMake(0, (_viewContent[2].height/2.0) *1, _viewContent[2].width, _viewContent[2].height/2.0)];
-    _textFieldTemp[4].keyboardType = UIKeyboardTypeDefault;
+    _textFieldTemp[4].keyboardType = UIKeyboardTypeNumberPad;
     
     
     [_labelTemp[5] setFrame:CGRectMake(10, 10+(_viewContent[0].height/4.0) *0, _viewContent[0].width - 10 - 10, (_viewContent[0].height/4.0)-20)];
@@ -176,13 +183,13 @@
     CGFloat height = width *(255.0/448.0);
     
     _buttonIDCardpositive = [UIButton initButtonTitleFont:22 titleColor:[UIColor clearColor] backgroundColor:[UIColor clearColor] imageName:nil titleName:@"正面"];
-    [_buttonIDCardpositive setBackgroundImage:GetImage(@"正面照片") forState:UIControlStateNormal];
+    [_buttonIDCardpositive setImage:GetImage(@"正面照片") forState:UIControlStateNormal];
     [_buttonIDCardpositive addTarget:self tag:13 action:@selector(buttonClick:)];
     [_buttonIDCardpositive setFrame:CGRectMake(60*GPCommonLayoutScaleSizeWidthIndex, 130*GPCommonLayoutScaleSizeWidthIndex, width, height)];
     [_viewContent[1] addSubview:_buttonIDCardpositive];
     
     _buttonIDCardReverse = [UIButton initButtonTitleFont:22 titleColor:[UIColor clearColor] backgroundColor:[UIColor clearColor] imageName:nil titleName:@"反面"];
-    [_buttonIDCardReverse setBackgroundImage:GetImage(@"反面照片") forState:UIControlStateNormal];
+    [_buttonIDCardReverse setImage:GetImage(@"反面照片") forState:UIControlStateNormal];
     [_buttonIDCardReverse addTarget:self tag:14 action:@selector(buttonClick:)];
     [_buttonIDCardReverse setFrame:CGRectMake(_viewContent[1].width/2.0 +_buttonIDCardpositive.left, _buttonIDCardpositive.top, width, height)];
     [_viewContent[1] addSubview:_buttonIDCardReverse];
@@ -247,15 +254,76 @@
 
 -(void)netRequest
 {
+//    HPWeak;
+    
+    [HPNetManager POSTWithUrlString:HostMmemberauthauth isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"userid"],@"member_id", nil] successBlock:^(id response) {
+        //GPDebugLog(@"response:%@",response);
+        if ([response[@"code"] integerValue] == 200) {
+            //            0默认，
+            //            1审核中，
+            //            2未通过，
+            //            3已认证
+            if ([[NSString stringWithFormat:@"%@",response[@"result"][@"member_auth_state"]]isEqualToString:@"0"]) {
+                return ;
+            }else{
+                [self->_textFieldTemp[0] setText:response[@"result"][@"username"]];
+                [self->_textFieldTemp[1] setText:response[@"result"][@"idcard"]];
+                [self->_textFieldTemp[2] setText:response[@"result"][@"member_areainfo"]];
+                self->stringProvince_id = response[@"result"][@"member_provinceid"];
+                self->stringCity_id = response[@"result"][@"member_cityid"];
+                self->stringRegion_id = response[@"result"][@"member_areaid"];
+                [self->_buttonIDCardpositive sd_setImageWithURL:URL(response[@"result"][@"member_idcard_image2"]) forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                    [self->_arrayDataSourcePhoto replaceObjectAtIndex:0 withObject:image];
+                }];
+                [self->_buttonIDCardReverse sd_setImageWithURL:URL(response[@"result"][@"member_idcard_image3"]) forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                    [self->_arrayDataSourcePhoto replaceObjectAtIndex:1 withObject:image];
+                }];
+                [self->_textFieldTemp[3] setText:response[@"result"][@"member_bankname"]];
+                [self->_textFieldTemp[4] setText:response[@"result"][@"member_bankcard"]];
+            }
+            if ([[NSString stringWithFormat:@"%@",response[@"result"][@"member_auth_state"]]isEqualToString:@"1"]) {
+                [self->_buttonTemp setUserInteractionEnabled:NO];
+                [self->_buttonTemp setTitle:@"认证中" forState:UIControlStateNormal];
+                [self->_buttonTemp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [self->_buttonTemp setBackgroundImage:CreateImageWithColor([UIColor lightGrayColor]) forState:UIControlStateNormal];
+            }
+            if ([[NSString stringWithFormat:@"%@",response[@"result"][@"member_auth_state"]]isEqualToString:@"2"]) {
+                [HPAlertTools showAlertWith:self title:@"提示信息" message:@"您提交的认证未通过,请检查后确认无误重新提交。" callbackBlock:^(NSInteger btnIndex) {
+                    //                [weakSelf.navigationController popViewControllerAnimated:YES];
+                } cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"确定",nil];
+            }
+            if ([[NSString stringWithFormat:@"%@",response[@"result"][@"member_auth_state"]]isEqualToString:@"3"]) {
+                [self->_buttonTemp setUserInteractionEnabled:NO];
+                [self->_buttonTemp setTitle:@"已认证" forState:UIControlStateNormal];
+                //                [self->_buttonTemp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                //                [self->_buttonTemp setBackgroundImage:CreateImageWithColor([UIColor lightGrayColor]) forState:UIControlStateNormal];
+            }
+            
+        }
+        else
+        {
+            [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:response[@"message"] buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
+        }
+    } failureBlock:^(NSError *error) {
+        
+    } progressBlock:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+-(void)uploadInfo
+{
     HPWeak;
     
-    ProvinceModel *provinceModel = _arrayDataSource[areaIndex1];
-    CityModel *cityModel = provinceModel.citysArray[areaIndex2];
-    RegionModel *regionModel = cityModel.regionsArray[areaIndex3];
-    
-    NSString *stringProvince_id = provinceModel.area_id;
-    NSString *stringCity_id = cityModel.area_id;
-    NSString *stringRegion_id = regionModel.area_id;
+    if (99999999 != areaIndex1) {
+        ProvinceModel *provinceModel = _arrayDataSource[areaIndex1];
+        CityModel *cityModel = provinceModel.citysArray[areaIndex2];
+        RegionModel *regionModel = cityModel.regionsArray[areaIndex3];
+        
+        stringProvince_id = provinceModel.area_id;
+        stringCity_id = cityModel.area_id;
+        stringRegion_id = regionModel.area_id;
+    }
     
     
     [HPNetManager uploadImageWithUrlString:HostMmemberauthauth parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"userid"],@"member_id",_textFieldTemp[0].text,@"username",_textFieldTemp[1].text,@"idcard",_textFieldTemp[2].text,@"member_areainfo",_textFieldTemp[3].text,@"member_bankname",_textFieldTemp[4].text,@"member_bankcard",stringCity_id,@"member_cityid",stringRegion_id,@"member_areaid",stringProvince_id,@"member_provinceid",@"1",@"commit", nil] imageArray:_arrayDataSourcePhoto fileNames:@[@"member_idcard_image2",@"member_idcard_image3"] imageType:@"jpg" imageScale:1 successBlock:^(id response) {
@@ -264,7 +332,7 @@
         if ([response[@"code"] integerValue] == 200) {
             [HPAlertTools showAlertWith:self title:@"提示信息" message:@"添加成功" callbackBlock:^(NSInteger btnIndex) {
                 [weakSelf.navigationController popViewControllerAnimated:YES];
-//                HPNOTIF_POST(@"refreshAddressList", nil);
+                //                HPNOTIF_POST(@"refreshAddressList", nil);
             } cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"确定",nil];
         }
         else
@@ -274,9 +342,9 @@
         
     } failurBlock:^(NSError *error) {
         //GPDebugLog(@"error:%@",error.description);
-        NSDictionary * data = error.userInfo;
+        //NSDictionary * data = error.userInfo;
         //GPDebugLog(@"data:%@",data)
-        NSString * str = [[NSString alloc]initWithData:data[@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding];
+        //NSString * str = [[NSString alloc]initWithData:data[@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding];
         //GPDebugLog(@"服务器的错误原因:%@",str);
         
     } progressBlock:^(int64_t bytesProgress, int64_t totalBytesProgress) {
@@ -307,7 +375,7 @@
     else if (_buttonTemp == btn)
     {
         if ([self checkAll]) {
-            [self netRequest];
+            [self uploadInfo];
         }
     }
 }
@@ -486,7 +554,7 @@
     
     UIImage *userImage = [self fixOrientation:[info objectForKey:@"UIImagePickerControllerOriginalImage"]];
     
-//    userImage = [self scaleImage:userImage toScale:0.3];
+    //    userImage = [self scaleImage:userImage toScale:0.3];
     
     //保存图片
     //    [self saveImage:userImage name:@"某个特定标示"];
@@ -494,7 +562,7 @@
     [pickerController dismissViewControllerAnimated:YES completion:^{
         
     }];
-    [_buttonSelect setBackgroundImage:userImage forState:UIControlStateNormal];
+    [_buttonSelect setImage:userImage forState:UIControlStateNormal];
     _buttonSelect.clipsToBounds = YES;
     if (_buttonSelect == _buttonIDCardpositive) {
         [_arrayDataSourcePhoto replaceObjectAtIndex:0 withObject:userImage];

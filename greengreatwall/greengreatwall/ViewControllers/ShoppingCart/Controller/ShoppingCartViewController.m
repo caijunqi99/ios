@@ -52,6 +52,8 @@
     if (self)
     {
         HPNOTIF_ADD(@"orderPaySuccess", headerRereshing);
+        HPNOTIF_ADD(@"orderPayCancel", headerRereshing);
+        
     }
     return self;
 }
@@ -173,6 +175,28 @@
     //尾部刷新控件
     //    scrollView.mj_footer = footer;
 //    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
+}
+
+//下拉刷新
+- (void)EditCartWithId:(NSString *)cart_id AndQuantity:(NSString *)quantity
+{
+    [HPNetManager POSTWithUrlString:Hostmembercartcart_edit_quantity isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",quantity,@"quantity",cart_id,@"cart_id", nil] successBlock:^(id response) {
+        //GPDebugLog(@"response:%@",response);
+
+        if ([response[@"code"] integerValue] == 200) {
+            
+        }
+        else
+        {
+            [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:response[@"message"] buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    } progressBlock:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    
 }
 
 //下拉刷新
@@ -383,8 +407,8 @@
         if (self.selectArray.count) {
             NSMutableString *stringCart_id = [NSMutableString stringWithFormat:@""];
             for (GoodsModel *goods in self.selectArray) {
-                
                 [stringCart_id appendFormat:@"%@", [NSString stringWithFormat:@"%@|%@,",goods.cart_id,goods.goods_num]];
+                [self EditCartWithId:goods.cart_id AndQuantity:goods.goods_num];
             }
             [stringCart_id deleteCharactersInRange:NSMakeRange(stringCart_id.length - 1, 1)];
             
@@ -424,6 +448,7 @@
         goodsModel.goods_num = countLabel.text;
         [storeModel.goodsArray replaceObjectAtIndex:indexPath.row withObject:goodsModel];
         if ([self.selectArray containsObject:goodsModel]) {
+            
             [self.selectArray removeObject:goodsModel];
             [self.selectArray addObject:goodsModel];
             [self countPrice];

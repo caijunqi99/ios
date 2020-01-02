@@ -348,7 +348,9 @@
         else
         {
             [self->_tableView.mj_header endRefreshing];
-            [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:response[@"message"] buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
+            [HPAlertTools showAlertWith:getCurrentViewController() title:@"提示信息" message:response[@"message"] callbackBlock:^(NSInteger btnIndex) {
+                [self.navigationController popViewControllerAnimated:YES];
+            } cancelButtonTitle:nil destructiveButtonTitle:@"确定" otherButtonTitles:nil];
         }
         
     } failureBlock:^(NSError *error) {

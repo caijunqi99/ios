@@ -242,8 +242,13 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         cell = [[StoreListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentify];
     }
     cell.btnClick = ^(UIButton*btn){
-        //GPDebugLog(@"indexPath.row:%ld",(long)indexPath.row);
-        //GPDebugLog(@"btn.tag:%ld",btn.tag);
+        GPDebugLog(@"indexPath.row:%ld",(long)indexPath.row);
+        GPDebugLog(@"btn.tag:%ld",(long)btn.tag);
+        
+        GoodsViewController *vc = [[GoodsViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.goods_id = self->_arrayDataSource[indexPath.row][@"search_list_goods"][btn.tag-1][@"goods_id"];
+        [self.navigationController pushViewController:vc animated:YES];
     };
     cell.dic = _arrayDataSource[indexPath.row];
     

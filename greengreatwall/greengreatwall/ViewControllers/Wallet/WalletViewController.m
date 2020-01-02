@@ -93,14 +93,14 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     _viewShadowUserLv = [UIView initViewBackColor:[UIColor whiteColor]];
     [_viewTemp addSubview:_viewShadowUserLv];
-    [_viewShadowUserLv setFrame:RectWithScale(CGRectMake(500, 40, 240, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_viewShadowUserLv setFrame:RectWithScale(CGRectMake(480, 40, 240, 50), GPCommonLayoutScaleSizeWidthIndex)];
     [_viewShadowUserLv rounded:25*GPCommonLayoutScaleSizeWidthIndex];
     [_viewShadowUserLv shadow:[UIColor blackColor] opacity:1 radius:10 offset:CGSizeMake(0, 0)];
     
     
     _viewShadowCompany = [UIView initViewBackColor:[UIColor whiteColor]];
     [_viewTemp addSubview:_viewShadowCompany];
-    [_viewShadowCompany setFrame:RectWithScale(CGRectMake(780, 40, 280, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_viewShadowCompany setFrame:RectWithScale(CGRectMake(740, 40, 300, 50), GPCommonLayoutScaleSizeWidthIndex)];
     [_viewShadowCompany rounded:25*GPCommonLayoutScaleSizeWidthIndex];
     [_viewShadowCompany shadow:[UIColor blackColor] opacity:1 radius:10 offset:CGSizeMake(0, 0)];
     
@@ -151,7 +151,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_labelTemp[3] setTextColor:[UIColor blackColor]];
     _labelTemp[3].textAlignment = NSTextAlignmentLeft;
     
-    [_labelTemp[4] setFrame:RectWithScale(CGRectMake(70, 0, 150, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_labelTemp[4] setFrame:RectWithScale(CGRectMake(70, 0, 200, 50), GPCommonLayoutScaleSizeWidthIndex)];
     [_viewShadowCompany addSubview:_labelTemp[4]];
     [_labelTemp[4] setTextColor:[UIColor blackColor]];
     _labelTemp[4].textAlignment = NSTextAlignmentLeft;
@@ -325,7 +325,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _labelTemp[7].text = stringmember_points;
     
     NSString *stringavator = dicMemberInfo[@"avator"];
-    [_imageViewTemp[0] sd_setImageWithURL:URL(stringavator) placeholderImage:defaultImage options:SDWebImageRefreshCached];
+    [_imageViewTemp[0] sd_setImageWithURL:URL(stringavator) placeholderImage:defaultImage];
 }
 
 -(void)tapClick:(UIGestureRecognizer*)tap

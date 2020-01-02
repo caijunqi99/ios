@@ -217,9 +217,9 @@
     }];
 }
 
--(void)putInShoppingCart
+-(void)putInShoppingCartWithAmount:(NSString *)amount AndGoodsID:(NSString *)goodsId
 {
-    [HPNetManager POSTWithUrlString:Hostmembercartcart_add isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_goods_id,@"goods_id",@"1",@"quantity",[HPUserDefault objectForKey:@"token"],@"key", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostmembercartcart_add isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:goodsId,@"goods_id",amount,@"quantity",[HPUserDefault objectForKey:@"token"],@"key", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {
@@ -448,7 +448,11 @@
     };
     
     bottomView.PutInShoppingCartBlock = ^(void) {
-        [self putInShoppingCart];
+        
+        ProAttrSelectView *view = [[ProAttrSelectView alloc]initWithImageUrlString:self->_dicDataSource[@"goods_image"][0] andGoodsName:self->_dicDataSource[@"goods_info"][@"goods_name"]];
+        view.delegate = self;
+        view.tag = 200;
+        [view show];
     };
     
     bottomView.PurchaseBlock = ^{
@@ -459,16 +463,23 @@
 //        ]];
         ProAttrSelectView *view = [[ProAttrSelectView alloc]initWithImageUrlString:self->_dicDataSource[@"goods_image"][0] andGoodsName:self->_dicDataSource[@"goods_info"][@"goods_name"]];
         view.delegate = self;
+        view.tag = 100;
         [view show];
     };
 }
 
 - (void)proAttrSelectView:(ProAttrSelectView *)view didClickSureWithAttrs:(NSMutableArray *)attrs count:(NSInteger)count {
     //GPDebugLog(@"%@:%ld",attrs,count);
-    ConfirmOrderViewController *vc = [[ConfirmOrderViewController alloc]init];
-    [vc setCart_id:[NSString stringWithFormat:@"%@|%ld",_goods_id,(long)count] andIfcart:@"0"];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (view.tag == 100) {
+        ConfirmOrderViewController *vc = [[ConfirmOrderViewController alloc]init];
+        [vc setCart_id:[NSString stringWithFormat:@"%@|%ld",_goods_id,(long)count] andIfcart:@"0"];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if (view.tag == 200)
+    {
+        [self putInShoppingCartWithAmount:[NSString stringWithFormat:@"%ld",(long)count] AndGoodsID:_goods_id];
+    }
 }
 
 

@@ -477,7 +477,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _labelUserPhoneNumber.text = stringmobile;
     
     NSString *stringavator = dicMemberInfo[@"avator"];
-    [_imageViewUserHead sd_setImageWithURL:URL(stringavator) placeholderImage:defaultImage options:SDWebImageRefreshCached];
+    [_imageViewUserHead sd_setImageWithURL:URL(stringavator) placeholderImage:defaultImage];
     
     NSString *stringorder_nopay_count = [NSString stringWithFormat:@"%@",dicMemberInfo[@"order_nopay_count"]];
     _buttonContentFirst[0].badgeValue = stringorder_nopay_count;

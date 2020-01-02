@@ -22,7 +22,7 @@
     NSString                *_string_pay_amount;
     
     
-    NSString                *_string_password;
+//    NSString                *_string_password;
 }
 @property(nonatomic,strong)UIView               *viewTemp;
 @property(nonatomic,strong)UIView               *viewTempII;
@@ -85,7 +85,7 @@
     [self.view addSubview:self.viewTempII];
     [self.viewTempII setFrame:CGRectMake(0, self.viewTemp.bottom + 130*GPCommonLayoutScaleSizeWidthIndex, GPScreenWidth, 160*GPCommonLayoutScaleSizeWidthIndex)];
     
-    NSArray *arrayLabelText = @[@"订单金额",@"¥",@"支付方式",@"余额支付",@"余额:¥"];
+    NSArray *arrayLabelText = @[@"订单金额",@"¥",@"支付方式",@"储值卡支付",@"储值卡:¥"];
     
     for (NSInteger i = 0; i<5; i++) {
         
@@ -137,7 +137,11 @@
 
 -(void)leftClick
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    HPNOTIF_POST(@"orderPayCancel", nil);
+    [self popToController:@"GoodsViewController"];
+    [self popToController:@"ShoppingCartViewController"];
+    [self popToController:@"OrderListViewController"];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)rightClick
@@ -162,9 +166,9 @@
     return NO;
 }
 
--(void)netRequestToPay
+-(void)netRequestToPayWithPassword:(NSString *)password
 {
-    [HPNetManager POSTWithUrlString:HostMemberpaymentpay_new isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_string_pay_sn,@"pay_sn",_string_password,@"password",@"1",@"pd_pay",@"predeposit",@"payment_code", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostMemberpaymentpay_new isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_string_pay_sn,@"pay_sn",password,@"password",@"1",@"pd_pay",@"predeposit",@"payment_code", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {
@@ -246,8 +250,7 @@
 
 -(void)InputPayPasswordView:(InputPayPassword *)view didClickSureWithPassword:(NSString *)password
 {
-    _string_password = password;
-    [self netRequestToPay];
+    [self netRequestToPayWithPassword:password];
 }
 
 #pragma mark - lazy load懒加载

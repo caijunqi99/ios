@@ -19,12 +19,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)    UIView          *viewLogo;
 @property (nonatomic,strong)    UIImageView     *imageViewLogo;
 
-@property (nonatomic,strong)    UIImageView     *imageViewLevel;
-@property (nonatomic,strong)    UIImageView     *imageViewLevelExternal;
+//@property (nonatomic,strong)    UIImageView     *imageViewLevel;
+//@property (nonatomic,strong)    UIImageView     *imageViewLevelExternal;
 
 @property (nonatomic,strong)    UIImageView     *imageViewLeft;
 @property (nonatomic,strong)    UIImageView     *imageViewCenter;
 @property (nonatomic,strong)    UIImageView     *imageViewRight;
+
+@property (nonatomic,strong)    UIButton        *buttonLeft;
+@property (nonatomic,strong)    UIButton        *buttonCenter;
+@property (nonatomic,strong)    UIButton        *buttonRight;
 
 
 
@@ -32,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong)    UILabel         *labelSales;
 @property (nonatomic,strong)    UILabel         *labelStoreType;
-@property (nonatomic,strong)    UIButton        *buttonEditAddress;
+@property (nonatomic,strong)    UIButton        *buttonEnterStore;
 @property (nonatomic,strong)    CALayer         *shadowLayer;
 
 @end

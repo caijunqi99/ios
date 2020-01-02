@@ -258,7 +258,7 @@
 #pragma mark - 系统消息列表
 /**
  *获取消息列表
- *https://shop.bayi-shop.com/index.php/mobile/Membermessage/systemmsg?key=c5332610eb543bec515404889c8c41b8&page=1
+ *https://shop.bayi-shop.com/index.php/mobile/Membermessage/systemmsg
  *page      页码
  *key      token
  */
@@ -286,7 +286,7 @@
 #pragma mark - 店铺首页-获取店铺信息
 /**
  *获取店铺信息
- *https://shop.bayi-shop.com/mobile/Store/store_info?store_id=1
+ *https://shop.bayi-shop.com/mobile/Store/store_info
  *store_id 店铺ID
  */
 #define HostStorestore_info         Host@"/Store/store_info"//获取店铺信息
@@ -294,7 +294,7 @@
 #pragma mark - 获取店铺商品-获取某店铺所有商品 ---每页10条
 /**
  *获取某店铺所有商品 ---每页10条
- *https://shop.bayi-shop.com/mobile/Store/store_goods?store_id=1&page=1
+ *https://shop.bayi-shop.com/mobile/Store/store_goods
  *store_id 店铺ID
  *page 页码
  *key 0为默认综合排序 2为价格排序 3为销量排序 5为人气排序 order
@@ -315,7 +315,7 @@
 #pragma mark - 获取店铺首页推荐商品
 /**
  *获取店铺首页推荐商品
- *https://shop.bayi-shop.com/mobile/Store/GetStoreCommentGoods?store_id=1
+ *https://shop.bayi-shop.com/mobile/Store/GetStoreCommentGoods
  *store_id 店铺ID
  */
 #define HostStoreGetStoreCommentGoods         Host@"/Store/GetStoreCommentGoods"//获取店铺首页推荐商品
@@ -325,7 +325,7 @@
 #pragma mark - 商品加入购物车-把商品加入到购物车内
 /**
  *把商品加入到购物车内
- *https://shop.bayi-shop.com/mobile/membercart/cart_add?goods_id=1&quantity=1&key=token
+ *https://shop.bayi-shop.com/mobile/membercart/cart_add
  *goods_id      商品ID
  *quantity      加入数量
  *key       token  不可以为空
@@ -333,13 +333,24 @@
 #define Hostmembercartcart_add         Host@"/membercart/cart_add"//把商品加入到购物车内
 
 
-#pragma mark - 获取购物车内全部商品
+#pragma mark - 购物车列表 - 获取购物车内全部商品
 /**
- *获取购物车内全部商品
- *https://shop.bayi-shop.com/mobile/membercart/cart_list?key=c4a2d4bf8046fdada41da0dece8e3ad7
+ *购物车列表 - 获取购物车内全部商品
+ *https://shop.bayi-shop.com/mobile/membercart/cart_list
  *key       token  不可以为空
  */
-#define Hostmembercartcart_list         Host@"/membercart/cart_list"//获取购物车内全部商品
+#define Hostmembercartcart_list         Host@"/membercart/cart_list"//购物车列表 - 获取购物车内全部商品
+
+
+#pragma mark - 修改购物车商品数量
+/**
+ *修改购物车商品数量
+ *https://shop.bayi-shop.com/mobile/membercart/cart_edit_quantity
+ *key       token  不可以为空
+ *quantity  数量
+ *cart_id   购物车内商品 cart_id
+ */
+#define Hostmembercartcart_edit_quantity         Host@"/membercart/cart_edit_quantity"//修改购物车商品数量
 
 
 #pragma mark - 删除购物车商品 -把商品从购物车删除
@@ -375,7 +386,7 @@
 #pragma mark - 商品详情页-获取商品详情
 /**
  *获取商品详情
- *https://shop.bayi-shop.com/mobile/goods/goods_detail?goods_id=8
+ *https://shop.bayi-shop.com/mobile/goods/goods_detail
  *goods_id 商品ID
  */
 #define Hostgoodsgoods_detail         Host@"/goods/goods_detail"//获取商品详情
@@ -385,7 +396,7 @@
 #pragma mark - 获取店铺商品-获取某店铺所有商品 ---每页10条
 /**
  *获取某店铺所有商品 ---每页10条
- *https://shop.bayi-shop.com/mobile/Store/store_goods.html?store_id=1&page=1
+ *https://shop.bayi-shop.com/mobile/Store/store_goods.html
  *gc_id 分类ID
  *page 页码
  *key 0为默认综合排序 2为价格排序 3为销量排序 5为人气排序 order
@@ -399,7 +410,7 @@
 #pragma mark - 商品搜索
 /**
  *商品搜索
- *https://shop.bayi-shop.com/mobile/goods/goods_list?page=1&keyword=西红柿
+ *https://shop.bayi-shop.com/mobile/goods/goods_list
  *keyword   关键字
  *page      页码
  *key       token  可以为空
@@ -469,7 +480,6 @@
 /**
  *购买商品--第一步，生成购物信息
  *https://shop.bayi-shop.com/index.php/mobile/Memberbuy/buy_step1
- *?key=549a4cd64bb3013f6dd56c1c41fa2c8c&cart_id=176|1&ifcart=0
  *cart_id   商品  ----    ID|数量,ID|数量,ID|数量
  *ifcart    默认为空，为直接购物，1为从购物车
  *key       token

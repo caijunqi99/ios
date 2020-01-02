@@ -45,6 +45,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         _arrayDataSource = [[NSMutableArray alloc]initWithCapacity:0];
         _strParameter = @"1";
         HPNOTIF_ADD(@"orderPaySuccess", headerRereshing);
+        HPNOTIF_ADD(@"orderPayCancel", headerRereshing);
+
     }
     return self;
 }
@@ -241,7 +243,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 -(void)buttonClickToPay:(UIButton*)btn
 {
     NSInteger section = btn.tag - 100;
-    NSString *pay_sn = _arrayDataSource[section][@"order_list"][0][@"pay_sn"];
+    NSString *pay_sn = _arrayDataSource[section][@"pay_sn"];
     
     ConfirmOrderToPayViewController *vc = [[ConfirmOrderToPayViewController alloc]init];
     vc.string_pay_sn = pay_sn;

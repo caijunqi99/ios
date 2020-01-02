@@ -188,7 +188,7 @@
     _stringNickname = stringNickname;
     
     NSString *stringavator = dicMemberInfo[@"avator"];
-    [_buttonUserHead sd_setBackgroundImageWithURL:URL(stringavator) forState:UIControlStateNormal placeholderImage:defaultImage options:SDWebImageRefreshCached];
+    [_buttonUserHead sd_setBackgroundImageWithURL:URL(stringavator) forState:UIControlStateNormal placeholderImage:defaultImage];
 }
 
 -(void)netRequestupload

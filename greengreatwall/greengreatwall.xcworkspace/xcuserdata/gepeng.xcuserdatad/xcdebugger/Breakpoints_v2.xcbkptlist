@@ -52,5 +52,117 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3D3785E3-C0E4-4CE7-A087-52AB79C8760F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "greengreatwall/ViewControllers/ShoppingCart/Controller/ShoppingCartViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "387"
+            endingLineNumber = "387"
+            landmarkName = "-clickAllSelectBottomView:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3D3785E3-C0E4-4CE7-A087-52AB79C8760F - 6456e3ffd3c76a7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__55-[ShoppingCartViewController clickAllSelectBottomView:]_block_invoke.253"
+                  moduleName = "&#x7eff;&#x8272;&#x957f;&#x57ce;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gepeng/Documents/GitHub/ios/greengreatwall/greengreatwall/ViewControllers/ShoppingCart/Controller/ShoppingCartViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "385"
+                  endingLineNumber = "385"
+                  offsetFromSymbolStart = "204">
+               </Location>
+               <Location
+                  uuid = "3D3785E3-C0E4-4CE7-A087-52AB79C8760F - 6456e3ffd3c76a7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__55-[ShoppingCartViewController clickAllSelectBottomView:]_block_invoke.253"
+                  moduleName = "&#x7eff;&#x8272;&#x957f;&#x57ce;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gepeng/Documents/GitHub/ios/greengreatwall/greengreatwall/ViewControllers/ShoppingCart/Controller/ShoppingCartViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "385"
+                  endingLineNumber = "385"
+                  offsetFromSymbolStart = "236">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C59FB42C-FFC9-41F4-B90F-041A8EF8E4EB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "greengreatwall/ViewControllers/ShoppingCart/Controller/ShoppingCartViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "428"
+            endingLineNumber = "428"
+            landmarkName = "-shoppingCartCellClickAction:storeModel:goodsModel:indexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FCC375DC-B3B2-4958-9D9C-1FC52B3C2E79"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "greengreatwall/ViewControllers/ShoppingCart/Controller/ShoppingCartViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
+            landmarkName = "-shoppingCartCellClickAction:storeModel:goodsModel:indexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "677AC99C-5148-4E55-9A1D-809BC9E996BC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "greengreatwall/ViewControllers/ShoppingCart/Controller/ShoppingCartViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "430"
+            endingLineNumber = "430"
+            landmarkName = "-shoppingCartCellClickAction:storeModel:goodsModel:indexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "538F9125-9F12-4155-A158-4756D28DBE37"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "greengreatwall/ViewControllers/Order/ConfirmOrderViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "-setCart_id:andIfcart:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

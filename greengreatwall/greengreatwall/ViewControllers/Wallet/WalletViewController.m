@@ -8,10 +8,12 @@
 
 #import "WalletViewController.h"
 
-#import "InstanceTableViewCell.h"
+#import "CollegeTableViewCell.h"
 #import "VerifiedViewController.h"
 #import "RechargeViewController.h"
 #import "TeamViewController.h"
+
+#import "CollegeContentViewController.h"
 @interface WalletViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,CategoryBarDelegate>
 {
     UIView                  *_viewTemp;
@@ -50,7 +52,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configInterface];
-    [self netRequest];
+    [self headerRereshing];
 }
 
 -(instancetype)init
@@ -58,8 +60,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     if (self = [super init]) {
         _arrayDataSource = [[NSMutableArray alloc]initWithCapacity:0];
         _strParameter = @"1";
-        _arrayButtonTitle = [[NSMutableArray alloc]initWithObjects:@"充值",@"实名",@"团队",@"邀请好友", nil];//@"提现",@"互转",@"储值卡",@"交易码",@"积分",           @"商学院",@"视频",
-        _arrayButtonImageName = [[NSMutableArray alloc]initWithObjects:@"充值钱包",@"实名",@"团队钱包",@"邀请好友", nil];//@"提现",@"互转",@"储值卡",@"交易码",@"积分",           @"商学院",@"视频",
+        _arrayButtonTitle = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"交易码",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"提现",@"互转",@"储值卡",@"交易码",@"积分",           @"商学院",@"视频",
+        _arrayButtonImageName = [[NSMutableArray alloc]initWithObjects:@"充值钱包",@"提现",@"互转",@"储值卡",@"交易码",@"积分",@"实名",@"团队钱包",@"邀请好友", nil];//@"提现",@"互转",@"储值卡",@"交易码",@"积分",           @"商学院",@"视频",
     }
     return self;
 }
@@ -214,20 +216,18 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     }
     
     
-    //    if (@available(iOS 13.0, *)) {
-    //        _tableViewTemp = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth, 200) style:UITableViewStyleInsetGrouped];
-    //    } else {
-    //        // Fallback on earlier versions
-    //        _tableViewTemp = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth, 200) style:UITableViewStyleGrouped];
-    //    }
-    //    _tableViewTemp.showsVerticalScrollIndicator = NO;
-    //    _tableViewTemp.showsHorizontalScrollIndicator = NO;
-    //    _tableViewTemp.dataSource = self;
-    //    _tableViewTemp.delegate = self;
-    //    _tableViewTemp.backgroundColor = [UIColor clearColor];
-    //    [self.view addSubview:_tableViewTemp];
-    //    [_tableViewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight)];
-    //    _tableViewTemp.tableHeaderView = _viewTemp;
+    
+    _tableViewTemp = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight) style:UITableViewStylePlain];
+    _tableViewTemp.showsVerticalScrollIndicator = NO;
+    _tableViewTemp.showsHorizontalScrollIndicator = NO;
+    _tableViewTemp.dataSource = self;
+    _tableViewTemp.delegate = self;
+    _tableViewTemp.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_tableViewTemp];
+//    [_tableViewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight)];
+    _tableViewTemp.tableHeaderView = _viewTemp;
+    
+    [self setupRefreshWithScrollView:_tableViewTemp];
     //
     //
     //    _scrollViewTemp = [[UIScrollView alloc]init];
@@ -380,7 +380,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     }
     else if([buttonName containsString:@"邀请好友"])
     {
-//        NSString *stringlink = [NSString stringWithFormat:@"%@?key=%@",member_inviter_poster,_stringInviterlink];
+        //        NSString *stringlink = [NSString stringWithFormat:@"%@?key=%@",member_inviter_poster,_stringInviterlink];
         NSString *stringlink = [NSString stringWithFormat:@"%@?key=%@",member_inviter_poster,[HPUserDefault objectForKey:@"token"]];
         
         HPBaseWKWebViewController *vc = [[HPBaseWKWebViewController alloc]init];
@@ -447,8 +447,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     footer.stateLabel.textColor = kColorFontRegular;
     
     //尾部刷新控件
-    scrollView.mj_footer = footer;
-    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
+    //    scrollView.mj_footer = footer;
+    //    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
 }
 
 
@@ -462,7 +462,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_arrayDataSource removeAllObjects];
     [_tableViewTemp reloadData];
     
-    [HPNetManager GETWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
+    [HPNetManager GETWithUrlString:Hostcollegecollege isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"article_type", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"]] count]) {
@@ -472,7 +472,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
                 [self->_arrayDataSource addObjectsFromArray:[NSArray arrayWithArray:response[@"result"]]];
                 [self->_tableViewTemp reloadData];
                 [self->_tableViewTemp.mj_header endRefreshing];
-                self->_strParameter = [NSString stringWithFormat:@"%d",self->_strParameter.intValue+1];
+                //                self->_strParameter = [NSString stringWithFormat:@"%d",self->_strParameter.intValue+1];
             }
             else
             {
@@ -550,6 +550,30 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 120*GPCommonLayoutScaleSizeWidthIndex;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *viewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth , 50*GPCommonLayoutScaleSizeWidthIndex)];
+//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth, 50*GPCommonLayoutScaleSizeWidthIndex)];
+//    view.backgroundColor = [UIColor whiteColor];
+//    [view rounded:10 rectCorners:(UIRectCornerBottomLeft|UIRectCornerBottomRight)];
+//    [viewHeader addSubview:view];
+    
+    UILabel *labelHeader = [[UILabel alloc]initWithFrame:CGRectMake(55*GPCommonLayoutScaleSizeWidthIndex, 35*GPCommonLayoutScaleSizeWidthIndex, GPScreenWidth - 110*GPCommonLayoutScaleSizeWidthIndex, 50*GPCommonLayoutScaleSizeWidthIndex)];
+    labelHeader.textColor = kColorTheme;
+    labelHeader.text = @"商学院";
+    labelHeader.textAlignment = NSTextAlignmentLeft;
+    labelHeader.font = FontRegularWithSize(16);
+    [viewHeader addSubview:labelHeader];
+    
+    
+    return viewHeader;
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -562,14 +586,14 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 360.0*GPCommonLayoutScaleSizeWidthIndex;
+    return 240.0*GPCommonLayoutScaleSizeWidthIndex;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    InstanceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentify];
+    CollegeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentify];
     if(!cell){
-        cell = [[InstanceTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentify];
+        cell = [[CollegeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentify];
     }
     NSDictionary * dic = _arrayDataSource[indexPath.row];
     cell.dic = dic;
@@ -578,9 +602,10 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GoodsViewController *vc = [[GoodsViewController alloc]init];
+    
+    CollegeContentViewController *vc = [[CollegeContentViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
-    vc.goods_id = _arrayDataSource[indexPath.row][@"goods_id"];
+    vc.string_article_id = _arrayDataSource[indexPath.row][@"article_id"];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

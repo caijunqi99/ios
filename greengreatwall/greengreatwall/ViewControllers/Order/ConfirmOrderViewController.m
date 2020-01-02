@@ -18,6 +18,8 @@
 #import "AddressListViewController.h"
 #import "DeliveryAddressModel.h"
 
+#import "VerifiedViewController.h"
+
 #define kBottomHeightShoppingCart        (180*GPCommonLayoutScaleSizeWidthIndex)
 @interface ConfirmOrderViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -296,7 +298,7 @@
     [self.tableView reloadData];
     
     [HPNetManager POSTWithUrlString:HostMemberbuybuy_step1 isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_string_cart_id,@"cart_id",_string_ifcart,@"ifcart", nil] successBlock:^(id response) {
-        //GPDebugLog(@"response:%@",response);
+        GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {
             
@@ -350,6 +352,14 @@
             [self->_tableView.mj_header endRefreshing];
             [HPAlertTools showAlertWith:getCurrentViewController() title:@"提示信息" message:response[@"message"] callbackBlock:^(NSInteger btnIndex) {
                 [self.navigationController popViewControllerAnimated:YES];
+                
+//                if ([[NSString stringWithFormat:@"%@",response[@"message"]] containsString:@"实名认证"]) {
+//                    VerifiedViewController *vc = [[VerifiedViewController alloc]init];
+//                    vc.hidesBottomBarWhenPushed = YES;
+//                    [self.navigationController pushViewController:vc animated:YES];
+//                }else{
+//                    [self.navigationController popViewControllerAnimated:YES];
+//                }
             } cancelButtonTitle:nil destructiveButtonTitle:@"确定" otherButtonTitles:nil];
         }
         

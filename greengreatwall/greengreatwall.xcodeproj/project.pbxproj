@@ -150,6 +150,8 @@
 		641E4B592385584600F07A09 /* StoreRecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 641E4B582385584600F07A09 /* StoreRecommendViewController.m */; };
 		641E4B6023862B1D00F07A09 /* StoreCategoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 641E4B5F23862B1D00F07A09 /* StoreCategoryCollectionViewCell.m */; };
 		641E4B6323862B3A00F07A09 /* StoreCategoryContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 641E4B6223862B3A00F07A09 /* StoreCategoryContentViewController.m */; };
+		64216A6B23BDCD14005489F1 /* CollegeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A6A23BDCD14005489F1 /* CollegeTableViewCell.m */; };
+		64216A6E23BDE599005489F1 /* CollegeContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A6D23BDE598005489F1 /* CollegeContentViewController.m */; };
 		643DA01323A7CA2D00BA26B8 /* 2688-1242.png in Resources */ = {isa = PBXBuildFile; fileRef = 643DA00723A7CA2D00BA26B8 /* 2688-1242.png */; };
 		643DA01423A7CA2D00BA26B8 /* 1792-828.png in Resources */ = {isa = PBXBuildFile; fileRef = 643DA00823A7CA2D00BA26B8 /* 1792-828.png */; };
 		643DA01523A7CA2D00BA26B8 /* 320-480.png in Resources */ = {isa = PBXBuildFile; fileRef = 643DA00923A7CA2D00BA26B8 /* 320-480.png */; };
@@ -261,7 +263,7 @@
 		64AE30C12397C9D100C0AB8F /* HPAlertTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 64AE30A42397C9D100C0AB8F /* HPAlertTools.m */; };
 		64AE30C22397C9D100C0AB8F /* HPSearchButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64AE30A82397C9D100C0AB8F /* HPSearchButtonView.m */; };
 		64AE30C32397C9D100C0AB8F /* HPPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64AE30AA2397C9D100C0AB8F /* HPPickerView.m */; };
-		64AE30C6239907D200C0AB8F /* SimpleWebViewWithHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 64AE30C5239907D200C0AB8F /* SimpleWebViewWithHeader.m */; };
+		64AE30C6239907D200C0AB8F /* SimpleWebViewWithHeaderAndFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 64AE30C5239907D200C0AB8F /* SimpleWebViewWithHeaderAndFooter.m */; };
 		64AE30CC239A69EA00C0AB8F /* SearchResultListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64AE30CB239A69EA00C0AB8F /* SearchResultListTableViewCell.m */; };
 		AA89923B3A9792093B466109 /* libPods-greengreatwall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E9509F90495D6184735287 /* libPods-greengreatwall.a */; };
 /* End PBXBuildFile section */
@@ -639,6 +641,10 @@
 		641E4B5F23862B1D00F07A09 /* StoreCategoryCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreCategoryCollectionViewCell.m; sourceTree = "<group>"; };
 		641E4B6123862B3A00F07A09 /* StoreCategoryContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreCategoryContentViewController.h; sourceTree = "<group>"; };
 		641E4B6223862B3A00F07A09 /* StoreCategoryContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreCategoryContentViewController.m; sourceTree = "<group>"; };
+		64216A6923BDCD14005489F1 /* CollegeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollegeTableViewCell.h; sourceTree = "<group>"; };
+		64216A6A23BDCD14005489F1 /* CollegeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollegeTableViewCell.m; sourceTree = "<group>"; };
+		64216A6C23BDE598005489F1 /* CollegeContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollegeContentViewController.h; sourceTree = "<group>"; };
+		64216A6D23BDE598005489F1 /* CollegeContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollegeContentViewController.m; sourceTree = "<group>"; };
 		643DA00723A7CA2D00BA26B8 /* 2688-1242.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2688-1242.png"; sourceTree = "<group>"; };
 		643DA00823A7CA2D00BA26B8 /* 1792-828.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1792-828.png"; sourceTree = "<group>"; };
 		643DA00923A7CA2D00BA26B8 /* 320-480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "320-480.png"; sourceTree = "<group>"; };
@@ -837,8 +843,8 @@
 		64AE30A82397C9D100C0AB8F /* HPSearchButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPSearchButtonView.m; sourceTree = "<group>"; };
 		64AE30AA2397C9D100C0AB8F /* HPPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPPickerView.m; sourceTree = "<group>"; };
 		64AE30AB2397C9D100C0AB8F /* HPPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPPickerView.h; sourceTree = "<group>"; };
-		64AE30C4239907D200C0AB8F /* SimpleWebViewWithHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleWebViewWithHeader.h; sourceTree = "<group>"; };
-		64AE30C5239907D200C0AB8F /* SimpleWebViewWithHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleWebViewWithHeader.m; sourceTree = "<group>"; };
+		64AE30C4239907D200C0AB8F /* SimpleWebViewWithHeaderAndFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleWebViewWithHeaderAndFooter.h; sourceTree = "<group>"; };
+		64AE30C5239907D200C0AB8F /* SimpleWebViewWithHeaderAndFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleWebViewWithHeaderAndFooter.m; sourceTree = "<group>"; };
 		64AE30CA239A69EA00C0AB8F /* SearchResultListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultListTableViewCell.h; sourceTree = "<group>"; };
 		64AE30CB239A69EA00C0AB8F /* SearchResultListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultListTableViewCell.m; sourceTree = "<group>"; };
 		6C3A3D99A8F7EEABC957EAD5 /* Pods-greengreatwall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-greengreatwall.debug.xcconfig"; path = "Target Support Files/Pods-greengreatwall/Pods-greengreatwall.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1825,6 +1831,24 @@
 			path = openssl;
 			sourceTree = "<group>";
 		};
+		64216A6F23BDEEB1005489F1 /* College */ = {
+			isa = PBXGroup;
+			children = (
+				64216A6923BDCD14005489F1 /* CollegeTableViewCell.h */,
+				64216A6A23BDCD14005489F1 /* CollegeTableViewCell.m */,
+				64216A6C23BDE598005489F1 /* CollegeContentViewController.h */,
+				64216A6D23BDE598005489F1 /* CollegeContentViewController.m */,
+			);
+			path = College;
+			sourceTree = "<group>";
+		};
+		64216A7023BDEEF0005489F1 /* TradeCode */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TradeCode;
+			sourceTree = "<group>";
+		};
 		643DA00623A7CA2D00BA26B8 /* 引导页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1968,9 +1992,11 @@
 		647ED07723B1AFF7003200FA /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				64216A7023BDEEF0005489F1 /* TradeCode */,
 				647ED0AD23B8FEAA003200FA /* Team */,
 				647ED0A223B8B34D003200FA /* Recharge */,
 				647ED07823B1B001003200FA /* Verified */,
+				64216A6F23BDEEB1005489F1 /* College */,
 				647ED08423B312C0003200FA /* WalletViewController.h */,
 				647ED08523B312C0003200FA /* WalletViewController.m */,
 			);
@@ -2318,8 +2344,8 @@
 			children = (
 				64AE30812397C9D100C0AB8F /* GPWKWebViewWithHeaderAndFooter.h */,
 				64AE30832397C9D100C0AB8F /* GPWKWebViewWithHeaderAndFooter.m */,
-				64AE30C4239907D200C0AB8F /* SimpleWebViewWithHeader.h */,
-				64AE30C5239907D200C0AB8F /* SimpleWebViewWithHeader.m */,
+				64AE30C4239907D200C0AB8F /* SimpleWebViewWithHeaderAndFooter.h */,
+				64AE30C5239907D200C0AB8F /* SimpleWebViewWithHeaderAndFooter.m */,
 				64AE30822397C9D100C0AB8F /* HPWKWebView.h */,
 				64AE30842397C9D100C0AB8F /* HPWKWebView.m */,
 			);
@@ -2673,9 +2699,11 @@
 				641E49CD238269A200F07A09 /* YQDiskCache.m in Sources */,
 				641E4AED23829D3300F07A09 /* APRSASigner.m in Sources */,
 				641E4A34238269A200F07A09 /* UIImageView+HPRotateImage.m in Sources */,
+				64216A6E23BDE599005489F1 /* CollegeContentViewController.m in Sources */,
 				641E4B442383D14200F07A09 /* IndexCollectionViewCell.m in Sources */,
 				641E4A1E238269A200F07A09 /* HPRequestCenter.m in Sources */,
 				64AE30AE2397C9D100C0AB8F /* HPTableView.m in Sources */,
+				64216A6B23BDCD14005489F1 /* CollegeTableViewCell.m in Sources */,
 				645C85AB23A6878F00E31AAE /* BaiDuLocationTool.m in Sources */,
 				641E4AB02382731C00F07A09 /* NoticeTableViewCell.m in Sources */,
 				647ED0AC23B8F0F8003200FA /* RechargeSuccessViewController.m in Sources */,
@@ -2806,7 +2834,7 @@
 				641E49E8238269A200F07A09 /* STQRCodeReaderView.m in Sources */,
 				641E4A23238269A200F07A09 /* NSDictionary+HPSafe.m in Sources */,
 				641E49EC238269A200F07A09 /* SRVideoBottomBar.m in Sources */,
-				64AE30C6239907D200C0AB8F /* SimpleWebViewWithHeader.m in Sources */,
+				64AE30C6239907D200C0AB8F /* SimpleWebViewWithHeaderAndFooter.m in Sources */,
 				641E49DB238269A200F07A09 /* YZDisplayTitleLabel.m in Sources */,
 				641E49D2238269A200F07A09 /* BaseViewController.m in Sources */,
 				641E49FC238269A200F07A09 /* HPRefreshGifFooter.m in Sources */,

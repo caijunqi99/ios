@@ -7,7 +7,7 @@
 //
 
 #import "GoodsViewController.h"
-#import "SimpleWebViewWithHeader.h"
+#import "SimpleWebViewWithHeaderAndFooter.h"
 #import "GoodsBottomView.h"
 #import "SDPhotoBrowser.h"
 #import "UILabelAlignToTopLeft.h"
@@ -29,7 +29,7 @@
     UILabelAlignToTopLeft             *_labelAdv;
     UILabelAlignToTopLeft             *_labelPrice;
     
-    SimpleWebViewWithHeader           *_webView;
+    SimpleWebViewWithHeaderAndFooter           *_webView;
     GoodsBottomView     *_bottomView;
     
     UIButton            *_buttonBack;
@@ -108,7 +108,7 @@
     
     
     
-    _webView = [[SimpleWebViewWithHeader alloc] initWithFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight - kTabBarHeight - kBottomHeightCommon)];
+    _webView = [[SimpleWebViewWithHeaderAndFooter alloc] initWithFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight - kTabBarHeight - kBottomHeightCommon)];
     _webView.scrollView.showsVerticalScrollIndicator = NO;
     _webView.scrollView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:_webView];

@@ -1,14 +1,14 @@
 //
-//  SimpleWebViewWithHeader.m
+//  SimpleWebViewWithHeaderAndFooter.m
 //  greengreatwall
 //
 //  Created by 葛朋 on 2019/12/5.
 //  Copyright © 2019 guocaiduigong. All rights reserved.
 //
 
-#import "SimpleWebViewWithHeader.h"
+#import "SimpleWebViewWithHeaderAndFooter.h"
 
-@interface SimpleWebViewWithHeader()<WKNavigationDelegate>
+@interface SimpleWebViewWithHeaderAndFooter()<WKNavigationDelegate>
 {
     UIView          *_viewHeader;
     UIView          *_viewFooter;
@@ -16,7 +16,7 @@
 }
 @end
 
-@implementation SimpleWebViewWithHeader
+@implementation SimpleWebViewWithHeaderAndFooter
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -45,9 +45,7 @@
     _viewFooter = footerView;
     _viewFooter.userInteractionEnabled = YES;
     //设置样式
-    NSString *string = [NSString stringWithFormat:@"<html><head><title>%@</title></head><body><p style='padding-top:%fpx;'></p><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-status-bar-style' content='black'><meta name='format-detection' content='telephone=no'><style type='text/css'>img{width:%fpx}</style>%@<p style='padding-bottom:%fpx;'></p></body></html>",titleString,headerView.frame.size.height, GPScreenWidth - 20, htmlString,footerView.frame.size.height];
-    
-    @"<html><head></head><body><p style='padding-top:%fpx;'></p><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-status-bar-style' content='black'><meta name='format-detection' content='telephone=no'><style type='text/css'>img{width:%fpx}</style>%@<p style='padding-bottom:%fpx;'></p></body></html>";
+    NSString *string = [NSString stringWithFormat:@"<html><head><title>%@</title></head><body><p style='padding-top:%fpx;'></p><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-status-bar-style' content='black'><meta name='format-detection' content='telephone=no'><style type='text/css'>img{width:%fpx !important;height:auto}body{max-width:%fpx !important;}</style>%@<p style='padding-bottom:%fpx;'></p></body></html>",titleString,headerView.frame.size.height, GPScreenWidth - 20,GPScreenWidth - 20, htmlString,footerView.frame.size.height];
     
     [self loadHTMLString:string baseURL:nil];
 }

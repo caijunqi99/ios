@@ -67,7 +67,6 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configInterface];
-    [self netRequest];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,7 +99,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
-    [self netRequest];
+    [self headerRereshing];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -120,44 +119,24 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 {
     viewSetBackgroundColor(kColorTheme);
     
-    _viewBack = [[UIView alloc]init];
-    [_viewBack setBackgroundColor:[UIColor whiteColor]];
-    [_viewBack setFrame:CGRectMake(0, 570*GPCommonLayoutScaleSizeWidthIndex , GPScreenWidth, GPScreenHeight - kTabBarHeight )];//-570*GPCommonLayoutScaleSizeWidthIndex
-    [_viewBack rounded:30 rectCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)];
-    [self.view addSubview:_viewBack];
-    
-    _viewTop = [[UIView alloc]init];
-    _viewTop.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_viewTop];
-    
-    [_viewTop setFrame:self.view.bounds];
-    /*
-    viewSetBackgroundColor(kColorTheme);
-    
-    _viewTop = [[UIView alloc]init];
-    _viewTop.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_viewTop];
-    //    [_scrollViewContent addSubview:_viewTop];
-    
-    [_viewTop setFrame:self.view.bounds];
-    
     _scrollViewContent = [[UIScrollView alloc]init];
     [_scrollViewContent setFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kTabBarHeight)];
     [_scrollViewContent setBackgroundColor:kColorTheme];
-//    [self.view addSubview:_scrollViewContent];
+    [self.view addSubview:_scrollViewContent];
+    _scrollViewContent.userInteractionEnabled = YES;
+    [self setupRefreshWithScrollView:_scrollViewContent];
     
     _viewBack = [[UIView alloc]init];
     [_viewBack setBackgroundColor:[UIColor whiteColor]];
-    [_viewBack setFrame:CGRectMake(0, 570*GPCommonLayoutScaleSizeWidthIndex , GPScreenWidth, GPScreenHeight - kTabBarHeight)];
+    [_viewBack setFrame:CGRectMake(0, 570*GPCommonLayoutScaleSizeWidthIndex , GPScreenWidth, GPScreenHeight - kTabBarHeight )];
     [_viewBack rounded:30 rectCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)];
-    [_viewTop addSubview:_viewBack];
     [_scrollViewContent addSubview:_viewBack];
-//    [_scrollViewContent setContentSize:CGSizeMake(GPScreenWidth, GPScreenHeight - kTabBarHeight -500*GPCommonLayoutScaleSizeWidthIndex)];
-//    _scrollViewContent.scrollEnabled = YES;
-//    _scrollViewContent.userInteractionEnabled = YES;
     
-    */
-
+    _viewTop = [[UIView alloc]init];
+    _viewTop.backgroundColor = [UIColor clearColor];
+    [_viewTop setFrame:CGRectMake(0, 0, GPScreenWidth, 2000)];
+    [_scrollViewContent addSubview:_viewTop];
+    
     
     CGFloat x = 0;
     CGFloat y = _viewBack.top;
@@ -269,7 +248,6 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_buttonWallet setTag:99];
     [_buttonWallet addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [_imageViewWallet addSubview:_buttonWallet];
-
     
     _labelContentFirstTitle = [[UILabel alloc]init];
     _labelContentFirstTitle.frame = RectWithScale(CGRectMake(65, 50, 900, 40), GPCommonLayoutScaleSizeWidthIndex);
@@ -278,7 +256,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _labelContentFirstTitle.font = FontRegularWithSize(16);
     [_viewContent[0] addSubview:_labelContentFirstTitle];
     _labelContentFirstTitle.text = @"我的订单";
-//    imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    
+    //    imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     NSArray *arrayImageName = @[@"待付款",@"代发货",@"完成",@"取消"];//,@"取消"
     NSArray *arrayTitleName = @[@"待付款",@"待发货",@"待收货",@"已完成"];//,@"已取消"
     
@@ -313,8 +292,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         [_viewContent[0] addSubview:_labelContentFirst[i]];
     }
     
-    UIImage *imageMirrored = [UIImage imageWithCGImage:GetImage([arrayImageName objectAtIndex:2]).CGImage scale:1 orientation:UIImageOrientationUpMirrored];
-    [_buttonContentFirst[2] setBackgroundImage:imageMirrored forState:UIControlStateNormal];
+//    UIImage *imageMirrored = [UIImage imageWithCGImage:GetImage([arrayImageName objectAtIndex:2]).CGImage scale:1 orientation:UIImageOrientationUpMirrored];
+//    [_buttonContentFirst[2] setBackgroundImage:imageMirrored forState:UIControlStateNormal];
     
     NSArray *arrayImageNameContent = @[@"资料",@"密码",@"支付密码",@"地址",@"退出"];
     NSArray *arrayTitleNameContent = @[@"个人资料",@"登录密码",@"支付密码",@"收货地址",@"退出登录"];
@@ -357,14 +336,19 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 5) {
-        [HPUserDefault removeUserDefaultObjectFromKey:@"token"];
-        [HPUserDefault removeUserDefaultObjectFromKey:@"userid"];
         
-        //设置indextabbar为主窗口的根视图控制器
-        LoginViewController *vc = [[LoginViewController alloc]init];
-        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:vc];
-        GPKeyWindow.rootViewController = nav;
-        [GPKeyWindow makeKeyAndVisible];
+        [HPAlertTools showAlertWith:getCurrentViewController() title:@"提示信息" message:@"确定退出登录?" callbackBlock:^(NSInteger btnIndex) {
+            if (btnIndex == 1) {
+                [HPUserDefault removeUserDefaultObjectFromKey:@"token"];
+                [HPUserDefault removeUserDefaultObjectFromKey:@"userid"];
+                
+                //设置indextabbar为主窗口的根视图控制器
+                LoginViewController *vc = [[LoginViewController alloc]init];
+                BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:vc];
+                GPKeyWindow.rootViewController = nav;
+                [GPKeyWindow makeKeyAndVisible];
+            }
+        } cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登录" otherButtonTitles:nil];
     }
 }
 
@@ -374,43 +358,15 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         WalletViewController *vc = [[WalletViewController alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-        
-        return;
-//        VerifiedViewController *vc = [[VerifiedViewController alloc]init];
-//        vc.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:vc animated:YES];
     }else{
-        
-        
         NSString *buttonName = btn.titleLabel.text;
-        
-//        NSArray *arrayTitleName = @[@"待付款",@"待发货",@"已完成",@"已取消"];
-//        NSInteger i = [arrayTitleName indexOfObject:buttonName];
+        //        NSArray *arrayTitleName = @[@"待付款",@"待发货",@"已完成",@"已取消"];
+        //        NSInteger i = [arrayTitleName indexOfObject:buttonName];
         
         OrderListViewController *vc = [[OrderListViewController alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
         vc.stringSelected = buttonName;
         [self.navigationController pushViewController:vc animated:YES];
-    }
-    
-    
-    return;
-    NSString *buttonName = btn.titleLabel.text;
-    if ([buttonName containsString:@"待付款"])
-    {
-        
-    }
-    else if([buttonName containsString:@"待发货"])
-    {
-        
-    }
-    else if([buttonName containsString:@"已完成"])
-    {
-        
-    }
-    else if([buttonName containsString:@"已取消"])
-    {
-        
     }
 }
 
@@ -450,7 +406,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 {
     [HPNetManager POSTWithUrlString:Hostmemberindex isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
-
+        
         if ([response[@"code"] integerValue] == 200) {
             [self updateInterfaceWithDic:response[@"result"]];
         }
@@ -490,6 +446,97 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     NSString *stringorder_noeval_count = [NSString stringWithFormat:@"%@",dicMemberInfo[@"order_noeval_count"]];
     _buttonContentFirst[3].badgeValue = stringorder_noeval_count;
+}
+
+- (void)setupRefreshWithScrollView:(UIScrollView *)scrollView
+{
+    
+    MJRefreshStateHeader *header = [MJRefreshStateHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+    
+    // Set title
+    [header setTitle:@"下拉加载最新数据" forState:MJRefreshStateIdle];
+    [header setTitle:@"松开加载" forState:MJRefreshStatePulling];
+    [header setTitle:@"正在加载" forState:MJRefreshStateRefreshing];
+    [header setLastUpdatedTimeText:^NSString *(NSDate *lastUpdatedTime) {
+        NSDate *lastTime = lastUpdatedTime;
+        NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+        NSInteger hour = [[NSCalendar currentCalendar] component:NSCalendarUnitHour fromDate:lastTime];
+        if (hour >12) {
+            fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss 下午";
+        }else{
+            fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss 上午";
+        }
+        NSString *timeStr = [fmt stringFromDate:lastTime];
+        return timeStr;
+    }];
+    
+    // Set font
+    header.stateLabel.font = FontRegularWithSize(15);
+    header.lastUpdatedTimeLabel.font = FontRegularWithSize(14);
+    
+    // Set textColor
+    header.stateLabel.textColor = kColorFontRegular;
+    header.lastUpdatedTimeLabel.textColor = kColorFontRegular;
+    
+    //头部刷新控件
+    scrollView.mj_header = header;
+    
+    CGFloat _viewh = 20;
+    scrollView.mj_header.ignoredScrollViewContentInsetTop = _viewh + kScrollViewHeaderIgnored;
+    
+    MJRefreshBackStateFooter *footer = [MJRefreshBackStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
+    
+    // Set title
+    [footer setTitle:@"点击或上拉加载更多数据" forState:MJRefreshStateIdle];
+    [footer setTitle:@"正在加载" forState:MJRefreshStateRefreshing];
+    [footer setTitle:@"没有更多数据" forState:MJRefreshStateNoMoreData];
+    
+    // Set font
+    footer.stateLabel.font = FontRegularWithSize(17);
+    
+    // Set textColor
+    footer.stateLabel.textColor = kColorFontRegular;
+    
+    //尾部刷新控件
+    //    scrollView.mj_footer = footer;
+//    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
+}
+
+//下拉刷新
+- (void)headerRereshing
+{
+    [HPNetManager POSTWithUrlString:Hostmemberindex isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key", nil] successBlock:^(id response) {
+        //GPDebugLog(@"response:%@",response);
+        
+        if ([response[@"code"] integerValue] == 200) {
+            [self updateInterfaceWithDic:response[@"result"]];
+            [self->_scrollViewContent.mj_header endRefreshing];
+        }
+        else
+        {
+            [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:response[@"message"] buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
+            [self->_scrollViewContent.mj_header endRefreshing];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        [self->_scrollViewContent.mj_header endRefreshing];
+    } progressBlock:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+//上拉加载更多
+- (void)footerRereshing
+{
+    //这里加入的是网络请求，带上相关参数，利用网络工具进行请求。我这里没有网络就模拟一下数据吧。
+    //网络不管请求成功还是失败都要结束更新。
+    
+    //利用延时函数模拟网络加载
+    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+    
+    dispatch_after(time, dispatch_get_main_queue(), ^{
+        [self->_scrollViewContent.mj_footer endRefreshing];
+    });
 }
 
 @end

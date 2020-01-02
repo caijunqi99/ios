@@ -566,6 +566,23 @@
 
 #pragma mark ---------------------商学院---------------------
 
+
+#pragma mark - 商学院列表
+/**
+ *商学院列表
+ *https://shop.bayi-shop.com/mobile/college/college
+ *article_type  0文章 1视频，不传默认0
+ */
+#define Hostcollegecollege         Host@"/college/college"//商学院列表
+
+#pragma mark - 商学院详情页
+/**
+ *商学院详情页
+ *https://shop.bayi-shop.com/mobile/college/detail
+ *article_id    文章/视频 id
+ */
+#define Hostcollegedetail         Host@"/college/detail"//商学院详情页
+
 #pragma mark ---------------------用户密码管理---------------------
 
 #pragma mark - 注册

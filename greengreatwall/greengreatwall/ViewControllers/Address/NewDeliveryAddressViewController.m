@@ -87,7 +87,7 @@
     [self settingNavTitle:@"新增收货人"];
     
     viewSetBackgroundColor(kColorBasic);
-    
+    _viewTemp = [UIView initViewBackColor:[UIColor whiteColor]];
     [self.viewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, 240)];
     [self.view addSubview:self.viewTemp];
     

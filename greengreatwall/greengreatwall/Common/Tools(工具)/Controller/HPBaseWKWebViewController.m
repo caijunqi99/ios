@@ -18,6 +18,18 @@ static void *WKWebBrowserContext = &WKWebBrowserContext;
 
 @implementation HPBaseWKWebViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+//    [self headerRereshing];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

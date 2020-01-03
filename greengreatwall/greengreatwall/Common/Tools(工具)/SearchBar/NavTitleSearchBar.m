@@ -37,7 +37,7 @@
     //修改cancel
     self.showsCancelButton = NO;
     self.barStyle = UIBarStyleDefault;
-    self.keyboardType = UIKeyboardTypeNumberPad;
+    self.keyboardType = UIKeyboardTypeDefault;
     //self.self.searchBarStyle = UISearchBarStyleMinimal;//没有背影，透明样式
     //
     self.showsSearchResultsButton = NO;

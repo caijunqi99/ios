@@ -8,11 +8,19 @@
 
 #import "WalletViewController.h"
 
-#import "CollegeTableViewCell.h"
-#import "VerifiedViewController.h"
 #import "RechargeViewController.h"
+
+#import "WithdrawViewController.h"
+#import "PointTransformViewController.h"
+#import "FundpredepositViewController.h"
+#import "TransationViewController.h"
+#import "PointsViewController.h"
+
+
+#import "VerifiedViewController.h"
 #import "TeamViewController.h"
 
+#import "CollegeTableViewCell.h"
 #import "CollegeContentViewController.h"
 @interface WalletViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,CategoryBarDelegate>
 {
@@ -61,7 +69,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         _arrayDataSource = [[NSMutableArray alloc]initWithCapacity:0];
         _strParameter = @"1";
         _arrayButtonTitle = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"交易码",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"提现",@"互转",@"储值卡",@"交易码",@"积分",           @"商学院",@"视频",
-        _arrayButtonImageName = [[NSMutableArray alloc]initWithObjects:@"充值钱包",@"提现",@"互转",@"储值卡",@"交易码",@"积分",@"实名",@"团队钱包",@"邀请好友", nil];//@"提现",@"互转",@"储值卡",@"交易码",@"积分",           @"商学院",@"视频",
+        _arrayButtonImageName = [[NSMutableArray alloc]initWithObjects:@"充值钱包",@"提现钱包",@"互转钱包",@"储值卡",@"交易码",@"积分钱包",@"实名",@"团队钱包",@"邀请好友钱包", nil];//@"提现",@"互转",@"储值卡",@"交易码",@"积分",           @"商学院",@"视频",
     }
     return self;
 }
@@ -198,7 +206,6 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     {
         _buttonFunc[i]=[UIButton buttonWithType:UIButtonTypeCustom];
         _buttonFunc[i].frame=RectWithScale(CGRectMake(140-10+340*(i%3), 610+195*(i/3), 95+20,95+20), GPCommonLayoutScaleSizeWidthIndex);
-        //        [_buttonFunc[i] setBackgroundImage:GetImage([_arrayButtonImageName objectAtIndex:i]) forState:UIControlStateNormal];
         [_buttonFunc[i] setImage:GetImage([_arrayButtonImageName objectAtIndex:i]) forState:UIControlStateNormal];
         [_buttonFunc[i] setTitle:[_arrayButtonTitle objectAtIndex:i] forState:UIControlStateNormal];
         [_buttonFunc[i] setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
@@ -224,37 +231,9 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _tableViewTemp.delegate = self;
     _tableViewTemp.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_tableViewTemp];
-//    [_tableViewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight)];
     _tableViewTemp.tableHeaderView = _viewTemp;
     
     [self setupRefreshWithScrollView:_tableViewTemp];
-    //
-    //
-    //    _scrollViewTemp = [[UIScrollView alloc]init];
-    //    _scrollViewTemp.showsHorizontalScrollIndicator = NO;
-    //    _scrollViewTemp.showsVerticalScrollIndicator = NO;
-    //    _scrollViewTemp.backgroundColor = [UIColor clearColor];
-    //    [_viewTemp addSubview:_scrollViewTemp];
-    //    [_scrollViewTemp setFrame:CGRectMake(80, 50, 100, 20)];
-    //
-    //    _categoryBarTemp = [[CategoryBar alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, GPScreenWidth , 30)];
-    //    _categoryBarTemp.backgroundColor = [UIColor clearColor];
-    //    _categoryBarTemp.delegate = self;
-    //    _categoryBarTemp.lineColor = rgb(0, 185, 142);
-    //    _categoryBarTemp.itemTitles = @[@"推荐店铺",@"店铺分类"];
-    //    _categoryBarTemp.font = FontRegularWithSize(13);
-    //    _categoryBarTemp.titleColor = rgb(211, 211, 211);
-    //    _categoryBarTemp.fontSelected = FontMediumWithSize(16);
-    //    _categoryBarTemp.titleColorSelected = rgb(0, 185, 142);
-    //    _categoryBarTemp.buttonColor = GPHexColor(0xF5F5F5);
-    //    _categoryBarTemp.buttonColorSelected = GPHexColor(0xFFFFFF);
-    //    _categoryBarTemp.buttonInset = 20;
-    //    _categoryBarTemp.isVertical = NO;
-    //    _categoryBarTemp.isSpread = NO;
-    //    [_categoryBarTemp updateData];
-    //    _categoryBarTemp.currentItemIndex = 0;
-    //    [_viewTemp addSubview:_categoryBarTemp];
-    //    [_categoryBarTemp setFrame:CGRectMake(80, 50, 100, 20)];
 }
 
 -(void)leftClick
@@ -348,23 +327,33 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     }
     else if([buttonName containsString:@"提现"])
     {
-        
+        WithdrawViewController *vc = [[WithdrawViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else if([buttonName containsString:@"互转"])
     {
-        
+        PointTransformViewController *vc = [[PointTransformViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else if([buttonName containsString:@"储值卡"])
     {
-        
+        FundpredepositViewController *vc = [[FundpredepositViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else if([buttonName containsString:@"交易码"])
     {
-        
+        TransationViewController *vc = [[TransationViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else if([buttonName containsString:@"积分"])
     {
-        
+        PointsViewController *vc = [[PointsViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else if([buttonName containsString:@"实名"])
     {

@@ -157,14 +157,14 @@
 #define Hostmembermy_withdraw        Host@"/member/my_withdraw"//提现申请
 
 
-#pragma mark - 获取可提现金额/银行卡
+#pragma mark - 可用积分/冻结积分/储值卡/交易码 查询接口
 /**
- *获取可提现金额/银行卡
+ *可用积分/冻结积分/储值卡/交易码 查询接口
  *https://shop.bayi-shop.com/mobile/member/my_asset
  *key       token
  *fields    available：可用积分；point：冻结积分；predepoit：储值卡；transaction：交易码
  */
-#define Hostmembermy_asset        Host@"/member/my_asset"//获取可提现金额/银行卡
+#define Hostmembermy_asset        Host@"/member/my_asset"//可用积分/冻结积分/储值卡/交易码 查询接口
 
 
 #pragma mark - 钱包页面个人资产查询
@@ -226,7 +226,7 @@
  *page          分页，默认第1页
  *pagesize      每页数量，默认5条
  */
-#define Hostmemberpointstransactionlog        Host@"/memberpoints/transactionlog"//交易码交易明细
+#define Hostmemberfundtransactionlog        Host@"/memberfund/transactionlog"//交易码交易明细
 
 
 

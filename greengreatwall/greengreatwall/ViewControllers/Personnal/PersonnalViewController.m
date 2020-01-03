@@ -25,6 +25,7 @@
 #import "OrderListViewController.h"
 
 #import "WalletViewController.h"
+
 @interface PersonnalViewController ()
 {
     UIView              *_viewBack;
@@ -42,7 +43,7 @@
     UILabel             *_labelWalletDescribe;
     UIButton            *_buttonWallet;
     
-    UIView              *_viewContent[6];
+    UIView              *_viewContent[7];
     UITapGestureRecognizer *_tap[6];
     
     UILabel             *_labelContentFirstTitle;
@@ -128,14 +129,15 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     _viewBack = [[UIView alloc]init];
     [_viewBack setBackgroundColor:[UIColor whiteColor]];
-    [_viewBack setFrame:CGRectMake(0, 570*GPCommonLayoutScaleSizeWidthIndex , GPScreenWidth, GPScreenHeight - kTabBarHeight )];
+    [_viewBack setFrame:CGRectMake(0, 570*GPCommonLayoutScaleSizeWidthIndex , GPScreenWidth, 3430*GPCommonLayoutScaleSizeWidthIndex)];//GPScreenHeight - kTabBarHeight
     [_viewBack rounded:30 rectCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)];
     [_scrollViewContent addSubview:_viewBack];
     
     _viewTop = [[UIView alloc]init];
     _viewTop.backgroundColor = [UIColor clearColor];
-    [_viewTop setFrame:CGRectMake(0, 0, GPScreenWidth, 2000)];
+    [_viewTop setFrame:CGRectMake(0, 0, GPScreenWidth, 2500*GPCommonLayoutScaleSizeWidthIndex)];
     [_scrollViewContent addSubview:_viewTop];
+    [_scrollViewContent setContentSize:CGSizeMake(GPScreenWidth, 1800*GPCommonLayoutScaleSizeWidthIndex)];
     
     
     CGFloat x = 0;
@@ -146,12 +148,13 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
                              [NSNumber numberWithFloat:140.0*GPCommonLayoutScaleSizeWidthIndex],
                              [NSNumber numberWithFloat:140.0*GPCommonLayoutScaleSizeWidthIndex],
                              [NSNumber numberWithFloat:140.0*GPCommonLayoutScaleSizeWidthIndex],
+                             [NSNumber numberWithFloat:140.0*GPCommonLayoutScaleSizeWidthIndex],
                              [NSNumber numberWithFloat:170.0*GPCommonLayoutScaleSizeWidthIndex],
                              [NSNumber numberWithFloat:140.0*GPCommonLayoutScaleSizeWidthIndex]];
     
     
     
-    for (NSInteger i = 0; i< 6; i++)
+    for (NSInteger i = 0; i< 7; i++)
     {
         CGFloat height = [arrayHeight[i] floatValue];
         _viewContent[i]=[[UIView alloc]init];;
@@ -258,7 +261,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _labelContentFirstTitle.text = @"我的订单";
     
     //    imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-    NSArray *arrayImageName = @[@"待付款",@"代发货",@"完成",@"取消"];//,@"取消"
+    NSArray *arrayImageName = @[@"待付款",@"代发货",@"待收货",@"完成"];//,@"取消"
     NSArray *arrayTitleName = @[@"待付款",@"待发货",@"待收货",@"已完成"];//,@"已取消"
     
     NSInteger lieContent = arrayTitleName.count;
@@ -295,10 +298,10 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //    UIImage *imageMirrored = [UIImage imageWithCGImage:GetImage([arrayImageName objectAtIndex:2]).CGImage scale:1 orientation:UIImageOrientationUpMirrored];
 //    [_buttonContentFirst[2] setBackgroundImage:imageMirrored forState:UIControlStateNormal];
     
-    NSArray *arrayImageNameContent = @[@"资料",@"密码",@"支付密码",@"地址",@"退出"];
-    NSArray *arrayTitleNameContent = @[@"个人资料",@"登录密码",@"支付密码",@"收货地址",@"退出登录"];
+    NSArray *arrayImageNameContent = @[@"资料",@"密码",@"支付密码",@"地址",@"邀请好友",@"退出"];
+    NSArray *arrayTitleNameContent = @[@"个人资料",@"登录密码",@"支付密码",@"收货地址",@"邀请好友",@"退出登录"];
     
-    for (NSInteger i = 0; i<5; i++) {
+    for (NSInteger i = 0; i<arrayTitleNameContent.count; i++) {
         _imageViewContent[i] = [[UIImageView alloc]init];
         [_imageViewContent[i] setBackgroundColor:[UIColor clearColor]];
         [_imageViewContent[i] setImage:GetImage(arrayImageNameContent[i])];
@@ -336,6 +339,13 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 5) {
+        NSString *stringlink = [NSString stringWithFormat:@"%@?key=%@",member_inviter_poster,[HPUserDefault objectForKey:@"token"]];
+        
+        HPBaseWKWebViewController *vc = [[HPBaseWKWebViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.urlStr = stringlink;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 6) {
         
         [HPAlertTools showAlertWith:getCurrentViewController() title:@"提示信息" message:@"确定退出登录?" callbackBlock:^(NSInteger btnIndex) {
             if (btnIndex == 1) {

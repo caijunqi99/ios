@@ -326,7 +326,7 @@ order_receive  : 确认收货
     return _arrayDataSource.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *arrayGoods = _arrayDataSource[section][@"order_list"][0][@"extend_order_goods"];
+    NSArray *arrayGoods = _arrayDataSource[section][@"order_list"][0][@"goods_list"];
     return arrayGoods.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -334,7 +334,7 @@ order_receive  : 确认收货
     //    StoreModel *storeModel = self.storeArray[indexPath.section];
     //    GoodsModel *goodsModel = storeModel.goodsArray[indexPath.row];
     //    cell.goodsModel = goodsModel;
-    NSArray *arrayGoods = _arrayDataSource[indexPath.section][@"order_list"][0][@"extend_order_goods"];
+    NSArray *arrayGoods = _arrayDataSource[indexPath.section][@"order_list"][0][@"goods_list"];
     NSDictionary * dic = arrayGoods[indexPath.row];
     GoodsModel *model = [[GoodsModel alloc] init];
     [model setValuesForKeysWithDictionary:dic];
@@ -481,7 +481,7 @@ order_receive  : 确认收货
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *arrayGoods = _arrayDataSource[indexPath.section][@"order_list"][0][@"extend_order_goods"];
+    NSArray *arrayGoods = _arrayDataSource[indexPath.section][@"order_list"][0][@"goods_list"];
     NSDictionary * dic = arrayGoods[indexPath.row];
     GoodsModel *goodsModel = [[GoodsModel alloc] init];
     [goodsModel setValuesForKeysWithDictionary:dic];

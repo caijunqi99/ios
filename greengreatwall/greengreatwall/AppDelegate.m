@@ -112,19 +112,19 @@
     
     UIViewController *rootVC;
     //GPDebugLog(@"token----------:%@",[HPUserDefault objectForKey:@"token"]);
-    if (IsStringEmptyOrNull([HPUserDefault objectForKey:@"token"]))
-    {
-        LoginViewController *vc = [[LoginViewController alloc]init];
-        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:vc];
-        rootVC = nav;
-    }
-    else
-    {
+//    if (IsStringEmptyOrNull([HPUserDefault objectForKey:@"token"]))
+//    {
+//        LoginViewController *vc = [[LoginViewController alloc]init];
+//        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:vc];
+//        rootVC = nav;
+//    }
+//    else
+//    {
         
         //设置indextabbar为主窗口的根视图控制器
         IndexTabBarViewController *vc = [IndexTabBarViewController shareInstance];
         rootVC = vc;
-    }
+//    }
     
     self.window.rootViewController = rootVC;
     [self.window makeKeyAndVisible];

@@ -160,6 +160,10 @@
 		64216A8723BE0483005489F1 /* TransationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A8623BE0483005489F1 /* TransationTableViewCell.m */; };
 		64216A8A23BE0498005489F1 /* FundpredepositTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A8923BE0498005489F1 /* FundpredepositTableViewCell.m */; };
 		64216A8D23BE04AD005489F1 /* PointsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A8C23BE04AD005489F1 /* PointsTableViewCell.m */; };
+		64216A9123C06F6C005489F1 /* OrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A9023C06F6B005489F1 /* OrderDetailTableViewCell.m */; };
+		64216A9423C06F8C005489F1 /* ExpressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A9323C06F8C005489F1 /* ExpressTableViewCell.m */; };
+		64216A9723C06F9E005489F1 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A9623C06F9E005489F1 /* OrderDetailViewController.m */; };
+		64216A9A23C06FAB005489F1 /* ExpressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A9923C06FAB005489F1 /* ExpressViewController.m */; };
 		643DA02223A7D3C000BA26B8 /* AreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 643DA02123A7D3C000BA26B8 /* AreaView.m */; };
 		643DA03023A7DF7700BA26B8 /* UILabelAlignToBottomLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 643DA02F23A7DF7700BA26B8 /* UILabelAlignToBottomLeft.m */; };
 		6448FC2F239E5DA600243799 /* ProAttrSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6448FC2E239E5DA600243799 /* ProAttrSelectView.m */; };
@@ -657,6 +661,14 @@
 		64216A8923BE0498005489F1 /* FundpredepositTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FundpredepositTableViewCell.m; sourceTree = "<group>"; };
 		64216A8B23BE04AD005489F1 /* PointsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointsTableViewCell.h; sourceTree = "<group>"; };
 		64216A8C23BE04AD005489F1 /* PointsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PointsTableViewCell.m; sourceTree = "<group>"; };
+		64216A8F23C06F6B005489F1 /* OrderDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailTableViewCell.h; sourceTree = "<group>"; };
+		64216A9023C06F6B005489F1 /* OrderDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailTableViewCell.m; sourceTree = "<group>"; };
+		64216A9223C06F8C005489F1 /* ExpressTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpressTableViewCell.h; sourceTree = "<group>"; };
+		64216A9323C06F8C005489F1 /* ExpressTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExpressTableViewCell.m; sourceTree = "<group>"; };
+		64216A9523C06F9E005489F1 /* OrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		64216A9623C06F9E005489F1 /* OrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		64216A9823C06FAB005489F1 /* ExpressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpressViewController.h; sourceTree = "<group>"; };
+		64216A9923C06FAB005489F1 /* ExpressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExpressViewController.m; sourceTree = "<group>"; };
 		643DA02023A7D3C000BA26B8 /* AreaView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AreaView.h; sourceTree = "<group>"; };
 		643DA02123A7D3C000BA26B8 /* AreaView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AreaView.m; sourceTree = "<group>"; };
 		643DA02E23A7DF7700BA26B8 /* UILabelAlignToBottomLeft.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILabelAlignToBottomLeft.h; sourceTree = "<group>"; };
@@ -1579,6 +1591,7 @@
 		641E4A612382731B00F07A09 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				64216A8E23C06F3D005489F1 /* OrderDetail */,
 				647ED09123B7A936003200FA /* OrderList */,
 				6448FC30239F342600243799 /* Login&Register */,
 				641E4A762382731B00F07A09 /* IndexTab */,
@@ -1891,6 +1904,21 @@
 				64216A8323BE0277005489F1 /* WithdrawViewController.m */,
 			);
 			path = Withdraw;
+			sourceTree = "<group>";
+		};
+		64216A8E23C06F3D005489F1 /* OrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				64216A9523C06F9E005489F1 /* OrderDetailViewController.h */,
+				64216A9623C06F9E005489F1 /* OrderDetailViewController.m */,
+				64216A8F23C06F6B005489F1 /* OrderDetailTableViewCell.h */,
+				64216A9023C06F6B005489F1 /* OrderDetailTableViewCell.m */,
+				64216A9823C06FAB005489F1 /* ExpressViewController.h */,
+				64216A9923C06FAB005489F1 /* ExpressViewController.m */,
+				64216A9223C06F8C005489F1 /* ExpressTableViewCell.h */,
+				64216A9323C06F8C005489F1 /* ExpressTableViewCell.m */,
+			);
+			path = OrderDetail;
 			sourceTree = "<group>";
 		};
 		643DA00623A7CA2D00BA26B8 /* 引导页 */ = {
@@ -2738,6 +2766,7 @@
 				641E49E2238269A200F07A09 /* SDBrowserImageView.m in Sources */,
 				641E4AA52382731C00F07A09 /* ClassificationCollectionViewCell.m in Sources */,
 				6448FC2F239E5DA600243799 /* ProAttrSelectView.m in Sources */,
+				64216A9A23C06FAB005489F1 /* ExpressViewController.m in Sources */,
 				645C85B923A761D900E31AAE /* AddressListTableViewCell.m in Sources */,
 				645C85A323A6878E00E31AAE /* AddCustomerWihtPoiSearchVC.m in Sources */,
 				641E4A1C238269A200F07A09 /* HPNetManagerCache.m in Sources */,
@@ -2815,6 +2844,7 @@
 				641E4A37238269A200F07A09 /* NSMutableString+HPSafe.m in Sources */,
 				641E4A36238269A200F07A09 /* NSString+HPCategory.m in Sources */,
 				641E49ED238269A200F07A09 /* SRVideoDownloader.m in Sources */,
+				64216A9123C06F6C005489F1 /* OrderDetailTableViewCell.m in Sources */,
 				647ED08023B31296003200FA /* SetLoginPasswordViewController.m in Sources */,
 				645C85C023A7737600E31AAE /* DeliveryAddressModel.m in Sources */,
 				641E49E1238269A200F07A09 /* SDWaitingView.m in Sources */,
@@ -2826,6 +2856,7 @@
 				645C85A523A6878E00E31AAE /* MatchAdressModel.m in Sources */,
 				641E49CB238269A200F07A09 /* NetWorkTool.m in Sources */,
 				641E4ABB2382731C00F07A09 /* PersonnalViewController.m in Sources */,
+				64216A9423C06F8C005489F1 /* ExpressTableViewCell.m in Sources */,
 				641E49D7238269A200F07A09 /* XDAutoresizeLabelFlowConfig.m in Sources */,
 				641E49E0238269A200F07A09 /* SDPhotoBrowser.m in Sources */,
 				643DA03023A7DF7700BA26B8 /* UILabelAlignToBottomLeft.m in Sources */,
@@ -2855,6 +2886,7 @@
 				641E4AA62382731C00F07A09 /* ClassificationContentViewController.m in Sources */,
 				64AE30482395090E00C0AB8F /* StoreGoodsIndexCollectionViewCell.m in Sources */,
 				641E4AD1238273F400F07A09 /* StoreViewController.m in Sources */,
+				64216A9723C06F9E005489F1 /* OrderDetailViewController.m in Sources */,
 				641E49D3238269A200F07A09 /* BaseNavigationViewController.m in Sources */,
 				641E4B4A2385333B00F07A09 /* CategoryBar.m in Sources */,
 				641E49F4238269A200F07A09 /* HPBaseWKWebViewController.m in Sources */,

@@ -286,6 +286,12 @@
                 [self->_buttonTemp setTitle:@"认证中" forState:UIControlStateNormal];
                 [self->_buttonTemp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 [self->_buttonTemp setBackgroundImage:CreateImageWithColor([UIColor lightGrayColor]) forState:UIControlStateNormal];
+                
+                [self->_buttonIDCardpositive setUserInteractionEnabled:NO];
+                [self->_buttonIDCardReverse setUserInteractionEnabled:NO];
+                for (NSInteger i = 0; i <5; i++) {
+                    [self->_textFieldTemp[i] setUserInteractionEnabled:NO];
+                }
             }
             if ([[NSString stringWithFormat:@"%@",response[@"result"][@"member_auth_state"]]isEqualToString:@"2"]) {
                 [HPAlertTools showAlertWith:self title:@"提示信息" message:@"您提交的认证未通过,请检查后确认无误重新提交。" callbackBlock:^(NSInteger btnIndex) {
@@ -297,6 +303,12 @@
                 [self->_buttonTemp setTitle:@"已认证" forState:UIControlStateNormal];
                 //                [self->_buttonTemp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 //                [self->_buttonTemp setBackgroundImage:CreateImageWithColor([UIColor lightGrayColor]) forState:UIControlStateNormal];
+                
+                [self->_buttonIDCardpositive setUserInteractionEnabled:NO];
+                [self->_buttonIDCardReverse setUserInteractionEnabled:NO];
+                for (NSInteger i = 0; i <5; i++) {
+                    [self->_textFieldTemp[i] setUserInteractionEnabled:NO];
+                }
             }
             
         }

@@ -164,7 +164,7 @@
  *key       token
  *fields    available：可用积分；point：冻结积分；predepoit：储值卡；transaction：交易码
  */
-#define Hostmembermy_asset        Host@"/member/my_asset"//可用积分/冻结积分/储值卡/交易码 查询接口
+    #define Hostmembermy_asset        Host@"/member/my_asset"//可用积分/冻结积分/储值卡/交易码 查询接口
 
 
 #pragma mark - 钱包页面个人资产查询

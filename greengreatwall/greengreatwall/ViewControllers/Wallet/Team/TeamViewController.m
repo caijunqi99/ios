@@ -151,25 +151,25 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _labelTemp[4].textAlignment = NSTextAlignmentLeft;
     
     
-    [_labelTemp[5] setFrame:RectWithScale(CGRectMake(40, 530 + 45, 240, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_labelTemp[5] setFrame:RectWithScale(CGRectMake(40, 530 + 45, 360, 50), GPCommonLayoutScaleSizeWidthIndex)];
     [_viewTemp addSubview:_labelTemp[5]];
     [_labelTemp[5] setTextColor:[UIColor blackColor]];
     _labelTemp[5].textAlignment = NSTextAlignmentCenter;
     [_labelTemp[5] setFont:FontRegularWithSize(16)];
     
-    [_labelTemp[6] setFrame:RectWithScale(CGRectMake(320, 530 + 45, 150, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_labelTemp[6] setFrame:RectWithScale(CGRectMake(400, 530 + 45, 150, 50), GPCommonLayoutScaleSizeWidthIndex)];
     [_viewTemp addSubview:_labelTemp[6]];
     [_labelTemp[6] setTextColor:[UIColor blackColor]];
     _labelTemp[6].textAlignment = NSTextAlignmentCenter;
     [_labelTemp[6] setFont:FontRegularWithSize(16)];
     
-    [_labelTemp[7] setFrame:RectWithScale(CGRectMake(500, 530 + 45, 100, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_labelTemp[7] setFrame:RectWithScale(CGRectMake(550, 530 + 45, 100, 50), GPCommonLayoutScaleSizeWidthIndex)];
     [_viewTemp addSubview:_labelTemp[7]];
     [_labelTemp[7] setTextColor:[UIColor blackColor]];
     _labelTemp[7].textAlignment = NSTextAlignmentCenter;
     [_labelTemp[7] setFont:FontRegularWithSize(16)];
     
-    [_labelTemp[8] setFrame:RectWithScale(CGRectMake(650, 530 + 45, 350, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_labelTemp[8] setFrame:RectWithScale(CGRectMake(650, 530 + 45, 390, 50), GPCommonLayoutScaleSizeWidthIndex)];
     [_viewTemp addSubview:_labelTemp[8]];
     [_labelTemp[8] setTextColor:[UIColor blackColor]];
     _labelTemp[8].textAlignment = NSTextAlignmentCenter;

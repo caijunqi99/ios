@@ -419,7 +419,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     //头部刷新控件
     scrollView.mj_header = header;
     
-    CGFloat _viewh = _viewTemp.bottom;
+    CGFloat _viewh = _viewTemp.height;
     scrollView.mj_header.ignoredScrollViewContentInsetTop = _viewh + kScrollViewHeaderIgnored;
     
     MJRefreshBackStateFooter *footer = [MJRefreshBackStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];

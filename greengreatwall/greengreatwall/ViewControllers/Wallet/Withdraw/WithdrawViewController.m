@@ -11,26 +11,21 @@
 
 @interface WithdrawViewController ()<UITextFieldDelegate>
 {
-    UIImageView             *_imageViewWallet;
+    UIView                  *_viewBack;
+    UIImageView             *_imageViewBack;
     
-    UIView                  *_viewContent[3];
-    
-    UILabelAlignToTopLeft   *_labelTemp[7];
-    UITextField             *_textFieldTemp[5];
+    UILabelAlignToTopLeft   *_labelTemp[6];
+    UITextField             *_textFieldTemp[2];
     
     UIButton                *_buttonTemp;
-    UIButton                *_buttonIDCardpositive;
-    UIButton                *_buttonIDCardReverse;
+    UIButton                *_buttonAll;
+    UIButton                *_buttonGetCode;
     
     UIButton                *_buttonSelect;
     
- 
-    
-    NSString                *stringProvince_id;
-    NSString                *stringCity_id;
-    NSString                *stringRegion_id;
-    
     NSMutableArray          *_arrayDataSource;
+    
+    NSString                *_string_commission;
 }
 
 
@@ -75,113 +70,109 @@
 {
     
     [self setBackButtonWithTarget:self action:@selector(leftClick)];
-    [self settingNavTitle:@"实名认证"];
+    [self settingNavTitle:@"提现"];
     
     viewSetBackgroundColor(kColorBasic);
     
-    _imageViewWallet = [[UIImageView alloc]init];
-    [_imageViewWallet setFrame:RectWithScale(CGRectMake(0, 0, 1080, 364), GPCommonLayoutScaleSizeWidthIndex)];
-    [_imageViewWallet setImage:GetImage(@"身份认证")];
-    [self.view addSubview:_imageViewWallet];
-    _imageViewWallet.userInteractionEnabled= NO;
+    _viewBack = [UIView initViewBackColor:[UIColor whiteColor]];
+    [_viewBack setFrame:RectWithScale(CGRectMake(0, 0, 1080, 1050), GPCommonLayoutScaleSizeWidthIndex)];
+    [self.view addSubview:_viewBack];
     
-    for (NSInteger i = 0; i<3; i++) {
-        _viewContent[i] = [[UIView alloc]init];
-        [_viewContent[i] setBackgroundColor:[UIColor whiteColor]];
-        [self.view addSubview:_viewContent[i]];
-    }
+    _imageViewBack = [[UIImageView alloc]init];
+    [_imageViewBack setFrame:RectWithScale(CGRectMake(40, 65, 1000, 378), GPCommonLayoutScaleSizeWidthIndex)];
+    [_imageViewBack setImage:GetImage(@"钱包背景图")];
+    [self.view addSubview:_imageViewBack];
+    _imageViewBack.userInteractionEnabled= NO;
     
     
     
-    [_viewContent[0] setFrame:RectWithScale(CGRectMake(0, 290, 1080, 430), GPCommonLayoutScaleSizeWidthIndex)];
-    [_viewContent[1] setFrame:RectWithScale(CGRectMake(0, 740, 1080, 430), GPCommonLayoutScaleSizeWidthIndex)];
-    [_viewContent[2] setFrame:RectWithScale(CGRectMake(0, 1200, 1080, 220), GPCommonLayoutScaleSizeWidthIndex)];
+    NSArray *arrayLabelText = @[@"可用积分",@"",@"最低提现积分:",@"提现积分",@"手续费:",@"验证码"];//@"请填写持卡人银行卡信息",@"持卡人",@"卡号",@"开户行",
+    //    NSArray *arrayPlaceHolderText = @[@"请输入提现积分数量",@"请输入验证码"];//@"请输入真实姓名",@"请输入银行卡号",@"请输入开户行",
     
-    [_viewContent[0] rounded:10 rectCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)];
-    
-    NSArray *arrayLabelText = @[@"真实姓名",@"身份证号",@"所在地区",@"银行名称",@"银行卡账号",@"基本信息",@"身份证照片"];
-    NSArray *arrayPlaceHolderText = @[@"请输入真实姓名",@"15-18位身份证号",@"请选择",@"请输入",@"请输入"];
-    
-    for (NSInteger i = 0; i<7; i++) {
+    for (NSInteger i = 0; i<arrayLabelText.count; i++) {
         
         _labelTemp[i] = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:arrayLabelText[i]];
         _labelTemp[i].lineBreakMode = NSLineBreakByCharWrapping;
         _labelTemp[i].backgroundColor = [UIColor clearColor];
-        [_labelTemp[i] setFrame:CGRectMake(10, 10, 80, 40)];
+        [_labelTemp[i] setFrame:RectWithScale(CGRectMake(40, 0, 160, 120), GPCommonLayoutScaleSizeWidthIndex)];
         
         if (i<5) {
-            _textFieldTemp[i] = [UITextField initTextFieldFont:16 LeftImageName:nil Placeholder:arrayPlaceHolderText[i]];
-            _textFieldTemp[i].keyboardType = UIKeyboardTypeDefault;
-            UIView *view = [UIView initViewBackColor:[UIColor clearColor]];
-            [view setFrame:CGRectMake(0, 0, 100, 60)];
-            [view addSubview:_labelTemp[i]];
-            _textFieldTemp[i].leftView = view;
-            _textFieldTemp[i].leftView.contentMode = UIViewContentModeScaleAspectFit;
-            _textFieldTemp[i].leftView.layer.masksToBounds = YES;
-            _textFieldTemp[i].leftView.clipsToBounds = YES;
-            _textFieldTemp[i].leftViewMode = UITextFieldViewModeAlways;
+            [self.view addSubview:_labelTemp[i]];
+        }else if (i == 5){
             
-            _textFieldTemp[i].delegate = self;
         }
     }
     
-    
-    
-    [_viewContent[0] addSubview:_textFieldTemp[0]];
-    [_textFieldTemp[0] setFrame:CGRectMake(0, (_viewContent[0].height/4.0) *1, _viewContent[0].width, _viewContent[0].height/4.0)];
-    _textFieldTemp[0].keyboardType = UIKeyboardTypeDefault;
-    
-    [_viewContent[0] addSubview:_textFieldTemp[1]];
-    [_textFieldTemp[1] setFrame:CGRectMake(0, (_viewContent[0].height/4.0) *2, _viewContent[0].width, _viewContent[0].height/4.0)];
+    _textFieldTemp[1] = [UITextField initTextFieldFont:16 LeftImageName:nil Placeholder:@"请输入验证码"];
     _textFieldTemp[1].keyboardType = UIKeyboardTypeDefault;
-    
-    [_viewContent[0] addSubview:_textFieldTemp[2]];
-    [_textFieldTemp[2] setFrame:CGRectMake(0, (_viewContent[0].height/4.0) *3, _viewContent[0].width, _viewContent[0].height/4.0)];
-    _textFieldTemp[2].keyboardType = UIKeyboardTypeDefault;
-    
-    
-    [_viewContent[2] addSubview:_textFieldTemp[3]];
-    [_textFieldTemp[3] setFrame:CGRectMake(0, (_viewContent[2].height/2.0) *0, _viewContent[2].width, _viewContent[2].height/2.0)];
-    _textFieldTemp[3].keyboardType = UIKeyboardTypeDefault;
-    
-    
-    [_viewContent[2] addSubview:_textFieldTemp[4]];
-    [_textFieldTemp[4] setFrame:CGRectMake(0, (_viewContent[2].height/2.0) *1, _viewContent[2].width, _viewContent[2].height/2.0)];
-    _textFieldTemp[4].keyboardType = UIKeyboardTypeNumberPad;
+    UIView *viewLeft1 = [UIView initViewBackColor:[UIColor clearColor]];
+    [viewLeft1 setFrame:RectWithScale(CGRectMake(0, 0, 240, 120), GPCommonLayoutScaleSizeWidthIndex)];
+    [viewLeft1 addSubview:_labelTemp[5]];
+    _textFieldTemp[1].leftView = viewLeft1;
+    _textFieldTemp[1].leftView.contentMode = UIViewContentModeScaleAspectFit;
+    _textFieldTemp[1].leftView.layer.masksToBounds = YES;
+    _textFieldTemp[1].leftView.clipsToBounds = YES;
+    _textFieldTemp[1].leftViewMode = UITextFieldViewModeAlways;
+    [_textFieldTemp[1] setFrame:RectWithScale(CGRectMake(0, 910, 1080, 120), GPCommonLayoutScaleSizeWidthIndex)];
+    _textFieldTemp[1].delegate = self;
     
     
-    [_labelTemp[5] setFrame:CGRectMake(10, 10+(_viewContent[0].height/4.0) *0, _viewContent[0].width - 10 - 10, (_viewContent[0].height/4.0)-20)];
-    [_viewContent[0] addSubview:_labelTemp[5]];
+    _buttonGetCode = [UIButton initButtonTitleFont:22 titleColor:kColorTheme backgroundColor:[UIColor clearColor] imageName:nil titleName:@"获取验证码"];
+    [_buttonGetCode addTarget:self tag:14 action:@selector(buttonClick:)];
+    [_buttonGetCode setFrame:RectWithScale(CGRectMake(0, 40, 250, 40), GPCommonLayoutScaleSizeWidthIndex)];
+    
+    UIView *viewRight1 = [UIView initViewBackColor:[UIColor clearColor]];
+    [viewRight1 setFrame:RectWithScale(CGRectMake(0, 0, 300, 120), GPCommonLayoutScaleSizeWidthIndex)];
+    [viewRight1 addSubview:_buttonGetCode];
+    _textFieldTemp[1].rightView = viewRight1;
+    _textFieldTemp[1].rightView.contentMode = UIViewContentModeScaleAspectFit;
+    _textFieldTemp[1].rightView.layer.masksToBounds = YES;
+    _textFieldTemp[1].rightView.clipsToBounds = YES;
+    _textFieldTemp[1].rightViewMode = UITextFieldViewModeAlways;
+    [self.view addSubview:_textFieldTemp[1]];
+    
+    [_labelTemp[0] setFrame:RectWithScale(CGRectMake(100, 100, 880, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_labelTemp[1] setFrame:RectWithScale(CGRectMake(100, 190, 880, 100), GPCommonLayoutScaleSizeWidthIndex)];
+    [_labelTemp[2] setFrame:RectWithScale(CGRectMake(100, 350, 880, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_labelTemp[3] setFrame:RectWithScale(CGRectMake(40, 460, 300, 60), GPCommonLayoutScaleSizeWidthIndex)];
+    [_labelTemp[4] setFrame:RectWithScale(CGRectMake(800, 760, 240, 40), GPCommonLayoutScaleSizeWidthIndex)];
+    //    [_labelTemp[5] setFrame:RectWithScale(CGRectMake(40, 840, 1000, 60), GPCommonLayoutScaleSizeWidthIndex)];
     
     
-    [_labelTemp[6] setFrame:CGRectMake(10, 10+(_viewContent[1].height/4.0) *0, _viewContent[1].width - 10 - 10, (_viewContent[1].height/4.0)-20)];
-    [_viewContent[1] addSubview:_labelTemp[6]];
+    [_labelTemp[0]setTextColor:[UIColor whiteColor]];
+    [_labelTemp[1]setTextColor:[UIColor whiteColor]];
+    [_labelTemp[2]setTextColor:[UIColor whiteColor]];
+    [_labelTemp[4]setTextColor:kColorTheme];
+    //    [_labelTemp[5]setTextColor:rgb(152, 153, 154)];
     
     
-    CGFloat width = (_viewContent[1].width - 200*GPCommonLayoutScaleSizeWidthIndex)/2.0;
-    CGFloat height = width *(255.0/448.0);
     
-    _buttonIDCardpositive = [UIButton initButtonTitleFont:22 titleColor:[UIColor clearColor] backgroundColor:[UIColor clearColor] imageName:nil titleName:@"正面"];
-    [_buttonIDCardpositive setImage:GetImage(@"正面照片") forState:UIControlStateNormal];
-    [_buttonIDCardpositive addTarget:self tag:13 action:@selector(buttonClick:)];
-    [_buttonIDCardpositive setFrame:CGRectMake(60*GPCommonLayoutScaleSizeWidthIndex, 130*GPCommonLayoutScaleSizeWidthIndex, width, height)];
-    [_viewContent[1] addSubview:_buttonIDCardpositive];
     
-    _buttonIDCardReverse = [UIButton initButtonTitleFont:22 titleColor:[UIColor clearColor] backgroundColor:[UIColor clearColor] imageName:nil titleName:@"反面"];
-    [_buttonIDCardReverse setImage:GetImage(@"反面照片") forState:UIControlStateNormal];
-    [_buttonIDCardReverse addTarget:self tag:14 action:@selector(buttonClick:)];
-    [_buttonIDCardReverse setFrame:CGRectMake(_viewContent[1].width/2.0 +_buttonIDCardpositive.left, _buttonIDCardpositive.top, width, height)];
-    [_viewContent[1] addSubview:_buttonIDCardReverse];
+    _buttonAll = [UIButton initButtonTitleFont:22 titleColor:kColorTheme backgroundColor:[UIColor clearColor] imageName:nil titleName:@"全部"];
+    [_buttonAll addTarget:self tag:13 action:@selector(buttonClick:)];
+    [_buttonAll setFrame:RectWithScale(CGRectMake(800, 460, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
+    [self.view addSubview:_buttonAll];
     
     
     
     
     
-    _buttonTemp = [UIButton initButtonTitleFont:22 titleColor:[UIColor whiteColor] backgroundColor:kColorTheme imageName:@"" titleName:@"提交认证"];
+    
+    _buttonTemp = [UIButton initButtonTitleFont:22 titleColor:[UIColor whiteColor] backgroundColor:kColorTheme imageName:@"" titleName:@"提现"];
     [_buttonTemp addTarget:self tag:11 action:@selector(buttonClick:)];
     [self.view addSubview:_buttonTemp];
     [_buttonTemp setFrame:CGRectMake(self.view.centerX - 395*GPCommonLayoutScaleSizeWidthIndex, GPScreenHeight - kNavBarAndStatusBarHeight - 270*GPCommonLayoutScaleSizeWidthIndex, 790*GPCommonLayoutScaleSizeWidthIndex, 790*(110.0/790.0)*GPCommonLayoutScaleSizeWidthIndex)];
     [_buttonTemp rounded:(55.0*GPCommonLayoutScaleSizeWidthIndex)];
+    
+    _textFieldTemp[0] = [UITextField initTextFieldFont:16 LeftImageName:nil Placeholder:@"请输入提现积分数量"];
+    _textFieldTemp[0].textColor = [UIColor blackColor];
+    _textFieldTemp[0].keyboardType = UIKeyboardTypeNumberPad;
+    _textFieldTemp[0].placeholder = @"请输入提现积分数量";
+    _textFieldTemp[0].delegate = self;
+    [_textFieldTemp[0] setBackgroundColor:rgb(244, 245, 246)];
+    [_textFieldTemp[0] setFrame:RectWithScale(CGRectMake(40, 600, 1000, 120), GPCommonLayoutScaleSizeWidthIndex)];
+    [self.view addSubview:_textFieldTemp[0]];
+    //    [self.view bringSubviewToFront:_textFieldTemp[0]];
 }
 
 -(void)leftClick
@@ -196,69 +187,34 @@
 
 -(BOOL)checkAll
 {
-    if ([_textFieldTemp[2].text containsString:@"请选择"]||IsStringEmptyOrNull(_textFieldTemp[2].text)) {
-        [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:@"请选择所在地区" buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
+    if ([_textFieldTemp[0].text floatValue] > [_labelTemp[1].text floatValue]) {
+        [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:@"可用积分不足" buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
+        return NO;
+    }
+    if (IsStringEmptyOrNull(_textFieldTemp[0].text)){
+        [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:@"请输入提现积分数量" buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
         return NO;
     }
     
-    
-    if (IsStringEmptyOrNull(_textFieldTemp[0].text)||IsStringEmptyOrNull(_textFieldTemp[1].text)||IsStringEmptyOrNull(_textFieldTemp[2].text)||IsStringEmptyOrNull(_textFieldTemp[3].text)||IsStringEmptyOrNull(_textFieldTemp[4].text)) {
-        [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:@"请填写完整信息" buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
+    if (IsStringEmptyOrNull(_textFieldTemp[1].text)){
+        [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:@"请输入验证码" buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
         return NO;
     }
-    else
-    {
-        return YES;
-    }
     
-    return NO;
-    
-    
+    return YES;
 }
 
 -(void)netRequest
 {
-//    HPWeak;
+    //    HPWeak;
     
-    [HPNetManager POSTWithUrlString:HostMmemberauthauth isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"userid"],@"member_id", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostmembermy_asset isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
-
-            if ([[NSString stringWithFormat:@"%@",response[@"result"][@"member_auth_state"]]isEqualToString:@"0"]) {
-                return ;
-            }else{
-                [self->_textFieldTemp[0] setText:response[@"result"][@"username"]];
-                [self->_textFieldTemp[1] setText:response[@"result"][@"idcard"]];
-                [self->_textFieldTemp[2] setText:response[@"result"][@"member_areainfo"]];
-                self->stringProvince_id = response[@"result"][@"member_provinceid"];
-                self->stringCity_id = response[@"result"][@"member_cityid"];
-                self->stringRegion_id = response[@"result"][@"member_areaid"];
-                [self->_buttonIDCardpositive sd_setImageWithURL:URL(response[@"result"][@"member_idcard_image2"]) forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-//                    [self->_arrayDataSourcePhoto replaceObjectAtIndex:0 withObject:image];
-                }];
-                [self->_buttonIDCardReverse sd_setImageWithURL:URL(response[@"result"][@"member_idcard_image3"]) forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-//                    [self->_arrayDataSourcePhoto replaceObjectAtIndex:1 withObject:image];
-                }];
-                [self->_textFieldTemp[3] setText:response[@"result"][@"member_bankname"]];
-                [self->_textFieldTemp[4] setText:response[@"result"][@"member_bankcard"]];
-            }
-            if ([[NSString stringWithFormat:@"%@",response[@"result"][@"member_auth_state"]]isEqualToString:@"1"]) {
-                [self->_buttonTemp setUserInteractionEnabled:NO];
-                [self->_buttonTemp setTitle:@"认证中" forState:UIControlStateNormal];
-                [self->_buttonTemp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                [self->_buttonTemp setBackgroundImage:CreateImageWithColor([UIColor lightGrayColor]) forState:UIControlStateNormal];
-            }
-            if ([[NSString stringWithFormat:@"%@",response[@"result"][@"member_auth_state"]]isEqualToString:@"2"]) {
-                [HPAlertTools showAlertWith:self title:@"提示信息" message:@"您提交的认证未通过,请检查后确认无误重新提交。" callbackBlock:^(NSInteger btnIndex) {
-                    //                [weakSelf.navigationController popViewControllerAnimated:YES];
-                } cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"确定",nil];
-            }
-            if ([[NSString stringWithFormat:@"%@",response[@"result"][@"member_auth_state"]]isEqualToString:@"3"]) {
-                [self->_buttonTemp setUserInteractionEnabled:NO];
-                [self->_buttonTemp setTitle:@"已认证" forState:UIControlStateNormal];
-                //                [self->_buttonTemp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                //                [self->_buttonTemp setBackgroundImage:CreateImageWithColor([UIColor lightGrayColor]) forState:UIControlStateNormal];
-            }
+            self->_labelTemp[1].text = [NSString stringWithFormat:@"%@",response[@"result"][@"available"]];
+            self->_labelTemp[2].text = [NSString stringWithFormat:@"最低提现积分:%@",response[@"result"][@"withdraw"]];
+            self->_labelTemp[4].text = [NSString stringWithFormat:@"手续费:%@%%",response[@"result"][@"commission"]];
+            self->_string_commission = response[@"result"][@"commission"];
             
         }
         else
@@ -272,15 +228,44 @@
     }];
 }
 
+-(void)netRequestGetVerify
+{
+    [HPNetManager GETWithUrlString:HostConnectget_sms_captcha isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"username"],@"member_mobile",@"6",@"type", nil] successBlock:^(id response) {
+        //GPDebugLog(@"response:%@",response);
+        
+        if ([response[@"code"] integerValue] == 200) {
+            [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:[NSString stringWithFormat:@"验证码已发送,有效时间%@分钟",response[@"result"][@"sms_time"]] buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
+        }
+        else
+        {
+            [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:response[@"message"] buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    } progressBlock:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
 -(void)uploadInfo
 {
     HPWeak;
-    
-    [HPNetManager POSTWithUrlString:Hostmembermy_asset isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key", nil] successBlock:^(id response) {
+    /**
+     *提现申请
+     *https://shop.bayi-shop.com/mobile/member/my_withdraw
+     *key                   token
+     *amount                提现金额
+     *commission            手续费比例
+     *memberbank_name       开户行
+     *memberbank_no         银行卡账号
+     *memberbank_truename   持卡人姓名
+     */
+    [HPNetManager POSTWithUrlString:Hostmembermy_withdraw isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_textFieldTemp[0].text,@"amount",_string_commission,@"commission",_textFieldTemp[0].text,@"amount", nil] successBlock:^(id response) {
         
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
-            [HPAlertTools showAlertWith:self title:@"提示信息" message:@"添加成功" callbackBlock:^(NSInteger btnIndex) {
+            [HPAlertTools showAlertWith:self title:@"提示信息" message:@"提交申请成功" callbackBlock:^(NSInteger btnIndex) {
                 [weakSelf.navigationController popViewControllerAnimated:YES];
                 //                HPNOTIF_POST(@"refreshAddressList", nil);
             } cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"确定",nil];
@@ -310,12 +295,12 @@
 -(void)buttonClick:(UIButton*)btn
 {
     _buttonSelect = btn;
-    if (_buttonIDCardReverse == btn) {
-
+    if (_buttonGetCode == btn) {
+        [self netRequestGetVerify];
     }
-    else if (_buttonIDCardpositive == btn)
+    else if (_buttonAll == btn)
     {
-
+        [_textFieldTemp[0] setText:_labelTemp[1].text];
     }
     else if (_buttonTemp == btn)
     {

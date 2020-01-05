@@ -110,7 +110,6 @@
     
     [_labelTemp[5] setFrame:RectWithScale(CGRectMake(40, 40, 60, 40), GPCommonLayoutScaleSizeWidthIndex)];
     _labelTemp[5].textAlignment = NSTextAlignmentLeft;
-//    [_viewTemp addSubview:_labelTemp[5]];
     
     
     _textFieldTemp[0] = [UITextField initTextFieldFont:16 LeftImageName:nil Placeholder:@""];
@@ -143,13 +142,7 @@
     _textFieldTemp[0].rightView.clipsToBounds = YES;
     _textFieldTemp[0].rightViewMode = UITextFieldViewModeAlways;
     
-    
-    
-    
-    
-    
-//    NSArray *arrayImageName = @[@"支付宝支付",@"微信支付"];//,@"银联"
-    NSArray *arrayTitleName = @[@"储值卡",@"交易码"];//,@"线下汇款"
+    NSArray *arrayTitleName = @[@"储值卡",@"交易码"];
     
     for (NSInteger i = 0; i< arrayTitleName.count; i++)
     {
@@ -221,6 +214,15 @@
         if ([response[@"code"] integerValue] == 200) {
             self->_labelTemp[3].text = [NSString stringWithFormat:@"%@",response[@"result"][@"available"]];
         }
+        //实名认证
+        else if([response[@"code"] integerValue] == 10086)
+        {
+            [HPAlertTools showAlertWith:self title:@"提示信息" message:response[@"message"] callbackBlock:^(NSInteger btnIndex) {
+                if (btnIndex == 1) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
+        }
         else
         {
             [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:response[@"message"] buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
@@ -241,7 +243,7 @@
         if ([response[@"code"] integerValue] == 200) {
             [HPAlertTools showAlertWith:self title:@"提示信息" message:@"成功" callbackBlock:^(NSInteger btnIndex) {
                 [weakSelf.navigationController popViewControllerAnimated:YES];
-//                HPNOTIF_POST(@"refreshAddressList", nil);
+                //                HPNOTIF_POST(@"refreshAddressList", nil);
             } cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"确定",nil];
         }
         else

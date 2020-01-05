@@ -1,16 +1,16 @@
 //
-//  ExpressViewController.m
+//  WithDrawListViewController.m
 //  greengreatwall
 //
-//  Created by 葛朋 on 2020/1/4.
+//  Created by 葛朋 on 2020/1/5.
 //  Copyright © 2020 guocaiduigong. All rights reserved.
 //
 
-#import "ExpressViewController.h"
+#import "WithDrawListViewController.h"
 
 
-#import "ExpressTableViewCell.h"
-@interface ExpressViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+#import "WithDrawTableViewCell.h"
+@interface WithDrawListViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
     UIView               *_viewTemp;
     
@@ -25,7 +25,7 @@
     NSMutableDictionary *_cellDic;
     NSMutableArray      *_arrayDataSource;
     
-//    NSString            *_strParameter;
+    NSString            *_strParameter;
     NSString            *_string_express_code;
     NSString            *_string_shipping_code;
     NSString            *_string_phone;
@@ -37,7 +37,7 @@
 
 static NSString * const ReuseIdentify = @"ReuseIdentify";
 
-@implementation ExpressViewController
+@implementation WithDrawListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,7 +50,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 {
     if (self = [super init]) {
         _arrayDataSource = [[NSMutableArray alloc]initWithCapacity:0];
-//        _strParameter = @"1";
+        _strParameter = @"1";
     }
     return self;
 }
@@ -76,12 +76,12 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 - (void)configInterface
 {
     [self setBackButtonWithTarget:self action:@selector(leftClick)];
-    [self settingNavTitle:@"物流信息"];
+    [self settingNavTitle:@"提现申请列表"];
     viewSetBackgroundColor(kColorBasic);
     
     
     _viewTemp = [UIView initViewBackColor:[UIColor whiteColor]];
-    [self.view addSubview:_viewTemp];
+//    [self.view addSubview:_viewTemp];
     [_viewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, 300*GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelPhoneIntro = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@"收货人电话:"];
@@ -111,7 +111,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     
     
-    _tableViewTemp = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight) style:UITableViewStylePlain];//UITableViewStyleGrouped
+    _tableViewTemp = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight) style:UITableViewStylePlain];
     _tableViewTemp.showsVerticalScrollIndicator = NO;
     _tableViewTemp.showsHorizontalScrollIndicator = NO;
     _tableViewTemp.dataSource = self;
@@ -119,7 +119,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     _tableViewTemp.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_tableViewTemp];
-    _tableViewTemp.tableHeaderView = _viewTemp;
+//    _tableViewTemp.tableHeaderView = _viewTemp;
     
     [self setupRefreshWithScrollView:_tableViewTemp];
 }
@@ -194,7 +194,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     //头部刷新控件
     scrollView.mj_header = header;
     
-    CGFloat _viewh = _viewTemp.bottom;
+    CGFloat _viewh = 0;
     scrollView.mj_header.ignoredScrollViewContentInsetTop = _viewh + kScrollViewHeaderIgnored;
     
     MJRefreshBackStateFooter *footer = [MJRefreshBackStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
@@ -220,20 +220,18 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //下拉刷新
 - (void)headerRereshing
 {
-    [self->_arrayDataSource removeAllObjects];
-    [self->_tableViewTemp reloadData];
+    [_arrayDataSource removeAllObjects];
+    [_tableViewTemp reloadData];
     
-    [HPNetManager POSTWithUrlString:HostMemberorderget_express isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_string_express_code,@"express_code",_string_shipping_code,@"shipping_code",_string_phone,@"phone", nil]  successBlock:^(id response) {
-        //GPDebugLog(@"response:%@",response);
+    _strParameter = @"1";
+    [HPNetManager POSTWithUrlString:Hostmemberfundpdcashlist isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"5",@"pagesize",_strParameter,@"page", nil] successBlock:^(id response) {
+        //        GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
-            if ([[NSArray arrayWithArray:response[@"result"]] count]) {
-                [self->_arrayDataSource removeAllObjects];
-                [self->_tableViewTemp reloadData];
-                
-                [self->_arrayDataSource addObjectsFromArray:[NSArray arrayWithArray:response[@"result"]]];
+            if ([[NSArray arrayWithArray:response[@"result"][@"list"]] count]) {
+                [self->_arrayDataSource addObjectsFromArray:[NSArray arrayWithArray:response[@"result"][@"list"]]];
                 [self->_tableViewTemp reloadData];
                 [self->_tableViewTemp.mj_header endRefreshing];
-//                self->_strParameter = [NSString stringWithFormat:@"%d",self->_strParameter.intValue+1];
+                self->_strParameter = [NSString stringWithFormat:@"%d",self->_strParameter.intValue+1];
             }
             else
             {
@@ -255,14 +253,14 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //上拉加载更多
 - (void)footerRereshing
 {
-    [HPNetManager POSTWithUrlString:HostMemberorderget_express isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_string_express_code,@"express_code",_string_shipping_code,@"shipping_code",_string_phone,@"phone", nil]  successBlock:^(id response) {
-        //GPDebugLog(@"response:%@",response);
+    [HPNetManager POSTWithUrlString:Hostmemberfundpdcashlist isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"5",@"pagesize",_strParameter,@"page", nil] successBlock:^(id response) {
+        //        GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
-            if ([[NSArray arrayWithArray:response[@"result"]] count]) {
-                [self->_arrayDataSource addObjectsFromArray:[NSArray arrayWithArray:response[@"result"]]];
+            if ([[NSArray arrayWithArray:response[@"result"][@"list"]] count]) {
+                [self->_arrayDataSource addObjectsFromArray:[NSArray arrayWithArray:response[@"result"][@"list"]]];
                 [self->_tableViewTemp reloadData];
                 [self->_tableViewTemp.mj_footer endRefreshing];
-//                self->_strParameter = [NSString stringWithFormat:@"%d",self->_strParameter.intValue+1];
+                self->_strParameter = [NSString stringWithFormat:@"%d",self->_strParameter.intValue+1];
             }
             else
             {
@@ -279,7 +277,6 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     } progressBlock:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         
     }];
-    
 }
 
 #pragma mark - scrollViewDelegate
@@ -323,14 +320,14 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 110.0;
+    return 80.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ExpressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentify];
+    WithDrawTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentify];
     if(!cell){
-        cell = [[ExpressTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentify];
+        cell = [[WithDrawTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentify];
     }
     NSDictionary * dic = _arrayDataSource[indexPath.row];
     cell.dic = dic;

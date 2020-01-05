@@ -20,12 +20,6 @@
     
     
     [_labelCount setFrame:RectWithScale(CGRectMake(800, 180, 100, 40), GPCommonLayoutScaleSizeWidthIndex)];
-    
-    [_buttonToPay setFrame:RectWithScale(CGRectMake(400, 50, 100, 30), GPCommonLayoutScaleSizeWidthIndex)];
-    
-    
-    
-    //    FuwenbenLabelWithFontAndColorInRange(_labelSales, FontRegularWithSize(10), GPHexColor(0x333333), NSMakeRange(0, 3));
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -71,20 +65,6 @@
         _labelGoodsType.textAlignment = NSTextAlignmentLeft;
         [_labelGoodsType setFont:FontRegularWithSize(12)];
         
-        _buttonToPay = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        [_buttonToPay setTitle:@"进店" forState:UIControlStateNormal];
-        [_buttonToPay.titleLabel setFont:FontRegularWithSize(12)];
-        [_buttonToPay setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [_buttonToPay setTag:1];
-        _buttonToPay.layer.masksToBounds = YES;
-        _buttonToPay.clipsToBounds = YES;
-        [_buttonToPay.layer setCornerRadius:10.0];
-        [_buttonToPay.layer setBorderColor:[UIColor redColor].CGColor];
-        [_buttonToPay.layer setBorderWidth:1];
-        //        [_buttonToPay rounded:10 width:5 color:[UIColor redColor]];
-        [_buttonToPay addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
         
         
         cellSetBackgroundColor(kColorCellBackground);
@@ -93,8 +73,6 @@
         [self.contentView addSubview:_labelTitle];
         [self.contentView addSubview:_labelCount];
         [self.contentView addSubview:_labelPrice];
-        
-//        [self.contentView addSubview:_buttonToPay];
     }
     return self;
 }
@@ -102,38 +80,12 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [_buttonToPay addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
     // Configure the view for the selected state
-}
-
--(void)buttonClick:(UIButton*)btn
-{
-    NSString *buttonName = btn.titleLabel.text;
-    
-    if (self.btnClick) {
-        //        self.btnClick(btn);
-    }
-    if ([buttonName containsString:@"日常保洁"])
-    {
-        
-    }
-    else if([buttonName containsString:@"深度保洁"])
-    {
-        
-    }
-}
-
--(void)setDic:(NSDictionary *)dic
-{
-//    self.labelCount.text = [NSString stringWithFormat:@"数量:%@", goodsModel.goods_num];
-//    [self.imageViewLeft sd_setImageWithURL:URL(goodsModel.goods_image_url) placeholderImage:defaultImage];
-//    self.labelTitle.text = goodsModel.goods_name;
-//    self.labelPrice.text = [NSString stringWithFormat:@"%@元", goodsModel.goods_price];
 }
 
 - (void)setGoodsModel:(GoodsModel *)goodsModel {

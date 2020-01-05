@@ -136,7 +136,7 @@
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
 //    NSString *appVersion = [infoDic objectForKey:@"CFBundleVersion"];
     NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
-    [HPNetManager GETWithUrlString:HostVersionGetVersion isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:appVersion,@"version_num",@"2",@"type", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostVersionGetVersion isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:appVersion,@"version_num",@"2",@"type", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {

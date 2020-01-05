@@ -78,25 +78,25 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 - (void)configInterface
 {
-    [self setBackButtonWithTarget:self action:@selector(leftClick)];
-    //    [self settingNavTitle:@""];
     viewSetBackgroundColor(kColorTheme);
     
     _viewTemp = [UIView initViewBackColor:[UIColor clearColor]];
     [self.view addSubview:_viewTemp];
     [_viewTemp setFrame:CGRectMake(0, kStatusBarHeight, GPScreenWidth, 690*GPCommonLayoutScaleSizeWidthIndex)];
-
-    //    _viewBack = [UIView initViewBackColor:rgb(246, 247, 248)];
-    //    [_viewTemp addSubview:_viewBack];
-    //    [_viewBack setFrame:RectWithScale(CGRectMake(0, 500, 1080, 30), GPCommonLayoutScaleSizeWidthIndex)];
-    //    [_viewBack rounded:25*GPCommonLayoutScaleSizeWidthIndex];
-    //    [_viewBack shadow:[UIColor blackColor] opacity:1 radius:10 offset:CGSizeMake(0, 0)];
+    
+    
+    UIImage *tmpImage = GetImage(@"白色左箭头");
+    CGSize newSize = CGSizeMake(14, 24);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0f);
+    [tmpImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *backButtonImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
     UIButton *navButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [navButton setFrame:CGRectMake(10, 10, 14, 24)];
+    [navButton setFrame:CGRectMake(20, 10, 14, 24)];
     [navButton setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
     [navButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [navButton setImage:GetImage(@"白色左箭头") forState:UIControlStateNormal];
+    [navButton setImage:backButtonImage forState:UIControlStateNormal];
     navButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [navButton addTarget:self action:@selector(leftClick) forControlEvents:UIControlEventTouchUpInside];
     [_viewTemp addSubview:navButton];
@@ -105,40 +105,30 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _viewInfo = [UIView initViewBackColor:[UIColor whiteColor]];
     [_viewTemp addSubview:_viewInfo];
     [_viewInfo setFrame:RectWithScale(CGRectMake(0, 570, 1080, 120), GPCommonLayoutScaleSizeWidthIndex)];
-    //    [_viewInfo rounded:25*GPCommonLayoutScaleSizeWidthIndex];
-    //    [_viewInfo shadow:[UIColor blackColor] opacity:1 radius:10 offset:CGSizeMake(0, 0)];
     
     _viewTransform = [UIView initViewBackColor:[UIColor whiteColor]];
     [_viewTemp addSubview:_viewTransform];
     [_viewTransform setFrame:RectWithScale(CGRectMake(0, 420, 540, 150), GPCommonLayoutScaleSizeWidthIndex)];
     
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
-        [_viewTransform addGestureRecognizer:tap];
-        [_viewTransform setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
+    [_viewTransform addGestureRecognizer:tap];
+    [_viewTransform setUserInteractionEnabled:YES];
     
     _viewWithdraw = [UIView initViewBackColor:[UIColor whiteColor]];
     [_viewTemp addSubview:_viewWithdraw];
     [_viewWithdraw setFrame:RectWithScale(CGRectMake(540, 420, 540, 150), GPCommonLayoutScaleSizeWidthIndex)];
     
-        UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
-        [_viewWithdraw addGestureRecognizer:tap1];
-        [_viewWithdraw setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
+    [_viewWithdraw addGestureRecognizer:tap1];
+    [_viewWithdraw setUserInteractionEnabled:YES];
     
-    //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
-    //    [_viewInfo addGestureRecognizer:tap];
-    //    [_viewInfo setUserInteractionEnabled:YES];
+    _imageViewTemp[1] = [[UIImageView alloc]initWithImage:GetImage(@"互转")];
+    [_viewTransform addSubview:_imageViewTemp[1]];
+    [_imageViewTemp[1] setFrame:RectWithScale(CGRectMake(200, 55, 50, 40),GPCommonLayoutScaleSizeWidthIndex)];
     
-//    _imageViewTemp[0] = [[UIImageView alloc]initWithImage:GetImage(@"积分")];//储值卡钱包
-//    [_viewTemp addSubview:_imageViewTemp[0]];
-//    [_imageViewTemp[0] setFrame:RectWithScale(CGRectMake(430, 140, 60, 60),GPCommonLayoutScaleSizeWidthIndex)];
-    
-        _imageViewTemp[1] = [[UIImageView alloc]initWithImage:GetImage(@"互转")];
-        [_viewTransform addSubview:_imageViewTemp[1]];
-        [_imageViewTemp[1] setFrame:RectWithScale(CGRectMake(200, 55, 50, 40),GPCommonLayoutScaleSizeWidthIndex)];
-    
-        _imageViewTemp[2] = [[UIImageView alloc]initWithImage:GetImage(@"提现")];
-        [_viewWithdraw addSubview:_imageViewTemp[2]];
-        [_imageViewTemp[2] setFrame:RectWithScale(CGRectMake(200, 55, 50, 40),GPCommonLayoutScaleSizeWidthIndex)];
+    _imageViewTemp[2] = [[UIImageView alloc]initWithImage:GetImage(@"提现")];
+    [_viewWithdraw addSubview:_imageViewTemp[2]];
+    [_imageViewTemp[2] setFrame:RectWithScale(CGRectMake(200, 55, 50, 40),GPCommonLayoutScaleSizeWidthIndex)];
     
     
     
@@ -178,40 +168,18 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_labelTemp[4] setTextColor:[UIColor grayColor]];
     _labelTemp[4].textAlignment = NSTextAlignmentLeft;
     
-    //    [_labelTemp[3] setFrame:RectWithScale(CGRectMake(60, 140, 400, 50), GPCommonLayoutScaleSizeWidthIndex)];
-    //    [_imageViewTemp[1] addSubview:_labelTemp[3]];
-    //    [_labelTemp[3] setTextColor:[UIColor whiteColor]];
-    //    _labelTemp[3].textAlignment = NSTextAlignmentLeft;
-    //
-    //    [_labelTemp[4] setFrame:RectWithScale(CGRectMake(45, 40, 350, 40), GPCommonLayoutScaleSizeWidthIndex)];
-    //    [_viewInfo addSubview:_labelTemp[4]];
-    //    [_labelTemp[4] setTextColor:[UIColor blackColor]];
-    //    _labelTemp[4].textAlignment = NSTextAlignmentLeft;
-    //
-    //
-        [_labelTemp[5] setFrame:RectWithScale(CGRectMake(260, 50, 240, 50), GPCommonLayoutScaleSizeWidthIndex)];
-        [_viewTransform addSubview:_labelTemp[5]];
-        [_labelTemp[5] setTextColor:[UIColor blackColor]];
-        _labelTemp[5].textAlignment = NSTextAlignmentLeft;
-        [_labelTemp[5] setFont:FontRegularWithSize(16)];
+    [_labelTemp[5] setFrame:RectWithScale(CGRectMake(260, 50, 240, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_viewTransform addSubview:_labelTemp[5]];
+    [_labelTemp[5] setTextColor:[UIColor blackColor]];
+    _labelTemp[5].textAlignment = NSTextAlignmentLeft;
+    [_labelTemp[5] setFont:FontRegularWithSize(16)];
     
-        [_labelTemp[6] setFrame:RectWithScale(CGRectMake(260, 50, 240, 50), GPCommonLayoutScaleSizeWidthIndex)];
-        [_viewWithdraw addSubview:_labelTemp[6]];
-        [_labelTemp[6] setTextColor:[UIColor blackColor]];
-        _labelTemp[6].textAlignment = NSTextAlignmentLeft;
-        [_labelTemp[6] setFont:FontRegularWithSize(16)];
-    //
-    //    [_labelTemp[7] setFrame:RectWithScale(CGRectMake(500, 530 + 45, 100, 50), GPCommonLayoutScaleSizeWidthIndex)];
-    //    [_viewTemp addSubview:_labelTemp[7]];
-    //    [_labelTemp[7] setTextColor:[UIColor blackColor]];
-    //    _labelTemp[7].textAlignment = NSTextAlignmentCenter;
-    //    [_labelTemp[7] setFont:FontRegularWithSize(16)];
-    //
-    //    [_labelTemp[8] setFrame:RectWithScale(CGRectMake(650, 530 + 45, 350, 50), GPCommonLayoutScaleSizeWidthIndex)];
-    //    [_viewTemp addSubview:_labelTemp[8]];
-    //    [_labelTemp[8] setTextColor:[UIColor blackColor]];
-    //    _labelTemp[8].textAlignment = NSTextAlignmentCenter;
-    //    [_labelTemp[8] setFont:FontRegularWithSize(16)];
+    [_labelTemp[6] setFrame:RectWithScale(CGRectMake(260, 50, 240, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_viewWithdraw addSubview:_labelTemp[6]];
+    [_labelTemp[6] setTextColor:[UIColor blackColor]];
+    _labelTemp[6].textAlignment = NSTextAlignmentLeft;
+    [_labelTemp[6] setFont:FontRegularWithSize(16)];
+    
     
     
     _tableViewTemp = [[UITableView alloc]initWithFrame:CGRectMake(0, _viewInfo.bottom + kStatusBarHeight, GPScreenWidth, GPScreenHeight - kStatusBarHeight - _viewInfo.bottom) style:UITableViewStylePlain];// + kStatusBarHeight //- kStatusBarHeight
@@ -221,8 +189,6 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _tableViewTemp.delegate = self;
     _tableViewTemp.backgroundColor = rgb(246, 247, 248);
     [self.view addSubview:_tableViewTemp];
-    //    [_tableViewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight)];
-    //    _tableViewTemp.tableHeaderView = _viewTemp;
     
     [self setupRefreshWithScrollView:_tableViewTemp];
     
@@ -240,16 +206,11 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)netRequest
 {
-    //    请求URL: https://shop.bayi-shop.com/mobile/member/my_asset?key=4265499fc5aa3e869f6ffd4e7a6f6808&fields=available
-    //    请求URL: https://shop.bayi-shop.com/mobile/member/my_asset?key=4265499fc5aa3e869f6ffd4e7a6f6808&fields=point
-    //    请求URL: https://shop.bayi-shop.com/mobile/member/my_asset?key=4265499fc5aa3e869f6ffd4e7a6f6808&fields=predepoit
-    //    请求URL: https://shop.bayi-shop.com/mobile/member/my_asset?key=4265499fc5aa3e869f6ffd4e7a6f6808&fields=transaction
     
     [HPNetManager POSTWithUrlString:Hostmembermy_asset isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"available",@"fields", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         
         if ([response[@"code"] integerValue] == 200) {
-//            self->_arrayDataSource = [NSMutableArray arrayWithArray:response[@"result"][@"datainfo"]];
             [self updateInterfaceWithDic:response[@"result"]];
         }
         else
@@ -273,16 +234,10 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     NSString *stringavailable = [NSString stringWithFormat:@"%@",datainfo[@"available"]];
     _labelTemp[3].text = stringavailable;
-    
-//    NSString *stringcountAll = [NSString stringWithFormat:@"%@",datainfo[@"countAll"]];
-//    _labelTemp[3].text = stringcountAll;//[NSString stringWithFormat:@"推荐码:%@",stringcountAll];
-//
-//    _stringInviterlink = [NSString stringWithFormat:@"%@",datainfo[@"inviterlink"]];
 }
 
 -(void)tapClick:(UIGestureRecognizer*)tap
 {
-    //    NSString *stringlink = [NSString stringWithFormat:@"%@?key=%@",member_inviter_poster,_stringInviterlink];
     if (tap.view == _viewTransform) {
         PointTransformViewController *vc = [[PointTransformViewController alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
@@ -404,8 +359,6 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         //GPDebugLog(@"response:%@",response);
         
         if ([response[@"code"] integerValue] == 200) {
-//            self->_arrayDataSource = [NSMutableArray arrayWithArray:response[@"result"][@"list"]];
-            //            [self updateInterfaceWithDic:response[@"result"]];
             
             if ([[NSArray arrayWithArray:response[@"result"][@"log_list"]] count]) {
                 [self->_arrayDataSource removeAllObjects];
@@ -420,6 +373,15 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
             {
                 [self->_tableViewTemp.mj_header endRefreshing];
             }
+        }
+        //实名认证
+        else if([response[@"code"] integerValue] == 10086)
+        {
+            [HPAlertTools showAlertWith:self title:@"提示信息" message:response[@"message"] callbackBlock:^(NSInteger btnIndex) {
+                if (btnIndex == 1) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
         }
         else
         {
@@ -450,6 +412,15 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
             {
                 [self->_tableViewTemp.mj_footer endRefreshing];
             }
+        }
+        //实名认证
+        else if([response[@"code"] integerValue] == 10086)
+        {
+            [HPAlertTools showAlertWith:self title:@"提示信息" message:response[@"message"] callbackBlock:^(NSInteger btnIndex) {
+                if (btnIndex == 1) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
         }
         else
         {
@@ -521,10 +492,6 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    GoodsViewController *vc = [[GoodsViewController alloc]init];
-    //    vc.hidesBottomBarWhenPushed = YES;
-    //    vc.goods_id = _arrayDataSource[indexPath.row][@"goods_id"];
-    //    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

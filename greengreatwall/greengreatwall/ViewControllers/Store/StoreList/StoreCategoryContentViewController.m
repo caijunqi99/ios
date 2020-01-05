@@ -148,7 +148,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_tableView reloadData];
     
     _strParameter = @"1";
-    [HPNetManager GETWithUrlString:HostStorelistindex isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page",_storeCate_id,@"cate_id", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostStorelistindex isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page",_storeCate_id,@"cate_id", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"]] count]) {
@@ -177,7 +177,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //上拉加载更多
 - (void)footerRereshing
 {
-    [HPNetManager GETWithUrlString:HostStorelistindex isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page",_storeCate_id,@"cate_id", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostStorelistindex isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page",_storeCate_id,@"cate_id", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"]] count]) {

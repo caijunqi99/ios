@@ -99,7 +99,7 @@
     [self.view addSubview:self.bottomView];
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(50*GPCommonLayoutScaleSizeWidthIndex, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, GPScreenHeight - kNavBarAndStatusBarHeight - kTabBarHeight - kBottomHeightShoppingCart) style:(UITableViewStyleGrouped)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(50*GPCommonLayoutScaleSizeWidthIndex, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, GPScreenHeight - kNavBarAndStatusBarHeight - kTabBarHeight - kBottomHeightShoppingCart) style:(UITableViewStyleGrouped)];//UITableViewStyleGrouped
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

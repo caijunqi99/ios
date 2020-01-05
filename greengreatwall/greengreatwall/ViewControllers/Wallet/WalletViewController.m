@@ -248,7 +248,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)netRequest
 {
-    [HPNetManager GETWithUrlString:Hostmemberwallet isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostmemberwallet isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         
         if ([response[@"code"] integerValue] == 200) {
@@ -451,7 +451,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_arrayDataSource removeAllObjects];
     [_tableViewTemp reloadData];
     
-    [HPNetManager GETWithUrlString:Hostcollegecollege isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"article_type", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostcollegecollege isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"article_type", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"]] count]) {
@@ -483,7 +483,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //上拉加载更多
 - (void)footerRereshing
 {
-    [HPNetManager GETWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"]] count]) {

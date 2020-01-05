@@ -146,7 +146,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_arraySliders removeAllObjects];
     _cycleSV.imageURLStringsGroup = @[];
     
-    [HPNetManager GETWithUrlString:HostStorestore_info isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_store_id,@"store_id", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostStorestore_info isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_store_id,@"store_id", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {
@@ -272,7 +272,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_collectionView reloadData];
     [self netRequest];
     
-    [HPNetManager GETWithUrlString:HostStoreGetStoreCommentGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_store_id,@"store_id", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostStoreGetStoreCommentGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_store_id,@"store_id", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"][@"rec_goods_list"]] count]) {

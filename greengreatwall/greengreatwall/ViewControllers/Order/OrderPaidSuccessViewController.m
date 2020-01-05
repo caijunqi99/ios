@@ -206,7 +206,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)netRequest
 {
-    [HPNetManager GETWithUrlString:HostGoodsgetRandGoods isNeedCache:NO parameters:nil successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostGoodsgetRandGoods isNeedCache:NO parameters:nil successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"]] count]) {

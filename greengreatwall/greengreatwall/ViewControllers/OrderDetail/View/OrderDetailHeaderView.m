@@ -1,14 +1,14 @@
 //
-//  OrderListHeaderView.m
+//  OrderDetailHeaderView.m
 //  greengreatwall
 //
-//  Created by 葛朋 on 2019/12/29.
-//  Copyright © 2019 guocaiduigong. All rights reserved.
+//  Created by 葛朋 on 2020/1/4.
+//  Copyright © 2020 guocaiduigong. All rights reserved.
 //
 
-#import "OrderListHeaderView.h"
+#import "OrderDetailHeaderView.h"
 
-@implementation OrderListHeaderView
+@implementation OrderDetailHeaderView
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -41,7 +41,7 @@
         
         
         [_viewRoundBack setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        [_viewRoundBack rounded:10 rectCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)];
+//        [_viewRoundBack rounded:10 rectCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)];
 
         [_imageViewLeft setFrame:RectWithScale(CGRectMake(20, 40, 40, 40), GPCommonLayoutScaleSizeWidthIndex)];
         [_labelStoreName setFrame:RectWithScale(CGRectMake(80, 40, 600, 40), GPCommonLayoutScaleSizeWidthIndex)];
@@ -50,7 +50,7 @@
         [self addSubview:_viewRoundBack];
         [self addSubview:_imageViewLeft];
         [self addSubview:_labelStoreName];
-        [self addSubview:_labelState];
+//        [self addSubview:_labelState];
     }
     return self;
 }

@@ -240,7 +240,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_arrayDataSourceAdv removeAllObjects];
     _cycleSV.imageURLStringsGroup = @[];
     
-    [HPNetManager GETWithUrlString:Hostgoodsclassget_child_all isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_string_gc_id,@"gc_id", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostgoodsclassget_child_all isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_string_gc_id,@"gc_id", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"][@"class_list"]] count]) {

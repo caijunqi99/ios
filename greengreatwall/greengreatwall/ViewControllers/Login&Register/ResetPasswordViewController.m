@@ -12,7 +12,7 @@
 {
     NSString            *_strParameter;
 }
-
+@property(nonatomic,assign)NSInteger            timeOut;
 @property(nonatomic,strong)UIView               *viewTemp;
 
 @property(nonatomic,strong)UIView               *viewLine;
@@ -156,7 +156,6 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)netRequest
 {
-    HPWeak;
     [HPNetManager POSTWithUrlString:HostMemberaccountmodify_password_step4 isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_textFieldUsername.text,@"mobile_key",_textFieldVerify.text,@"auth_code",_textFieldPassword.text,@"password",_textFieldPasswordConfirm.text,@"confirm_password", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         
@@ -182,7 +181,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)netRequestGetVerify
 {
-    [HPNetManager GETWithUrlString:HostConnectget_sms_captcha isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_textFieldUsername.text,@"member_mobile",@"6",@"type", nil] successBlock:^(id response) {
+    [self sentPhoneCodeTimeMethod];
+    [HPNetManager POSTWithUrlString:HostConnectget_sms_captcha isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_textFieldUsername.text,@"member_mobile",@"6",@"type", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {
@@ -200,6 +200,54 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     }];
 }
 
+/**
+ 倒计时方法 在点击获取验证码按钮的方法里调用此方法即可实现, 需要在倒计时里修改按钮相关的请在此方法里yourButton修改
+ */
+- (void)sentPhoneCodeTimeMethod {
+    //倒计时时间 - 60S
+    __block NSInteger timeOut = 59;
+    self.timeOut = timeOut;
+    UIButton *yourButton = _buttonGetVerifyCode;
+    //执行队列
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //计时器 -》 dispatch_source_set_timer自动生成
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    dispatch_source_set_event_handler(timer, ^{
+        if (timeOut <= 0) {
+            dispatch_source_cancel(timer);
+            //主线程设置按钮样式
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 倒计时结束
+                [yourButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+                [yourButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [yourButton setEnabled:YES];
+                [yourButton setUserInteractionEnabled:YES];
+            });
+        } else {
+            //开始计时
+            //剩余秒数 seconds
+            NSInteger seconds = timeOut % 60;
+            NSString *strTime = [NSString stringWithFormat:@"%.1ld", seconds];
+            //主线程设置按钮样式
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIView beginAnimations:nil context:nil];
+                [UIView setAnimationDuration:1.0];
+                NSString *title = [NSString stringWithFormat:@"%@",strTime];
+                [yourButton setTitle:title forState:UIControlStateNormal];
+//              [yourButton.titleLabel setTextAlignment:NSTextAlignmentRight];
+                // 设置按钮title居中 上面注释的方法无效
+                [yourButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+                [yourButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [UIView commitAnimations];
+                //计时器间不允许点击
+                [yourButton setUserInteractionEnabled:NO];
+            });
+            timeOut--;
+        }
+    });
+    dispatch_resume(timer);
+}
 -(void)buttonClick:(UIButton*)btn
 {
     NSString *buttonName = btn.titleLabel.text;
@@ -240,11 +288,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     {
         return YES;
     }
-        
-    [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:@"请填写完整信息" buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
     return NO;
-    
-    
 }
 
 

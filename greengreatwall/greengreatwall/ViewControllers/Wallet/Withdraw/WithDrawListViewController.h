@@ -1,8 +1,8 @@
 //
-//  ExpressViewController.h
+//  WithDrawListViewController.h
 //  greengreatwall
 //
-//  Created by 葛朋 on 2020/1/4.
+//  Created by 葛朋 on 2020/1/5.
 //  Copyright © 2020 guocaiduigong. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ExpressViewController : BaseViewController
+@interface WithDrawListViewController : BaseViewController
 -(void)setExpress_code:(NSString *)express_code Shipping_code:(NSString *)shipping_code Phone:(NSString *)phone;
 @end
 

@@ -515,7 +515,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)netRequest
 {
-    [HPNetManager GETWithUrlString:HostIndexIndex isNeedCache:NO parameters:nil successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostIndexIndex isNeedCache:NO parameters:nil successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {
@@ -942,7 +942,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [self->_collectionView reloadData];
     
     
-    [HPNetManager GETWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"]] count]) {
@@ -971,7 +971,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //上拉加载更多
 - (void)footerRereshing
 {
-    [HPNetManager GETWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"]] count]) {

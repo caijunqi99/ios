@@ -154,7 +154,7 @@ static NSString * const ReuseIdentify  = @"ReuseIdentify";
 
 -(void)netRequest
 {
-    [HPNetManager GETWithUrlString:HostStorestore_info isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_store_id,@"store_id", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostStorestore_info isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_store_id,@"store_id", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {

@@ -202,7 +202,7 @@ static NSString * const OrderReuseIdentify = @"OrderReuseIdentify";
     }
     
     
-    [HPNetManager GETWithUrlString:Hostgoodsgoods_list isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page",StringNullOrNot(_keyword),@"keyword",StringNullOrNot(_gc_id),@"gc_id",StringNullOrNot(stringType),@"key", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostgoodsgoods_list isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page",StringNullOrNot(_keyword),@"keyword",StringNullOrNot(_gc_id),@"gc_id",StringNullOrNot(stringType),@"key", nil] successBlock:^(id response) {
         //        GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"][@"goods_list"]] count]) {
@@ -284,7 +284,7 @@ static NSString * const OrderReuseIdentify = @"OrderReuseIdentify";
     }
     
     
-    [HPNetManager GETWithUrlString:Hostgoodsgoods_list isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page",StringNullOrNot(_keyword),@"keyword",StringNullOrNot(_gc_id),@"gc_id",StringNullOrNot(stringType),@"key", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostgoodsgoods_list isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page",StringNullOrNot(_keyword),@"keyword",StringNullOrNot(_gc_id),@"gc_id",StringNullOrNot(stringType),@"key", nil] successBlock:^(id response) {
         //        GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"][@"goods_list"]] count]) {

@@ -9,6 +9,7 @@
 #import "HPNetManager.h"
 
 #import "LoginViewController.h"
+#import "IndexTabBarViewController.h"
 
 #import <AVFoundation/AVAsset.h>
 #import <AVFoundation/AVAssetExportSession.h>
@@ -327,6 +328,14 @@ static NSMutableArray *tasks;
                                 BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:vc];
                                 GPKeyWindow.rootViewController = nav;
                                 [GPKeyWindow makeKeyAndVisible];
+                            }else if (btnIndex == 0){
+                                //设置indextabbar为主窗口的根视图控制器
+                                [currentVC.navigationController popToRootViewControllerAnimated:YES];
+                                
+                                IndexTabBarViewController *vc = [IndexTabBarViewController shareInstance];
+                                [vc setSelectedIndex:0];
+                                //                                GPKeyWindow.rootViewController = vc;
+                                //                                [GPKeyWindow makeKeyAndVisible];
                             }
                         } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
                     }
@@ -385,6 +394,14 @@ static NSMutableArray *tasks;
                                 BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:vc];
                                 GPKeyWindow.rootViewController = nav;
                                 [GPKeyWindow makeKeyAndVisible];
+                            }else if (btnIndex == 0){
+                                //设置indextabbar为主窗口的根视图控制器
+                                [currentVC.navigationController popToRootViewControllerAnimated:YES];
+                                
+                                IndexTabBarViewController *vc = [IndexTabBarViewController shareInstance];
+                                [vc setSelectedIndex:0];
+                                //                                GPKeyWindow.rootViewController = vc;
+                                //                                [GPKeyWindow makeKeyAndVisible];
                             }
                         } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
                     }
@@ -1022,8 +1039,8 @@ static NSMutableArray *tasks;
     
     NSData *imageData = [self compressOriginalImage:resizedImage toMaxDataSizeKBytes:200*1024];
     
-//    //以40K大小为例，误差1K为例
-//    UIImage * image = [UIImage imageWithData:[self compressImageWithImage:image aimWidth:200 aimLength:40*1024 accuracyOfLength:1024]];
+    //    //以40K大小为例，误差1K为例
+    //    UIImage * image = [UIImage imageWithData:[self compressImageWithImage:image aimWidth:200 aimLength:40*1024 accuracyOfLength:1024]];
     
     CGFloat dataKBytes = imageData.length/1000.0;
     GPDebugLog(@"dataKBytes:----%f",dataKBytes);
@@ -1059,7 +1076,7 @@ static NSMutableArray *tasks;
 - (NSData *)compressImageWithImage:(UIImage *)image aimWidth:(CGFloat)width aimLength:(NSInteger)length accuracyOfLength:(NSInteger)accuracy{
     
     UIImage * newImage = [self imageWithImage:image scaledToSize:CGSizeMake(width, width * image.size.height / image.size.width)];
-   
+    
     NSData  * data = UIImageJPEGRepresentation(newImage, 1);
     NSInteger imageDataLen = [data length];
     
@@ -1095,11 +1112,11 @@ static NSMutableArray *tasks;
                 maxQuality = midQuality;
                 continue;
             }else if (len < length-accuracy){
-                 NSLog(@"-----%d------%f------%ld-----",flag,midQuality,len);
+                NSLog(@"-----%d------%f------%ld-----",flag,midQuality,len);
                 minQuality = midQuality;
                 continue;
             }else{
-                 NSLog(@"-----%d------%f------%ld--end",flag,midQuality,len);
+                NSLog(@"-----%d------%f------%ld--end",flag,midQuality,len);
                 return imageData;
                 break;
             }

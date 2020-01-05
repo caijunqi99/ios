@@ -164,12 +164,15 @@
 		64216A9423C06F8C005489F1 /* ExpressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A9323C06F8C005489F1 /* ExpressTableViewCell.m */; };
 		64216A9723C06F9E005489F1 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A9623C06F9E005489F1 /* OrderDetailViewController.m */; };
 		64216A9A23C06FAB005489F1 /* ExpressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A9923C06FAB005489F1 /* ExpressViewController.m */; };
+		64216A9E23C0A117005489F1 /* OrderDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216A9D23C0A117005489F1 /* OrderDetailBottomView.m */; };
+		64216AA123C0C749005489F1 /* OrderDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216AA023C0C749005489F1 /* OrderDetailHeaderView.m */; };
+		64216AA423C1DA4A005489F1 /* WithDrawListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216AA323C1DA4A005489F1 /* WithDrawListViewController.m */; };
+		64216AA723C1DEBB005489F1 /* WithDrawTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64216AA623C1DEBB005489F1 /* WithDrawTableViewCell.m */; };
 		643DA02223A7D3C000BA26B8 /* AreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 643DA02123A7D3C000BA26B8 /* AreaView.m */; };
 		643DA03023A7DF7700BA26B8 /* UILabelAlignToBottomLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 643DA02F23A7DF7700BA26B8 /* UILabelAlignToBottomLeft.m */; };
 		6448FC2F239E5DA600243799 /* ProAttrSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6448FC2E239E5DA600243799 /* ProAttrSelectView.m */; };
 		6448FC33239F346900243799 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6448FC32239F346900243799 /* LoginViewController.m */; };
 		6448FC36239F349A00243799 /* ResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6448FC35239F349A00243799 /* ResetPasswordViewController.m */; };
-		6448FC39239F34DA00243799 /* ResetPasswordSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6448FC38239F34DA00243799 /* ResetPasswordSuccessViewController.m */; };
 		6448FC3C239F34ED00243799 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6448FC3B239F34ED00243799 /* RegisterViewController.m */; };
 		6448FC40239F6B6400243799 /* InstanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6448FC3F239F6B6400243799 /* InstanceViewController.m */; };
 		6448FC43239F829300243799 /* InstanceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6448FC42239F829300243799 /* InstanceCollectionViewCell.m */; };
@@ -669,6 +672,14 @@
 		64216A9623C06F9E005489F1 /* OrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		64216A9823C06FAB005489F1 /* ExpressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpressViewController.h; sourceTree = "<group>"; };
 		64216A9923C06FAB005489F1 /* ExpressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExpressViewController.m; sourceTree = "<group>"; };
+		64216A9C23C0A117005489F1 /* OrderDetailBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailBottomView.h; sourceTree = "<group>"; };
+		64216A9D23C0A117005489F1 /* OrderDetailBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailBottomView.m; sourceTree = "<group>"; };
+		64216A9F23C0C749005489F1 /* OrderDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailHeaderView.h; sourceTree = "<group>"; };
+		64216AA023C0C749005489F1 /* OrderDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailHeaderView.m; sourceTree = "<group>"; };
+		64216AA223C1DA4A005489F1 /* WithDrawListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithDrawListViewController.h; sourceTree = "<group>"; };
+		64216AA323C1DA4A005489F1 /* WithDrawListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithDrawListViewController.m; sourceTree = "<group>"; };
+		64216AA523C1DEBB005489F1 /* WithDrawTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithDrawTableViewCell.h; sourceTree = "<group>"; };
+		64216AA623C1DEBB005489F1 /* WithDrawTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithDrawTableViewCell.m; sourceTree = "<group>"; };
 		643DA02023A7D3C000BA26B8 /* AreaView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AreaView.h; sourceTree = "<group>"; };
 		643DA02123A7D3C000BA26B8 /* AreaView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AreaView.m; sourceTree = "<group>"; };
 		643DA02E23A7DF7700BA26B8 /* UILabelAlignToBottomLeft.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILabelAlignToBottomLeft.h; sourceTree = "<group>"; };
@@ -679,8 +690,6 @@
 		6448FC32239F346900243799 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6448FC34239F349A00243799 /* ResetPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPasswordViewController.h; sourceTree = "<group>"; };
 		6448FC35239F349A00243799 /* ResetPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordViewController.m; sourceTree = "<group>"; };
-		6448FC37239F34DA00243799 /* ResetPasswordSuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPasswordSuccessViewController.h; sourceTree = "<group>"; };
-		6448FC38239F34DA00243799 /* ResetPasswordSuccessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordSuccessViewController.m; sourceTree = "<group>"; };
 		6448FC3A239F34ED00243799 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		6448FC3B239F34ED00243799 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		6448FC3D239F433D00243799 /* 绿色长城.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "绿色长城.entitlements"; sourceTree = "<group>"; };
@@ -1902,6 +1911,10 @@
 			children = (
 				64216A8223BE0277005489F1 /* WithdrawViewController.h */,
 				64216A8323BE0277005489F1 /* WithdrawViewController.m */,
+				64216AA223C1DA4A005489F1 /* WithDrawListViewController.h */,
+				64216AA323C1DA4A005489F1 /* WithDrawListViewController.m */,
+				64216AA523C1DEBB005489F1 /* WithDrawTableViewCell.h */,
+				64216AA623C1DEBB005489F1 /* WithDrawTableViewCell.m */,
 			);
 			path = Withdraw;
 			sourceTree = "<group>";
@@ -1909,6 +1922,7 @@
 		64216A8E23C06F3D005489F1 /* OrderDetail */ = {
 			isa = PBXGroup;
 			children = (
+				64216A9B23C0A0EF005489F1 /* View */,
 				64216A9523C06F9E005489F1 /* OrderDetailViewController.h */,
 				64216A9623C06F9E005489F1 /* OrderDetailViewController.m */,
 				64216A8F23C06F6B005489F1 /* OrderDetailTableViewCell.h */,
@@ -1919,6 +1933,17 @@
 				64216A9323C06F8C005489F1 /* ExpressTableViewCell.m */,
 			);
 			path = OrderDetail;
+			sourceTree = "<group>";
+		};
+		64216A9B23C0A0EF005489F1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				64216A9C23C0A117005489F1 /* OrderDetailBottomView.h */,
+				64216A9D23C0A117005489F1 /* OrderDetailBottomView.m */,
+				64216A9F23C0C749005489F1 /* OrderDetailHeaderView.h */,
+				64216AA023C0C749005489F1 /* OrderDetailHeaderView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		643DA00623A7CA2D00BA26B8 /* 引导页 */ = {
@@ -1961,8 +1986,6 @@
 				6448FC32239F346900243799 /* LoginViewController.m */,
 				6448FC34239F349A00243799 /* ResetPasswordViewController.h */,
 				6448FC35239F349A00243799 /* ResetPasswordViewController.m */,
-				6448FC37239F34DA00243799 /* ResetPasswordSuccessViewController.h */,
-				6448FC38239F34DA00243799 /* ResetPasswordSuccessViewController.m */,
 				6448FC3A239F34ED00243799 /* RegisterViewController.h */,
 				6448FC3B239F34ED00243799 /* RegisterViewController.m */,
 			);
@@ -2798,6 +2821,7 @@
 				64AE30AF2397C9D100C0AB8F /* HPCountdownButton.m in Sources */,
 				641E49CE238269A200F07A09 /* YQMemoryCache.m in Sources */,
 				641E49F3238269A200F07A09 /* HPProgressHUD.m in Sources */,
+				64216AA123C0C749005489F1 /* OrderDetailHeaderView.m in Sources */,
 				645C85B023A7203800E31AAE /* AddressListViewController.m in Sources */,
 				649821C02387B27E0055746D /* AnimationContoller.m in Sources */,
 				647ED0A923B8BEFF003200FA /* RechargeBottomView.m in Sources */,
@@ -2808,6 +2832,7 @@
 				647ED0A523B8BE27003200FA /* RechargeViewController.m in Sources */,
 				641E4B502385351800F07A09 /* CategoryBarWithImages.m in Sources */,
 				641E49FA238269A200F07A09 /* HPRefreshFooter.m in Sources */,
+				64216A9E23C0A117005489F1 /* OrderDetailBottomView.m in Sources */,
 				649821CC238E15AA0055746D /* GroupShadowTableView.m in Sources */,
 				641E4AAF2382731C00F07A09 /* PushViewController.m in Sources */,
 				649821BF2387B27E0055746D /* KLTNavigationController.m in Sources */,
@@ -2892,6 +2917,7 @@
 				641E49F4238269A200F07A09 /* HPBaseWKWebViewController.m in Sources */,
 				641E49E5238269A200F07A09 /* STQRCodeConst.m in Sources */,
 				64AE30532396057200C0AB8F /* GoodsViewController.m in Sources */,
+				64216AA723C1DEBB005489F1 /* WithDrawTableViewCell.m in Sources */,
 				641E49E8238269A200F07A09 /* STQRCodeReaderView.m in Sources */,
 				641E4A23238269A200F07A09 /* NSDictionary+HPSafe.m in Sources */,
 				641E49EC238269A200F07A09 /* SRVideoBottomBar.m in Sources */,
@@ -2934,7 +2960,6 @@
 				64778BCB23A22D4500C931EE /* PersonnalInfoViewController.m in Sources */,
 				64AE30B92397C9D100C0AB8F /* HPButtonLayoutTextView.m in Sources */,
 				641E49E9238269A200F07A09 /* SRPlayerLayerView.m in Sources */,
-				6448FC39239F34DA00243799 /* ResetPasswordSuccessViewController.m in Sources */,
 				641E49C3238269A200F07A09 /* HPConsts.m in Sources */,
 				64AE30B02397C9D100C0AB8F /* GPWKWebViewWithHeaderAndFooter.m in Sources */,
 				6448FC3C239F34ED00243799 /* RegisterViewController.m in Sources */,
@@ -2946,6 +2971,7 @@
 				6448FC40239F6B6400243799 /* InstanceViewController.m in Sources */,
 				641E4A58238269A200F07A09 /* AppDelegate.m in Sources */,
 				641E4A28238269A200F07A09 /* UIView+HPImageToBase64.m in Sources */,
+				64216AA423C1DA4A005489F1 /* WithDrawListViewController.m in Sources */,
 				641E4A1D238269A200F07A09 /* HPApiSender.m in Sources */,
 				647ED0A123B849BC003200FA /* OrderListHeaderView.m in Sources */,
 				641E4A38238269A200F07A09 /* NSString+HPPredicate.m in Sources */,

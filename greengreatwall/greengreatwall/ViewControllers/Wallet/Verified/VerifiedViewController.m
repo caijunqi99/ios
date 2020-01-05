@@ -337,12 +337,13 @@
         stringRegion_id = regionModel.area_id;
     }
     
-    
+    WaittingMBProgressHUD(GPKeyWindow, @"正在上传,请等待...");
     [HPNetManager uploadImageWithUrlString:HostMmemberauthauth parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"userid"],@"member_id",_textFieldTemp[0].text,@"username",_textFieldTemp[1].text,@"idcard",_textFieldTemp[2].text,@"member_areainfo",_textFieldTemp[3].text,@"member_bankname",_textFieldTemp[4].text,@"member_bankcard",stringCity_id,@"member_cityid",stringRegion_id,@"member_areaid",stringProvince_id,@"member_provinceid",@"1",@"commit", nil] imageArray:_arrayDataSourcePhoto fileNames:@[@"member_idcard_image2",@"member_idcard_image3"] imageType:@"jpg" imageScale:1 successBlock:^(id response) {
         
+        FinishMBProgressHUD(GPKeyWindow);
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
-            [HPAlertTools showAlertWith:self title:@"提示信息" message:@"添加成功" callbackBlock:^(NSInteger btnIndex) {
+            [HPAlertTools showAlertWith:self title:@"提示信息" message:@"认证成功" callbackBlock:^(NSInteger btnIndex) {
                 [weakSelf.navigationController popViewControllerAnimated:YES];
                 //                HPNOTIF_POST(@"refreshAddressList", nil);
             } cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"确定",nil];
@@ -358,7 +359,7 @@
         //GPDebugLog(@"data:%@",data)
         //NSString * str = [[NSString alloc]initWithData:data[@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding];
         //GPDebugLog(@"服务器的错误原因:%@",str);
-        
+        FinishMBProgressHUD(GPKeyWindow);
     } progressBlock:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         //GPDebugLog(@"bytesProgress:%lld",bytesProgress);
     }];

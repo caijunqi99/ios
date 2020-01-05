@@ -118,7 +118,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)netRequest
 {
-    [HPNetManager GETWithUrlString:Hostloginindex isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_textFieldUsername.text,@"username",_textFieldPassword.text,@"password",@"ios",@"client", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostloginindex isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_textFieldUsername.text,@"username",_textFieldPassword.text,@"password",@"ios",@"client", nil] successBlock:^(id response) {
 
         if ([response[@"code"] integerValue] == 200) {
             

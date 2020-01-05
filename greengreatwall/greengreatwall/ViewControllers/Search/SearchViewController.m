@@ -165,7 +165,7 @@
 -(void)netRequest
 {
     HPWeakSelf(self)
-    [HPNetManager GETWithUrlString:Hostindexsearch_key_list isNeedCache:NO parameters:nil successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostindexsearch_key_list isNeedCache:NO parameters:nil successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {

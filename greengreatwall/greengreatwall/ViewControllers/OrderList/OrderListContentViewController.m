@@ -11,6 +11,8 @@
 #import "OrderListContentTableViewCell.h"
 #import "OrderListHeaderView.h"
 #import "ConfirmOrderToPayViewController.h"
+
+#import "OrderDetailViewController.h"
 @interface OrderListContentViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UITableView         *_tableView;
@@ -78,7 +80,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 {
     viewSetBackgroundColor(kColorBasic);
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(50*GPCommonLayoutScaleSizeWidthIndex, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex , GPScreenHeight - kNavBarAndStatusBarHeight - 30) style:(UITableViewStyleGrouped)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(50*GPCommonLayoutScaleSizeWidthIndex, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex , GPScreenHeight - kNavBarAndStatusBarHeight - 30) style:(UITableViewStyleGrouped)];//UITableViewStyleGrouped
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -89,7 +91,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     [self setupRefreshWithScrollView:_tableView];
     
-    CGFloat _viewh = 20;
+    CGFloat _viewh = 20*GPCommonLayoutScaleSizeWidthIndex;
     //设置滚动范围偏移200
     _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(_viewh, 0, 0, 0);
     //设置内容范围偏移200
@@ -162,7 +164,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_tableView reloadData];
     
     _strParameter = @"1";
-    [HPNetManager POSTWithUrlString:HostMemberorderorder_list isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"5",@"pagesize",_strParameter,@"page",_strParameter,@"page",_orderState_type,@"state_type", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostMemberorderorder_list isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"5",@"pagesize",_strParameter,@"page",_orderState_type,@"state_type", nil] successBlock:^(id response) {
         //        GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"][@"order_group_list"]] count]) {
@@ -191,7 +193,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //上拉加载更多
 - (void)footerRereshing
 {
-    [HPNetManager POSTWithUrlString:HostMemberorderorder_list isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"5",@"pagesize",_strParameter,@"page",_strParameter,@"page",_orderState_type,@"state_type", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostMemberorderorder_list isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"5",@"pagesize",_strParameter,@"page",_orderState_type,@"state_type", nil] successBlock:^(id response) {
         //        GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"][@"order_group_list"]] count]) {
@@ -249,18 +251,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     vc.string_pay_sn = pay_sn;
     [self.navigationController pushViewController:vc animated:YES];
 }
-/**
-*修改订单状态 - 取消订单 删除订单 确认收货
-*https://shop.bayi-shop.com/mobile/memberorder/change_state
-*order_id     订单ID
-*state_type
-*order_cancel ：取消订单
-order_delete  ：删除订单
-order_receive  : 确认收货
-*key           token值
-*state_info    取消原因，由用户填写，可以为空
-*state_info1   取消原因，由用户选择，可以为空
-*/
+
 -(void)buttonClickCancel:(UIButton*)btn
 {
     [HPAlertTools showAlertWith:self title:@"提示信息" message:@"确认取消此订单?" callbackBlock:^(NSInteger btnIndex) {
@@ -331,23 +322,12 @@ order_receive  : 确认收货
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OrderListContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderListContentTableViewCell"];
-    //    StoreModel *storeModel = self.storeArray[indexPath.section];
-    //    GoodsModel *goodsModel = storeModel.goodsArray[indexPath.row];
-    //    cell.goodsModel = goodsModel;
+
     NSArray *arrayGoods = _arrayDataSource[indexPath.section][@"order_list"][0][@"goods_list"];
     NSDictionary * dic = arrayGoods[indexPath.row];
     GoodsModel *model = [[GoodsModel alloc] init];
     [model setValuesForKeysWithDictionary:dic];
     cell.goodsModel = model;
-    cell.dic = dic;
-    cell.btnClick = ^(UIButton *btn) {
-        //GPDebugLog(@"indexPath.row:%ld",(long)indexPath.row);
-        //GPDebugLog(@"btn.tag:%ld",(long)btn.tag);
-        //        EditDeliveryAddressViewController *vc = [[EditDeliveryAddressViewController alloc]init];
-        //        vc.hidesBottomBarWhenPushed = YES;
-        //        vc.addressModel = model;
-        //        [self.navigationController pushViewController:vc animated:YES];
-    };
     
     return cell;
 }
@@ -360,23 +340,18 @@ order_receive  : 确认收货
     return 100*GPCommonLayoutScaleSizeWidthIndex;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    //    if (section == ([self.storeArray count]-1)) {
-    //        return 200*GPCommonLayoutScaleSizeWidthIndex;
-    //    }
-    NSString *state = _arrayDataSource[section][@"order_list"][0][@"state_desc"];
-    
-    if ([state isEqualToString:@"待付款"]) {
-        return 130*GPCommonLayoutScaleSizeWidthIndex;
-    }
-    return 100*GPCommonLayoutScaleSizeWidthIndex;
+
+//    NSString *state = _arrayDataSource[section][@"order_list"][0][@"state_desc"];
+//    if ([state isEqualToString:@"待付款"]) {
+//        return 170*GPCommonLayoutScaleSizeWidthIndex;
+//    }
+    return 170*GPCommonLayoutScaleSizeWidthIndex;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     OrderListHeaderView *headerView = [[OrderListHeaderView alloc]initWithFrame:CGRectMake(0*GPCommonLayoutScaleSizeWidthIndex, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 100*GPCommonLayoutScaleSizeWidthIndex)];
     headerView.userInteractionEnabled = YES;
     headerView.backgroundColor = [UIColor whiteColor];
-    //    StoreModel *storeModel = self.storeArray[section];
-    //    headerView.storeModel = storeModel;
     
     NSString *store_name = _arrayDataSource[section][@"order_list"][0][@"store_name"];
     NSString *state = _arrayDataSource[section][@"order_list"][0][@"state_desc"];
@@ -387,19 +362,26 @@ order_receive  : 确认收货
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *viewFooter = [[UIView alloc]init];
-    [viewFooter setFrame:CGRectMake(0, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 80*GPCommonLayoutScaleSizeWidthIndex)];
+    [viewFooter setFrame:CGRectMake(0, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 140*GPCommonLayoutScaleSizeWidthIndex)];
     UIView *view = [[UIView alloc]init];
     view.backgroundColor = [UIColor whiteColor];
     [viewFooter addSubview:view];
-    [view setFrame:CGRectMake(0, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 80*GPCommonLayoutScaleSizeWidthIndex)];
+    [view setFrame:CGRectMake(0, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 140*GPCommonLayoutScaleSizeWidthIndex)];
     [view rounded:10 rectCorners:(UIRectCornerBottomLeft|UIRectCornerBottomRight)];
-    
+    NSString *stringAmount = _arrayDataSource[section][@"order_amount"];
+    NSString *stringCount = _arrayDataSource[section][@"order_list"][0][@"goods_count"];
+    UILabel *labelAmount = [[UILabel alloc]init];
+    [labelAmount setText:[NSString stringWithFormat:@"共%@件商品,订单总价:%@",stringCount,stringAmount]];
+    [labelAmount setFrame:RectWithScale(CGRectMake(200, 0, 750, 60), GPCommonLayoutScaleSizeWidthIndex)];
+    [labelAmount setTextAlignment:NSTextAlignmentRight];
+    [viewFooter addSubview:labelAmount];
+    [labelAmount setFont:FontMediumWithSize(12)];
     
     NSString *state = _arrayDataSource[section][@"order_list"][0][@"state_desc"];
     
     if ([state isEqualToString:@"待付款"]) {
         UIButton *_buttonCancel = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonCancel setFrame:RectWithScale(CGRectMake(500, 0, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
+        [_buttonCancel setFrame:RectWithScale(CGRectMake(500, 70, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
         [_buttonCancel setTitle:@"取消订单" forState:UIControlStateNormal];
         [_buttonCancel.titleLabel setFont:FontRegularWithSize(12)];
         [_buttonCancel setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -413,7 +395,7 @@ order_receive  : 确认收货
         [viewFooter addSubview:_buttonCancel];
         
         UIButton *_buttonToPay = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonToPay setFrame:RectWithScale(CGRectMake(750, 0, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
+        [_buttonToPay setFrame:RectWithScale(CGRectMake(750, 70, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
         [_buttonToPay setTitle:@"去付款" forState:UIControlStateNormal];
         [_buttonToPay.titleLabel setFont:FontRegularWithSize(12)];
         [_buttonToPay setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -429,7 +411,7 @@ order_receive  : 确认收货
     else if([state isEqualToString:@"待收货"])
     {
         UIButton *_buttonConfirmReceive = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonConfirmReceive setFrame:RectWithScale(CGRectMake(750, 0, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
+        [_buttonConfirmReceive setFrame:RectWithScale(CGRectMake(750, 70, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
         [_buttonConfirmReceive setTitle:@"确认收货" forState:UIControlStateNormal];
         [_buttonConfirmReceive.titleLabel setFont:FontRegularWithSize(12)];
         [_buttonConfirmReceive setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -445,7 +427,7 @@ order_receive  : 确认收货
     else if([state isEqualToString:@"交易完成"]||[state isEqualToString:@"已取消"])
     {
         UIButton *_buttonDelete = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonDelete setFrame:RectWithScale(CGRectMake(750, 0, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
+        [_buttonDelete setFrame:RectWithScale(CGRectMake(750, 70, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
         [_buttonDelete setTitle:@"删除订单" forState:UIControlStateNormal];
         [_buttonDelete.titleLabel setFont:FontRegularWithSize(12)];
         [_buttonDelete setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -458,40 +440,16 @@ order_receive  : 确认收货
         [_buttonDelete addTarget:self action:@selector(buttonClickDelete:) forControlEvents:UIControlEventTouchUpInside];
         [viewFooter addSubview:_buttonDelete];
     }
-//    else if([state isEqualToString:@"已取消"])
-//    {
-//        UIButton *_buttonDelete = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [_buttonDelete setFrame:RectWithScale(CGRectMake(750, 0, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
-//        [_buttonDelete setTitle:@"删除订单" forState:UIControlStateNormal];
-//        [_buttonDelete.titleLabel setFont:FontRegularWithSize(12)];
-//        [_buttonDelete setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//        [_buttonDelete setTag:section+100];
-//        _buttonDelete.layer.masksToBounds = YES;
-//        _buttonDelete.clipsToBounds = YES;
-//        [_buttonDelete.layer setCornerRadius:15.0*GPCommonLayoutScaleSizeWidthIndex];
-//        [_buttonDelete.layer setBorderColor:[UIColor redColor].CGColor];
-//        [_buttonDelete.layer setBorderWidth:1];
-//        [_buttonDelete addTarget:self action:@selector(buttonClickDelete:) forControlEvents:UIControlEventTouchUpInside];
-//        [viewFooter addSubview:_buttonDelete];
-//    }
-
-
+    
     return viewFooter;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *arrayGoods = _arrayDataSource[indexPath.section][@"order_list"][0][@"goods_list"];
-    NSDictionary * dic = arrayGoods[indexPath.row];
-    GoodsModel *goodsModel = [[GoodsModel alloc] init];
-    [goodsModel setValuesForKeysWithDictionary:dic];
-    
-    
-    GoodsViewController *vc = [[GoodsViewController alloc]init];
+    OrderDetailViewController *vc = [[OrderDetailViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
-    vc.goods_id = goodsModel.goods_id;
+    vc.string_order_id = _arrayDataSource[indexPath.section][@"order_id"];
     [self.navigationController pushViewController:vc animated:YES];
-    
 }
 
 @end

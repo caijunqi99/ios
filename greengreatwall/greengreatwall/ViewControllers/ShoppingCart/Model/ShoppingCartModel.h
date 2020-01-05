@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *goods_num;
 @property (nonatomic, copy) NSString *goods_image;
+@property (nonatomic, copy) NSString *image_url;
 @property (nonatomic, copy) NSString *goods_image_url;
 @property (nonatomic, copy) NSString *goods_price;
 @property (nonatomic, copy) NSString *goods_id;

@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OrderDetailViewController : BaseViewController
-
+@property(nonatomic,copy)NSString *string_order_id;
 @end
 
 NS_ASSUME_NONNULL_END

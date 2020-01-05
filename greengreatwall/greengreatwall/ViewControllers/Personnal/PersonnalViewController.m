@@ -204,7 +204,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _labelUserNickName.textAlignment = NSTextAlignmentLeft;
     _labelUserNickName.font = FontMediumWithSize(20);
     [_viewTop addSubview:_labelUserNickName];
-    _labelUserNickName.text = @"旺疯";
+    _labelUserNickName.text = @"";
     
     
     
@@ -214,7 +214,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _labelUserPhoneNumber.textAlignment = NSTextAlignmentLeft;
     _labelUserPhoneNumber.font = FontMediumWithSize(20);
     [_viewTop addSubview:_labelUserPhoneNumber];
-    _labelUserPhoneNumber.text = @"185****5678";
+    _labelUserPhoneNumber.text = @"";
     
     _imageViewWallet = [[UIImageView alloc]init];
     [_imageViewWallet setFrame:RectWithScale(CGRectMake(100, 435, 880, 135), GPCommonLayoutScaleSizeWidthIndex)];

@@ -12,26 +12,28 @@
 #import "GoodsViewController.h"
 @interface InstanceViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,SDCycleScrollViewDelegate,CategoryBarDelegate,XDSearchBarViewDelegate>
 {
+    UIView               *_viewTemp;
+    UILabel              *_labelTemp;
+    UIButton             *_buttonTemp;
+    UIImageView          *_imageViewTemp;
+    UITableView          *_tableViewTemp;
+    UICollectionView     *_collectionViewTemp;
+    UICollectionViewFlowLayout *_flowLayout;
+    UIScrollView         *_scrollViewTemp;
+
+    SDCycleScrollView    *_cycleScrollViewTemp;
+    CategoryBar          *_categoryBarTemp;
+    NavTitleSearchBar    *_searchBarTemp;
+    UITextField          *_textFieldTemp;
+    UITextView           *_textViewTemp;
+    
     NSMutableDictionary *_cellDic;
     NSMutableArray      *_arrayDataSource;
     
     NSString            *_strParameter;
 }
 
-@property(nonatomic,strong)UIView               *viewTemp;
-@property(nonatomic,strong)UILabel              *labelTemp;
-@property(nonatomic,strong)UIButton             *buttonTemp;
-@property(nonatomic,strong)UIImageView          *imageViewTemp;
-@property(nonatomic,strong)UITableView          *tableViewTemp;
-@property(nonatomic,strong)UICollectionView     *collectionViewTemp;
-@property(nonatomic,strong)UICollectionViewFlowLayout *flowLayout;
-@property(nonatomic,strong)UIScrollView         *scrollViewTemp;
 
-@property(nonatomic,strong)SDCycleScrollView    *cycleScrollViewTemp;
-@property(nonatomic,strong)CategoryBar          *categoryBarTemp;
-@property(nonatomic,strong)NavTitleSearchBar    *searchBarTemp;
-@property(nonatomic,strong)UITextField          *textFieldTemp;
-@property(nonatomic,strong)UITextView           *textViewTemp;
 
 @end
 
@@ -42,6 +44,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self configInterface];
 }
 
 -(instancetype)init
@@ -82,53 +85,127 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 - (void)configInterface
 {
     //添加搜索框
+    _searchBarTemp = [[NavTitleSearchBar alloc]initWithFrame:CGRectMake(10, 5, GPScreenWidth-40, kNavBarHeight -10)];
+    _searchBarTemp.searchDelegate = self;
+    _searchBarTemp.placeholder = @"搜索商品";
+    _searchBarTemp.backgroundColor = rgb(244, 244, 244);
     UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(10,0,GPScreenWidth-20,kNavBarHeight)];
-    [titleView addSubview:self.searchBarTemp];
+    [titleView addSubview:_searchBarTemp];
     //Set to titleView
     self.navigationItem.titleView = titleView;
     
     [self setBackButtonWithTarget:self action:@selector(leftClick)];
     [self setLeftNavButtonImage:defaultImage Title:@"" Frame:CGRectMake(0, 0, 30, 30) Target:self action:@selector(leftClick)];
     [self setRightNavButtonWithImage:defaultImage Title:@"" Frame:CGRectMake(0, 0, 30, 30) Target:self action:@selector(rightClick)];
-    
+    [self settingNavTitle:@"例子"];
     viewSetBackgroundColor(kColorBasic);
     
-    [self.view addSubview:self.viewTemp];
-    [self.viewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, 120)];
     
-    [self.viewTemp addSubview:self.imageViewTemp];
-    [self.imageViewTemp setFrame:CGRectMake(10, 10, 60, 60)];
+    _viewTemp = [UIView initViewBackColor:[UIColor whiteColor]];
+    [self.view addSubview:_viewTemp];
+    [_viewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, 120)];
     
-    [self.viewTemp addSubview:self.labelTemp];
-    [self.labelTemp setFrame:CGRectMake(80, 10, self.viewTemp.width - 90, 30)];
     
-    [self.viewTemp addSubview:self.buttonTemp];
-    [self.buttonTemp setFrame:CGRectMake(80, 50, 100, 20)];
+    _imageViewTemp = [UIImageView initImageView:@"1"];
+    [_viewTemp addSubview:_imageViewTemp];
+    [_imageViewTemp setFrame:CGRectMake(10, 10, 60, 60)];
     
-    [self.view addSubview:self.tableViewTemp];
-    [self.tableViewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight)];
-    self.tableViewTemp.tableHeaderView = self.viewTemp;
+    
+    _labelTemp = [UILabel initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:@"this is label"];
+    _labelTemp.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelTemp.backgroundColor = [UIColor clearColor];
+    [_viewTemp addSubview:_labelTemp];
+    [_labelTemp setFrame:CGRectMake(80, 10, _viewTemp.width - 90, 30)];
+    
+    
+    _buttonTemp = [UIButton initButtonTitleFont:16 titleColor:[UIColor blackColor] titleName:@""];
+    _buttonTemp = [UIButton initButtonTitleFont:16 titleColor:[UIColor blackColor] titleName:@"" backgroundColor:[UIColor blueColor] radius:5];
+    _buttonTemp = [UIButton initButtonTitleFont:16 titleColor:[UIColor blackColor] backgroundColor:[UIColor blueColor] imageName:@"" titleName:@""];
+    [_buttonTemp addTarget:self tag:11 action:@selector(buttonClick:)];
+    [_viewTemp addSubview:_buttonTemp];
+    [_buttonTemp setFrame:CGRectMake(80, 50, 100, 20)];
+    
+    
+    if (@available(iOS 13.0, *)) {
+        _tableViewTemp = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth, 200) style:UITableViewStyleInsetGrouped];
+    } else {
+        // Fallback on earlier versions
+        _tableViewTemp = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth, 200) style:UITableViewStyleGrouped];//UITableViewStyleGrouped
+    }
+    _tableViewTemp.showsVerticalScrollIndicator = NO;
+    _tableViewTemp.showsHorizontalScrollIndicator = NO;
+    _tableViewTemp.dataSource = self;
+    _tableViewTemp.delegate = self;
+    
+    _tableViewTemp.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_tableViewTemp];
+    [_tableViewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight - kNavBarAndStatusBarHeight)];
+    _tableViewTemp.tableHeaderView = _viewTemp;
     
     // 高度 = 屏幕高度 - 导航栏高度64 - 频道视图高度44
     CGFloat h = GPScreenHeight - kNavBarAndStatusBarHeight - kTabBarHeight ;
     CGRect frame = CGRectMake(0, 0, GPScreenWidth, h);
-    [self.viewTemp addSubview:self.collectionViewTemp];
-    [self.collectionViewTemp setFrame:frame];
     
-    [self.viewTemp addSubview:self.scrollViewTemp];
-    [self.scrollViewTemp setFrame:CGRectMake(80, 50, 100, 20)];
+    _collectionViewTemp = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, GPScreenWidth, 200) collectionViewLayout:_flowLayout];
+    _collectionViewTemp.delegate = self;
+    _collectionViewTemp.dataSource = self;
+    _collectionViewTemp.backgroundColor = [UIColor clearColor];
+    [_collectionViewTemp registerClass:[InstanceCollectionViewCell class] forCellWithReuseIdentifier:ReuseIdentify];
     
-    [self.viewTemp addSubview:self.cycleScrollViewTemp];
-    [self.cycleScrollViewTemp setFrame:CGRectMake(80, 50, 100, 20)];
+    // 设置cell的大小和细节
+    _flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    _flowLayout.minimumInteritemSpacing = 5.0;
+    _flowLayout.minimumLineSpacing = 5.0;
+    _flowLayout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5);
+    _flowLayout.itemSize = CGSizeMake(_collectionViewTemp.width/2.0-10, (_collectionViewTemp.width/2.0 -10)*(290.0/249.0));
+    [_viewTemp addSubview:_collectionViewTemp];
+    [_collectionViewTemp setFrame:frame];
     
-    [self.viewTemp addSubview:self.categoryBarTemp];
-    [self.categoryBarTemp setFrame:CGRectMake(80, 50, 100, 20)];
     
-    [self.viewTemp addSubview:self.textFieldTemp];
-    [self.textFieldTemp setFrame:CGRectMake(80, 50, 100, 20)];
+    _scrollViewTemp = [[UIScrollView alloc]init];
+    _scrollViewTemp.showsHorizontalScrollIndicator = NO;
+    _scrollViewTemp.showsVerticalScrollIndicator = NO;
+    _scrollViewTemp.backgroundColor = [UIColor clearColor];
+    [_viewTemp addSubview:_scrollViewTemp];
+    [_scrollViewTemp setFrame:CGRectMake(80, 50, 100, 20)];
     
-    [self.viewTemp addSubview:self.textViewTemp];
-    [self.textViewTemp setFrame:CGRectMake(80, 50, 100, 20)];
+    
+    _cycleScrollViewTemp = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, GPScreenWidth, 100) delegate:self placeholderImage:defaultImage];
+    _cycleScrollViewTemp.autoScrollTimeInterval = 3;
+    _cycleScrollViewTemp.backgroundColor = [UIColor clearColor];
+    _cycleScrollViewTemp.infiniteLoop = YES;
+    _cycleScrollViewTemp.localizationImageNamesGroup = @[@"1",@"2",@"3"];
+    [_viewTemp addSubview:_cycleScrollViewTemp];
+    [_cycleScrollViewTemp setFrame:CGRectMake(80, 50, 100, 20)];
+    
+    
+    _categoryBarTemp = [[CategoryBar alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, GPScreenWidth , 30)];
+    _categoryBarTemp.backgroundColor = [UIColor clearColor];
+    _categoryBarTemp.delegate = self;
+    _categoryBarTemp.lineColor = rgb(0, 185, 142);
+    _categoryBarTemp.itemTitles = @[@"推荐店铺",@"店铺分类"];
+    _categoryBarTemp.font = FontRegularWithSize(13);
+    _categoryBarTemp.titleColor = rgb(211, 211, 211);
+    _categoryBarTemp.fontSelected = FontMediumWithSize(16);
+    _categoryBarTemp.titleColorSelected = rgb(0, 185, 142);
+    _categoryBarTemp.buttonColor = GPHexColor(0xF5F5F5);
+    _categoryBarTemp.buttonColorSelected = GPHexColor(0xFFFFFF);
+    _categoryBarTemp.buttonInset = 20;
+    _categoryBarTemp.isVertical = NO;
+    _categoryBarTemp.isSpread = NO;
+    [_categoryBarTemp updateData];
+    _categoryBarTemp.currentItemIndex = 0;
+    [_viewTemp addSubview:_categoryBarTemp];
+    [_categoryBarTemp setFrame:CGRectMake(80, 50, 100, 20)];
+    
+    _textFieldTemp = [UITextField initTextFieldFont:16 LeftImageName:@"1" Placeholder:@"placeholder"];
+    [_viewTemp addSubview:_textFieldTemp];
+    [_textFieldTemp setFrame:CGRectMake(80, 50, 100, 20)];
+    
+    _textViewTemp = [[UITextView alloc]init];
+    [_viewTemp addSubview:_textViewTemp];
+    [_textViewTemp setFrame:CGRectMake(80, 50, 100, 20)];
 }
 
 -(void)leftClick
@@ -143,7 +220,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)netRequest
 {
-    [HPNetManager GETWithUrlString:HostStorestore_info isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_stringFunction,@"stringFunction", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostStorestore_info isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_stringFunction,@"stringFunction", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {
@@ -249,7 +326,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_arrayDataSource removeAllObjects];
     [_collectionViewTemp reloadData];
     
-    [HPNetManager GETWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"]] count]) {
@@ -281,7 +358,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //上拉加载更多
 - (void)footerRereshing
 {
-    [HPNetManager GETWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:HostIndexgetCommendGoods isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_strParameter,@"page", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"]] count]) {
@@ -438,166 +515,6 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 }
 
 #pragma mark - lazy load懒加载
-
--(UIView *)viewTemp
-{
-    if (!_viewTemp) {
-        _viewTemp = [UIView initViewBackColor:[UIColor whiteColor]];
-    }
-    return _viewTemp;
-}
-
--(UILabel *)labelTemp
-{
-    if (!_labelTemp) {
-        _labelTemp = [UILabel initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:@"this is label"];
-        _labelTemp.lineBreakMode = NSLineBreakByCharWrapping;
-        _labelTemp.backgroundColor = [UIColor clearColor];
-    }
-    return _labelTemp;
-}
-
--(UIImageView *)imageViewTemp
-{
-    if (!_imageViewTemp) {
-        _imageViewTemp = [UIImageView initImageView:@"1"];
-    }
-    return _imageViewTemp;
-}
-
--(UIButton *)buttonTemp
-{
-    if (!_buttonTemp) {
-        _buttonTemp = [UIButton initButtonTitleFont:16 titleColor:[UIColor blackColor] titleName:@""];
-        _buttonTemp = [UIButton initButtonTitleFont:16 titleColor:[UIColor blackColor] titleName:@"" backgroundColor:[UIColor blueColor] radius:5];
-        _buttonTemp = [UIButton initButtonTitleFont:16 titleColor:[UIColor blackColor] backgroundColor:[UIColor blueColor] imageName:@"" titleName:@""];
-        [_buttonTemp addTarget:self tag:11 action:@selector(buttonClick:)];
-    }
-    return _buttonTemp;
-}
-
--(UIScrollView *)scrollViewTemp
-{
-    if (!_scrollViewTemp) {
-        _scrollViewTemp = [[UIScrollView alloc]init];
-        _scrollViewTemp.showsHorizontalScrollIndicator = NO;
-        _scrollViewTemp.showsVerticalScrollIndicator = NO;
-        _scrollViewTemp.backgroundColor = [UIColor clearColor];
-    }
-    return _scrollViewTemp;
-}
-
--(UITableView *)tableViewTemp
-{
-    if (!_tableViewTemp) {
-        if (@available(iOS 13.0, *)) {
-            _tableViewTemp = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth, 200) style:UITableViewStyleInsetGrouped];
-        } else {
-            // Fallback on earlier versions
-            _tableViewTemp = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, GPScreenWidth, 200) style:UITableViewStyleGrouped];
-        }
-        _tableViewTemp.showsVerticalScrollIndicator = NO;
-        _tableViewTemp.showsHorizontalScrollIndicator = NO;
-        _tableViewTemp.dataSource = self;
-        _tableViewTemp.delegate = self;
-        
-        _tableViewTemp.backgroundColor = [UIColor clearColor];
-    }
-    return _tableViewTemp;
-}
-
-
-
--(UICollectionView *)collectionViewTemp
-{
-    if (!_collectionViewTemp) {
-        _collectionViewTemp = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, GPScreenWidth, 200) collectionViewLayout:self.flowLayout];
-        _collectionViewTemp.delegate = self;
-        _collectionViewTemp.dataSource = self;
-        
-        _collectionViewTemp.backgroundColor = [UIColor clearColor];
-        [_collectionViewTemp registerClass:[InstanceCollectionViewCell class] forCellWithReuseIdentifier:ReuseIdentify];
-        
-        _flowLayout.itemSize = CGSizeMake(_collectionViewTemp.width/2.0-10, (_collectionViewTemp.width/2.0 -10)*(290.0/249.0));
-    }
-    return _collectionViewTemp;
-}
-
--(UICollectionViewFlowLayout *)flowLayout
-{
-    if (!_flowLayout) {
-        // 设置cell的大小和细节
-        _flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _flowLayout.minimumInteritemSpacing = 5.0;
-        _flowLayout.minimumLineSpacing = 5.0;
-        _flowLayout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5);
-    }
-    return _flowLayout;
-}
-
--(SDCycleScrollView *)cycleScrollViewTemp
-{
-    if (!_cycleScrollViewTemp) {
-        _cycleScrollViewTemp = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, GPScreenWidth, 100) delegate:self placeholderImage:defaultImage];
-        _cycleScrollViewTemp.autoScrollTimeInterval = 3;
-        _cycleScrollViewTemp.backgroundColor = [UIColor clearColor];
-        _cycleScrollViewTemp.infiniteLoop = YES;
-        _cycleScrollViewTemp.localizationImageNamesGroup = @[@"1",@"2",@"3"];
-    }
-    return _cycleScrollViewTemp;
-}
-
--(CategoryBar *)categoryBarTemp
-{
-    if (!_categoryBarTemp) {
-        _categoryBarTemp = [[CategoryBar alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, GPScreenWidth , 30)];
-        _categoryBarTemp.backgroundColor = [UIColor clearColor];
-        _categoryBarTemp.delegate = self;
-        _categoryBarTemp.lineColor = rgb(0, 185, 142);
-        _categoryBarTemp.itemTitles = @[@"推荐店铺",@"店铺分类"];
-        _categoryBarTemp.font = FontRegularWithSize(13);
-        _categoryBarTemp.titleColor = rgb(211, 211, 211);
-        _categoryBarTemp.fontSelected = FontMediumWithSize(16);
-        _categoryBarTemp.titleColorSelected = rgb(0, 185, 142);
-        _categoryBarTemp.buttonColor = GPHexColor(0xF5F5F5);
-        _categoryBarTemp.buttonColorSelected = GPHexColor(0xFFFFFF);
-        _categoryBarTemp.buttonInset = 20;
-        _categoryBarTemp.isVertical = NO;
-        _categoryBarTemp.isSpread = NO;
-        [_categoryBarTemp updateData];
-        _categoryBarTemp.currentItemIndex = 0;
-    }
-    return _categoryBarTemp;
-}
-
--(NavTitleSearchBar *)searchBarTemp
-{
-    if (!_searchBarTemp) {
-        
-        _searchBarTemp = [[NavTitleSearchBar alloc]initWithFrame:CGRectMake(10, 5, GPScreenWidth-40, kNavBarHeight -10)];
-        _searchBarTemp.searchDelegate = self;
-        _searchBarTemp.placeholder = @"搜索商品";
-        _searchBarTemp.backgroundColor = rgb(244, 244, 244);
-    }
-    return _searchBarTemp;
-}
-
--(UITextField *)textFieldTemp
-{
-    if (!_textFieldTemp) {
-        _textFieldTemp = [UITextField initTextFieldFont:16 LeftImageName:@"1" Placeholder:@"placeholder"];
-    }
-    return _textFieldTemp;
-}
-
--(UITextView *)textViewTemp
-{
-    if (!_textViewTemp) {
-        _textViewTemp = [[UITextView alloc]init];
-    }
-    return _textViewTemp;
-}
 
 /*
  #pragma mark - Navigation

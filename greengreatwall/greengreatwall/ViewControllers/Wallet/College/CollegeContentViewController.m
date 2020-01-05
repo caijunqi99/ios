@@ -162,7 +162,7 @@
 //下拉刷新
 - (void)headerRereshing
 {
-    [HPNetManager GETWithUrlString:Hostcollegedetail isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_string_article_id,@"article_id", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostcollegedetail isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:_string_article_id,@"article_id", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         
         if ([response[@"code"] integerValue] == 200) {

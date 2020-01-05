@@ -11,18 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OrderListContentTableViewCell : UITableViewCell
-@property (nonatomic, strong) void ((^btnClick)(UIButton*));
-
-@property (nonatomic,copy)      NSDictionary    *dic;
-
-@property (nonatomic,strong)    UIButton        *buttonToPay;
-@property (nonatomic,strong)    UIButton        *buttonConfirmReceipt;
-@property (nonatomic,strong)    UIButton        *buttonCancelOrder;
-@property (nonatomic,strong)    CALayer         *shadowLayer;
-
-
 @property (nonatomic, strong) GoodsModel *goodsModel;
-
 
 @property (nonatomic,strong)    UIImageView     *imageViewLeft;
 @property (nonatomic,strong)    UILabelAlignToTopLeft         *labelTitle;

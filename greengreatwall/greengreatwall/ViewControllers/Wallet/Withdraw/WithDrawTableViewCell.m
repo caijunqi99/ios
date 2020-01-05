@@ -1,39 +1,31 @@
 //
-//  ExpressTableViewCell.m
+//  WithDrawTableViewCell.m
 //  greengreatwall
 //
-//  Created by 葛朋 on 2020/1/4.
+//  Created by 葛朋 on 2020/1/5.
 //  Copyright © 2020 guocaiduigong. All rights reserved.
 //
 
-#import "ExpressTableViewCell.h"
+#import "WithDrawTableViewCell.h"
 
-@implementation ExpressTableViewCell
+@implementation WithDrawTableViewCell
 
 -(void)layoutSubviews
 {
-//    [_labelTitle setText:[NSString stringWithFormat:@"%@",_dic[@"AcceptTime"]]];
-    [_labelContent setText:[NSString stringWithFormat:@"%@",_dic[@"AcceptStation"]]];
+    [_labelTitle setText:[NSString stringWithFormat:@"提现金额:%@",_dic[@"pdc_amount"]]];
+    [_labelContent setText:[NSString stringWithFormat:@"状态:%@",_dic[@"pdc_payment_state_text"]]];
     
-//    NSString *intervalString = _dic[@"message_time"];
-//    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[intervalString doubleValue]+3600*0];// 加上八小时的时间差值
-//    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSString *string = [dateFormatter stringFromDate:date];
-//    //GPDebugLog(@"时间戳转换为时间是 %@",string);
-//    
-    [_labelTime setText:[NSString stringWithFormat:@"%@",_dic[@"AcceptTime"]]];
+    [_labelTime setText:[NSString stringWithFormat:@"申请时间:%@",_dic[@"pdc_add_time_text"]]];
     
-    [_viewBack setFrame:CGRectMake(10, 5, self.contentView.width - 20, 100)];
+    [_viewBack setFrame:CGRectMake(10, 5, self.contentView.width - 20, 70)];
     
     
-    [_labelTitle setFrame:CGRectMake(_viewBack.width - 150, 10, 140, 20)];
+    [_labelTime setFrame:CGRectMake(160, 10, _viewBack.width - 170, 20)];
     
-    [_labelTime setFrame:CGRectMake(10, 10, _viewBack.width - 160, 20)];
+    [_labelTitle setFrame:CGRectMake(10, 10, 150, 20)];
     
-    [_labelContent setFrame:CGRectMake(10, 30, _viewBack.width - 20, 60)];
+    [_labelContent setFrame:CGRectMake(10, 40, _viewBack.width - 20, 20)];
     
-//    FuwenbenLabelWithFontAndColorInRange(_labelContent, FontRegularWithSize(14), kColorTheme, NSMakeRange(0, 8));
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -70,7 +62,7 @@
         _labelTime.lineBreakMode = NSLineBreakByCharWrapping;
         _labelTime.textColor = kColorFontMedium;
         _labelTime.backgroundColor = [UIColor clearColor];
-        _labelTime.textAlignment = NSTextAlignmentLeft;
+        _labelTime.textAlignment = NSTextAlignmentRight;
         [_labelTime setFont:FontRegularWithSize(14)];
         
         cellSetBackgroundColor(kColorBasic);

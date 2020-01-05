@@ -3145,7 +3145,7 @@
 				CODE_SIGN_ENTITLEMENTS = "greengreatwall/绿色长城.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 9A4A5GN976;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/greengreatwall/PrefixHeader.pch";
@@ -3178,7 +3178,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/greengreatwall/Common/AliPay",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tongantianxia.greengreatwall;
 				PRODUCT_NAME = "绿色长城";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3194,7 +3194,7 @@
 				CODE_SIGN_ENTITLEMENTS = "greengreatwall/绿色长城.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 9A4A5GN976;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/greengreatwall/PrefixHeader.pch";
@@ -3227,7 +3227,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/greengreatwall/Common/AliPay",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tongantianxia.greengreatwall;
 				PRODUCT_NAME = "绿色长城";
 				PROVISIONING_PROFILE_SPECIFIER = "";

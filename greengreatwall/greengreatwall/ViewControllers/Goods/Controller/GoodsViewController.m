@@ -49,6 +49,14 @@
     NSMutableArray      *_arrayDataSource;
     
     NSString            *_string_storeID;
+    
+    UIView              *_viewVip;
+    
+    UILabel             *_labelVipIntro[4];
+    UILabel             *_labelVip[4];
+    
+    UIView              *_viewDescribe;
+    UILabel             *_labelDescribe;
 }
 //轮播图
 @property (nonatomic,strong) SDCycleScrollView *cycleSV;
@@ -131,10 +139,14 @@
     
     _viewTop = [[UIView alloc]init];
     [_viewTop setBackgroundColor:[UIColor whiteColor]];
-    [_viewTop setFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenWidth + 110 + 480*GPCommonLayoutScaleSizeWidthIndex)];
+    [_viewTop setFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenWidth + 110 + 700*GPCommonLayoutScaleSizeWidthIndex)];
+    
+    _viewVip = [UIView initViewBackColor:[UIColor whiteColor]];
+    [_viewVip setFrame:CGRectMake(0, GPScreenWidth+110, GPScreenWidth, 110*GPCommonLayoutScaleSizeWidthIndex)];
+    [_viewTop addSubview:_viewVip];
     
     _viewStore = [UIView initViewBackColor:[UIColor whiteColor]];
-    [_viewStore setFrame:CGRectMake(0, GPScreenWidth+110, GPScreenWidth, 180*GPCommonLayoutScaleSizeWidthIndex)];
+    [_viewStore setFrame:CGRectMake(0, _viewVip.bottom, GPScreenWidth, 180*GPCommonLayoutScaleSizeWidthIndex)];
     [_viewTop addSubview:_viewStore];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
     [_viewStore addGestureRecognizer:tap];
@@ -173,6 +185,33 @@
     [_viewTop addSubview:_scrollViewGoods];
     
     
+    
+    
+    
+    
+    for (NSInteger i = 0; i<4; i++) {
+        _labelVipIntro[i] = [UILabel initLabelTextFont:FontRegularWithSize(14) textColor:[UIColor whiteColor] title:@""];
+        [_labelVipIntro[i] setFrame:RectWithScale(CGRectMake(10+270*i, 30, 150, 50), GPCommonLayoutScaleSizeWidthIndex)];
+        [_labelVipIntro[i]setBackgroundColor:kColorTheme];
+        [_labelVipIntro[i] setTintColor:kColorTheme];
+        [_viewVip addSubview:_labelVipIntro[i]];
+        
+        _labelVip[i] = [UILabel initLabelTextFont:FontRegularWithSize(14) textColor:kColorTheme title:@""];
+        [_labelVip[i] setFrame:RectWithScale(CGRectMake(160+270*i, 30, 80, 50), GPCommonLayoutScaleSizeWidthIndex)];
+        [_labelVip[i]setBackgroundColor:[UIColor whiteColor]];
+        [_labelVip[i] setTintColor:[UIColor whiteColor]];
+        [_viewVip addSubview:_labelVip[i]];
+    }
+    
+    _viewDescribe = [UIView initViewBackColor:[UIColor whiteColor]];
+    [_viewDescribe setFrame:CGRectMake(0, _scrollViewGoods.bottom, GPScreenWidth, 110*GPCommonLayoutScaleSizeWidthIndex)];
+    [_viewTop addSubview:_viewDescribe];
+    
+    _labelDescribe = [UILabel initLabelTextFont:FontMediumWithSize(16) textColor:kColorTheme title:@"商品详情"];
+    [_labelDescribe setFrame:RectWithScale(CGRectMake(40, 30, 1000, 50), GPCommonLayoutScaleSizeWidthIndex)];
+    [_labelDescribe setBackgroundColor:[UIColor whiteColor]];
+    [_viewDescribe addSubview:_labelDescribe];
+    
     _viewFooter = [[UIView alloc]init];
     [_viewFooter setBackgroundColor:[UIColor clearColor]];
     CGFloat height_viewFooter = 0;//arc4random()%40
@@ -189,10 +228,10 @@
     [_viewTop addSubview:_cycleSV];
     
     _labelTitle = [[UILabelAlignToTopLeft alloc]init];
-    _labelTitle.frame = CGRectMake(10, _cycleSV.bottom +10, _viewTop.width -20, 40);
+    _labelTitle.frame = CGRectMake(10, _cycleSV.bottom +10, _viewTop.width -20, 50);
     _labelTitle.textColor = [UIColor blackColor];
     _labelTitle.textAlignment = NSTextAlignmentLeft;
-    _labelTitle.font = FontMediumWithSize(12);
+    _labelTitle.font = FontMediumWithSize(16);
     _labelTitle.numberOfLines = 2;
     _labelTitle.lineBreakMode = NSLineBreakByCharWrapping;
     [_viewTop addSubview:_labelTitle];
@@ -202,7 +241,7 @@
     _labelAdv.frame = CGRectMake(10, _labelTitle.bottom+10, _viewTop.width-20-100, 40);
     _labelAdv.textColor = [UIColor grayColor];
     _labelAdv.textAlignment = NSTextAlignmentLeft;
-    _labelAdv.font = FontMediumWithSize(12);
+    _labelAdv.font = FontMediumWithSize(14);
     _labelAdv.numberOfLines = 2;
     _labelAdv.lineBreakMode = NSLineBreakByCharWrapping;
     [_viewTop addSubview:_labelAdv];
@@ -417,8 +456,22 @@
             self->_string_storeID = response[@"result"][@"store_info"][@"store_id"];
             [self->_labelStoreGoodsNumber setText:[NSString stringWithFormat:@"在售商品%@件",response[@"result"][@"store_info"][@"goods_count"]]];
             
+            if ([NSArray arrayWithArray:response[@"result"][@"goods_info"][@"goods_mgdiscount_arr"]].count) {
+                NSArray *arr = response[@"result"][@"goods_info"][@"goods_mgdiscount_arr"];
+                [self->_viewVip setHidden:NO];
+                for (NSInteger i = 0;i<4;i++) {
+                    [self->_labelVipIntro[i] setText:arr[i][@"level_name"]];
+                    [self->_labelVip[i] setText:[NSString stringWithFormat:@"%@折",arr[i][@"level_discount"]]];
+                }
+            }else{
+                [self->_viewVip setHidden:YES];
+            }
+            
+            
             NSArray *arrayGoods = response[@"result"][@"goods_commend_list"];
+            
             [self->_scrollViewGoods setContentSize:CGSizeMake((20+220 *arrayGoods.count)*GPCommonLayoutScaleSizeWidthIndex, 0)];
+            
             for (NSInteger i = 0; i< arrayGoods.count; i++) {
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 [btn setFrame:RectWithScale(CGRectMake(10 + 220*i, 10, 220, 280), GPCommonLayoutScaleSizeWidthIndex)];
@@ -432,14 +485,8 @@
                 [label setFrame:RectWithScale(CGRectMake(10, 220, 200, 40), GPCommonLayoutScaleSizeWidthIndex)];
                 [btn addSubview:label];
                 
-//                [btn sd_setImageWithURL:URL(arrayGoods[i][@"goods_image_url"]) forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-//                    [btn setTitle:arrayGoods[i][@"goods_name"] forState:UIControlStateNormal];
-//                    [btn layoutButtonWithEdgeInsetsStyle:HPButtonEdgeInsetsStyleTop imageTitleSpace:5];
-//                }];
-                
                 [btn addTarget:self tag:100+i action:@selector(buttonClick:)];
                 [self->_scrollViewGoods addSubview:btn];
-                
             }
         }
         else

@@ -100,7 +100,7 @@
     self.labelCount.text = [NSString stringWithFormat:@"数量:%@", goodsModel.goods_num];
     [self.imageViewLeft sd_setImageWithURL:URL(goodsModel.goods_image_url) placeholderImage:defaultImage];
     self.labelTitle.text = goodsModel.goods_name;
-    self.labelPrice.text = [NSString stringWithFormat:@"%@元", goodsModel.goods_price];
+    self.labelPrice.text = [NSString stringWithFormat:@"%.2f元", [goodsModel.goods_price floatValue]];
 //    self.labelGoodsType.text = [NSString stringWithFormat:@"%@", goodsModel.goods_advword];
 }
 

@@ -177,14 +177,13 @@
 //    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
 }
 
-//下拉刷新
 - (void)EditCartWithId:(NSString *)cart_id AndQuantity:(NSString *)quantity
 {
     [HPNetManager POSTWithUrlString:Hostmembercartcart_edit_quantity isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",quantity,@"quantity",cart_id,@"cart_id", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {
-            
+            [self headerRereshing];
         }
         else
         {
@@ -408,7 +407,7 @@
             NSMutableString *stringCart_id = [NSMutableString stringWithFormat:@""];
             for (GoodsModel *goods in self.selectArray) {
                 [stringCart_id appendFormat:@"%@", [NSString stringWithFormat:@"%@|%@,",goods.cart_id,goods.goods_num]];
-                [self EditCartWithId:goods.cart_id AndQuantity:goods.goods_num];
+//                [self EditCartWithId:goods.cart_id AndQuantity:goods.goods_num];
             }
             [stringCart_id deleteCharactersInRange:NSMakeRange(stringCart_id.length - 1, 1)];
             
@@ -446,9 +445,9 @@
     cell.AddBlock = ^(UILabel *countLabel) {
         //GPDebugLog(@"%@", countLabel.text);
         goodsModel.goods_num = countLabel.text;
+        [self EditCartWithId:goodsModel.cart_id AndQuantity:goodsModel.goods_num];
         [storeModel.goodsArray replaceObjectAtIndex:indexPath.row withObject:goodsModel];
         if ([self.selectArray containsObject:goodsModel]) {
-            
             [self.selectArray removeObject:goodsModel];
             [self.selectArray addObject:goodsModel];
             [self countPrice];
@@ -458,6 +457,7 @@
     cell.CutBlock = ^(UILabel *countLabel) {
         //GPDebugLog(@"%@", countLabel.text);
         goodsModel.goods_num = countLabel.text;
+        [self EditCartWithId:goodsModel.cart_id AndQuantity:goodsModel.goods_num];
         [storeModel.goodsArray replaceObjectAtIndex:indexPath.row withObject:goodsModel];
         if ([self.selectArray containsObject:goodsModel]) {
             [self.selectArray removeObject:goodsModel];

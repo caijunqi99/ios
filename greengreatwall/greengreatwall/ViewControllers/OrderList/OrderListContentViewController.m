@@ -13,7 +13,11 @@
 #import "ConfirmOrderToPayViewController.h"
 
 #import "OrderDetailViewController.h"
-@interface OrderListContentViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+#import "GroupShadowTableView.h"
+#import "OrderListSectionTableViewCell.h"
+
+@interface OrderListContentViewController ()<UITableViewDelegate,UITableViewDataSource>//,GroupShadowTableViewDelegate,GroupShadowTableViewDataSource
 {
     UITableView         *_tableView;
     
@@ -21,7 +25,10 @@
     
     NSString            *_strParameter;
 }
+//@property (strong, nonatomic)  GroupShadowTableView *tableView;
+@property (nonatomic,weak) OrderListContentTableViewCell *selectedCell;
 
+@property (nonatomic,strong) NSIndexPath *selectedIndexPath;
 @end
 static NSString * const ReuseIdentify = @"ReuseIdentify";
 
@@ -31,7 +38,6 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configInterface];
-    //        [self footerRereshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,7 +54,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         _strParameter = @"1";
         HPNOTIF_ADD(@"orderPaySuccess", headerRereshing);
         HPNOTIF_ADD(@"orderPayCancel", headerRereshing);
-
+        
     }
     return self;
 }
@@ -61,6 +67,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+//    [self headerRereshing];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -78,7 +85,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 - (void)configInterface
 {
-    viewSetBackgroundColor(kColorBasic);
+    viewSetBackgroundColor([UIColor groupTableViewBackgroundColor]);
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(50*GPCommonLayoutScaleSizeWidthIndex, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex , GPScreenHeight - kNavBarAndStatusBarHeight - 30) style:(UITableViewStyleGrouped)];//UITableViewStyleGrouped
     _tableView.dataSource = self;
@@ -87,7 +94,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:_tableView];
-    [_tableView registerClass:[OrderListContentTableViewCell class] forCellReuseIdentifier:@"OrderListContentTableViewCell"];
+    [_tableView registerClass:[OrderListSectionTableViewCell class] forCellReuseIdentifier:@"OrderListSectionTableViewCell"];
     
     [self setupRefreshWithScrollView:_tableView];
     
@@ -236,10 +243,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)setOrderState_type:(NSString *)orderState_type
 {
-    if (_orderState_type != orderState_type) {
-        _orderState_type = orderState_type;
-        [self headerRereshing];
-    }
+    _orderState_type = orderState_type;
+    [self headerRereshing];
 }
 
 -(void)buttonClickToPay:(UIButton*)btn
@@ -317,35 +322,106 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     return _arrayDataSource.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *arrayGoods = _arrayDataSource[section][@"order_list"][0][@"goods_list"];
-    return arrayGoods.count;
+    return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    OrderListContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderListContentTableViewCell"];
+    OrderListSectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%@%@",@"OrderListSectionTableViewCell",_orderState_type]];
+    if (cell == nil) {
+        cell = [[OrderListSectionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"%@%@",@"OrderListSectionTableViewCell",_orderState_type]];
+    }
+    cell.dic = _arrayDataSource[indexPath.section];
 
-    NSArray *arrayGoods = _arrayDataSource[indexPath.section][@"order_list"][0][@"goods_list"];
-    NSDictionary * dic = arrayGoods[indexPath.row];
-    GoodsModel *model = [[GoodsModel alloc] init];
-    [model setValuesForKeysWithDictionary:dic];
-    cell.goodsModel = model;
+    HPWeak;
+    [cell setDidSelectRowAtIndexPath:^(OrderListContentTableViewCell *SectionTableViewCell, NSIndexPath *indexPath1) {
+        NSInteger section = indexPath.section;
+        NSInteger row = SectionTableViewCell.tag - 200;
+        
+        GPDebugLog(@"indexPath.sec:%ld    ,indexPath.row:%ld",(long)section,(long)row);
+        
+        OrderDetailViewController *vc = [[OrderDetailViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.string_order_id = self->_arrayDataSource[section][@"order_list"][row][@"order_id"];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+    }];
+    
+    cell.btnClick = ^(UIButton * btn) {
+        NSString *stringorder_id = [NSString stringWithFormat:@"%d",(btn.tag -100)];
+        
+        if ([btn.titleLabel.text isEqualToString:@"取消订单"]) {
+            [HPAlertTools showAlertWith:self title:@"提示信息" message:@"确认取消此订单?" callbackBlock:^(NSInteger btnIndex) {
+                if (btnIndex == 1) {
+                    [self dealWithOrderByType:@"order_cancel" andOrderID:stringorder_id];
+                }else if (btnIndex == 0) {
+                    
+                }
+            } cancelButtonTitle:@"容我三思" destructiveButtonTitle:@"我意已决" otherButtonTitles:nil];
+        }else if ([btn.titleLabel.text isEqualToString:@"确认收货"]){
+            [HPAlertTools showAlertWith:self title:@"提示信息" message:@"确认收货?" callbackBlock:^(NSInteger btnIndex) {
+                if (btnIndex == 1) {
+                    [self dealWithOrderByType:@"order_receive" andOrderID:stringorder_id];
+                }else if (btnIndex == 0) {
+                    
+                }
+            } cancelButtonTitle:@"容我三思" destructiveButtonTitle:@"我意已决" otherButtonTitles:nil];
+        }else if ([btn.titleLabel.text isEqualToString:@"删除订单"]){
+            [HPAlertTools showAlertWith:self title:@"提示信息" message:@"确认删除此订单?" callbackBlock:^(NSInteger btnIndex) {
+                if (btnIndex == 1) {
+                    [self dealWithOrderByType:@"order_delete" andOrderID:stringorder_id];
+                }else if (btnIndex == 0) {
+                    
+                }
+            } cancelButtonTitle:@"容我三思" destructiveButtonTitle:@"我意已决" otherButtonTitles:nil];
+        }
+    };
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 260*GPCommonLayoutScaleSizeWidthIndex;
+    //0:已取消10:未付款;20:已付款;30:已发货;40:已收货;
+    NSDictionary *dicorder_state = [NSDictionary dictionaryWithObjectsAndKeys:@"已取消",@"0",@"未付款",@"10",@"已付款",@"20",@"已发货",@"30",@"已收货",@"40", nil];
+    
+    CGFloat totalHeight = 0;
+    NSDictionary *dic = _arrayDataSource[indexPath.section];
+    
+    
+    
+    for (NSDictionary *dicOrderList in dic[@"order_list"]) {
+        totalHeight += 100*GPCommonLayoutScaleSizeWidthIndex;
+        
+        totalHeight += 260*GPCommonLayoutScaleSizeWidthIndex*[NSArray arrayWithArray:dicOrderList[@"goods_list"]].count;
+        
+        NSString *stringorder_state = [NSString stringWithFormat:@"%@",dicOrderList[@"order_state"]];
+        
+        NSString *state = [NSString stringWithFormat:@"%@",dicorder_state[stringorder_state]];
+        if ([state isEqualToString:@"未付款"]||[state isEqualToString:@"已发货"]||[state isEqualToString:@"已收货"]||[state isEqualToString:@"已取消"]) {
+            totalHeight += 70*GPCommonLayoutScaleSizeWidthIndex;
+            continue;
+        }
+    }
+    return totalHeight;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    OrderListSectionTableViewCell *ptCell = (OrderListSectionTableViewCell *)cell;
+    [ptCell.tableView reloadData];
+    [ptCell.tableView layoutIfNeeded];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 100*GPCommonLayoutScaleSizeWidthIndex;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-
-//    NSString *state = _arrayDataSource[section][@"order_list"][0][@"state_desc"];
-//    if ([state isEqualToString:@"待付款"]) {
-//        return 170*GPCommonLayoutScaleSizeWidthIndex;
-//    }
-    return 170*GPCommonLayoutScaleSizeWidthIndex;
+    
+    //0:已取消10:未付款;20:已付款;30:已发货;40:已收货;
+    NSDictionary *dicorder_state = [NSDictionary dictionaryWithObjectsAndKeys:@"已取消",@"0",@"未付款",@"10",@"已付款",@"20",@"已发货",@"30",@"已收货",@"40", nil];
+    NSString *stringorder_state = [NSString stringWithFormat:@"%@",_arrayDataSource[section][@"order_state"]];
+    NSString *state = [NSString stringWithFormat:@"%@",dicorder_state[stringorder_state]];
+    if ([state isEqualToString:@"未付款"]) {
+        return 170*GPCommonLayoutScaleSizeWidthIndex;
+    }
+    return 100*GPCommonLayoutScaleSizeWidthIndex;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
@@ -353,46 +429,37 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     headerView.userInteractionEnabled = YES;
     headerView.backgroundColor = [UIColor whiteColor];
     
-    NSString *store_name = _arrayDataSource[section][@"order_list"][0][@"store_name"];
-    NSString *state = _arrayDataSource[section][@"order_list"][0][@"state_desc"];
-    [headerView setStore_name:store_name andState:state];
+    NSString *state = _arrayDataSource[section][@"state_desc"];
+    [headerView setState:state];
     return headerView;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *viewFooter = [[UIView alloc]init];
-    [viewFooter setFrame:CGRectMake(0, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 140*GPCommonLayoutScaleSizeWidthIndex)];
-    UIView *view = [[UIView alloc]init];
-    view.backgroundColor = [UIColor whiteColor];
-    [viewFooter addSubview:view];
-    [view setFrame:CGRectMake(0, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 140*GPCommonLayoutScaleSizeWidthIndex)];
-    [view rounded:10 rectCorners:(UIRectCornerBottomLeft|UIRectCornerBottomRight)];
-    NSString *stringAmount = _arrayDataSource[section][@"order_amount"];
-    NSString *stringCount = _arrayDataSource[section][@"order_list"][0][@"goods_count"];
-    UILabel *labelAmount = [[UILabel alloc]init];
-    [labelAmount setText:[NSString stringWithFormat:@"共%@件商品,订单总价:%@",stringCount,stringAmount]];
-    [labelAmount setFrame:RectWithScale(CGRectMake(200, 0, 750, 60), GPCommonLayoutScaleSizeWidthIndex)];
-    [labelAmount setTextAlignment:NSTextAlignmentRight];
-    [viewFooter addSubview:labelAmount];
-    [labelAmount setFont:FontMediumWithSize(12)];
     
-    NSString *state = _arrayDataSource[section][@"order_list"][0][@"state_desc"];
     
-    if ([state isEqualToString:@"待付款"]) {
-        UIButton *_buttonCancel = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonCancel setFrame:RectWithScale(CGRectMake(500, 70, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
-        [_buttonCancel setTitle:@"取消订单" forState:UIControlStateNormal];
-        [_buttonCancel.titleLabel setFont:FontRegularWithSize(12)];
-        [_buttonCancel setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [_buttonCancel setTag:section+100];
-        _buttonCancel.layer.masksToBounds = YES;
-        _buttonCancel.clipsToBounds = YES;
-        [_buttonCancel.layer setCornerRadius:15.0*GPCommonLayoutScaleSizeWidthIndex];
-        [_buttonCancel.layer setBorderColor:[UIColor redColor].CGColor];
-        [_buttonCancel.layer setBorderWidth:1];
-        [_buttonCancel addTarget:self action:@selector(buttonClickCancel:) forControlEvents:UIControlEventTouchUpInside];
-        [viewFooter addSubview:_buttonCancel];
+    //0:已取消10:未付款;20:已付款;30:已发货;40:已收货;
+    NSDictionary *dicorder_state = [NSDictionary dictionaryWithObjectsAndKeys:@"已取消",@"0",@"未付款",@"10",@"已付款",@"20",@"已发货",@"30",@"已收货",@"40", nil];
+    NSString *stringorder_state = [NSString stringWithFormat:@"%@",_arrayDataSource[section][@"order_state"]];
+    NSString *state = [NSString stringWithFormat:@"%@",dicorder_state[stringorder_state]];
+    
+    if ([state isEqualToString:@"未付款"]) {
+        [viewFooter setFrame:CGRectMake(0, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 170*GPCommonLayoutScaleSizeWidthIndex)];
+        UIView *view = [[UIView alloc]init];
+        view.backgroundColor = [UIColor whiteColor];
+        [viewFooter addSubview:view];
+        [view setFrame:CGRectMake(0, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 140*GPCommonLayoutScaleSizeWidthIndex)];
+        [view rounded:10 rectCorners:(UIRectCornerBottomLeft|UIRectCornerBottomRight)];
+        NSString *stringAmount = _arrayDataSource[section][@"order_amount"];
+        UILabel *labelAmount = [[UILabel alloc]init];
+        [labelAmount setText:[NSString stringWithFormat:@"订单总价:%@",stringAmount]];
+        [labelAmount setFrame:RectWithScale(CGRectMake(200, 0, 750, 60), GPCommonLayoutScaleSizeWidthIndex)];
+        [labelAmount setTextAlignment:NSTextAlignmentRight];
+        [viewFooter addSubview:labelAmount];
+        [labelAmount setFont:FontMediumWithSize(12)];
+        
+        
         
         UIButton *_buttonToPay = [UIButton buttonWithType:UIButtonTypeCustom];
         [_buttonToPay setFrame:RectWithScale(CGRectMake(750, 70, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
@@ -407,49 +474,30 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         [_buttonToPay.layer setBorderWidth:1];
         [_buttonToPay addTarget:self action:@selector(buttonClickToPay:) forControlEvents:UIControlEventTouchUpInside];
         [viewFooter addSubview:_buttonToPay];
+    }else{
+        [viewFooter setFrame:CGRectMake(0, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 100*GPCommonLayoutScaleSizeWidthIndex)];
+        UIView *view = [[UIView alloc]init];
+        view.backgroundColor = [UIColor whiteColor];
+        [viewFooter addSubview:view];
+        [view setFrame:CGRectMake(0, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 70*GPCommonLayoutScaleSizeWidthIndex)];
+        [view rounded:10 rectCorners:(UIRectCornerBottomLeft|UIRectCornerBottomRight)];
+        NSString *stringAmount = _arrayDataSource[section][@"order_amount"];
+        UILabel *labelAmount = [[UILabel alloc]init];
+        [labelAmount setText:[NSString stringWithFormat:@"订单总价:%@",stringAmount]];
+        [labelAmount setFrame:RectWithScale(CGRectMake(200, 0, 750, 60), GPCommonLayoutScaleSizeWidthIndex)];
+        [labelAmount setTextAlignment:NSTextAlignmentRight];
+        [viewFooter addSubview:labelAmount];
+        [labelAmount setFont:FontMediumWithSize(12)];
     }
-    else if([state isEqualToString:@"待收货"])
-    {
-        UIButton *_buttonConfirmReceive = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonConfirmReceive setFrame:RectWithScale(CGRectMake(750, 70, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
-        [_buttonConfirmReceive setTitle:@"确认收货" forState:UIControlStateNormal];
-        [_buttonConfirmReceive.titleLabel setFont:FontRegularWithSize(12)];
-        [_buttonConfirmReceive setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [_buttonConfirmReceive setTag:section+100];
-        _buttonConfirmReceive.layer.masksToBounds = YES;
-        _buttonConfirmReceive.clipsToBounds = YES;
-        [_buttonConfirmReceive.layer setCornerRadius:15.0*GPCommonLayoutScaleSizeWidthIndex];
-        [_buttonConfirmReceive.layer setBorderColor:[UIColor redColor].CGColor];
-        [_buttonConfirmReceive.layer setBorderWidth:1];
-        [_buttonConfirmReceive addTarget:self action:@selector(buttonClickConfirmReceive:) forControlEvents:UIControlEventTouchUpInside];
-        [viewFooter addSubview:_buttonConfirmReceive];
-    }
-    else if([state isEqualToString:@"交易完成"]||[state isEqualToString:@"已取消"])
-    {
-        UIButton *_buttonDelete = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonDelete setFrame:RectWithScale(CGRectMake(750, 70, 200, 60), GPCommonLayoutScaleSizeWidthIndex)];
-        [_buttonDelete setTitle:@"删除订单" forState:UIControlStateNormal];
-        [_buttonDelete.titleLabel setFont:FontRegularWithSize(12)];
-        [_buttonDelete setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [_buttonDelete setTag:section+100];
-        _buttonDelete.layer.masksToBounds = YES;
-        _buttonDelete.clipsToBounds = YES;
-        [_buttonDelete.layer setCornerRadius:15.0*GPCommonLayoutScaleSizeWidthIndex];
-        [_buttonDelete.layer setBorderColor:[UIColor redColor].CGColor];
-        [_buttonDelete.layer setBorderWidth:1];
-        [_buttonDelete addTarget:self action:@selector(buttonClickDelete:) forControlEvents:UIControlEventTouchUpInside];
-        [viewFooter addSubview:_buttonDelete];
-    }
-    
     return viewFooter;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderDetailViewController *vc = [[OrderDetailViewController alloc]init];
-    vc.hidesBottomBarWhenPushed = YES;
-    vc.string_order_id = _arrayDataSource[indexPath.section][@"order_id"];
-    [self.navigationController pushViewController:vc animated:YES];
+//    OrderDetailViewController *vc = [[OrderDetailViewController alloc]init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    vc.string_order_id = _arrayDataSource[indexPath.section][@"order_list"][indexPath.row][@"order_id"];
+//    [getCurrentViewController().navigationController pushViewController:vc animated:YES];
 }
 
 @end

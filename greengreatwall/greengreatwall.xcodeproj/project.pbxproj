@@ -210,6 +210,8 @@
 		647ED0AC23B8F0F8003200FA /* RechargeSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 647ED0AB23B8F0F8003200FA /* RechargeSuccessViewController.m */; };
 		647ED0B123B8FEBE003200FA /* TeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 647ED0B023B8FEBE003200FA /* TeamViewController.m */; };
 		647ED0B423B9A783003200FA /* TeamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 647ED0B323B9A783003200FA /* TeamTableViewCell.m */; };
+		6481D55023C7063400BEDB22 /* OrderListSectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6481D54F23C7063400BEDB22 /* OrderListSectionTableViewCell.m */; };
+		6481D55423C70A2B00BEDB22 /* OrderContentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6481D55323C70A2B00BEDB22 /* OrderContentHeaderView.m */; };
 		6486B56623A8E01200D7A40A /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6486B56523A8E01200D7A40A /* area.plist */; };
 		6486B56923A8EC2A00D7A40A /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6486B56823A8EC2A00D7A40A /* AreaModel.m */; };
 		6486B56C23ACAF0400D7A40A /* ConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6486B56B23ACAF0400D7A40A /* ConfirmOrderViewController.m */; };
@@ -765,6 +767,10 @@
 		647ED0B023B8FEBE003200FA /* TeamViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamViewController.m; sourceTree = "<group>"; };
 		647ED0B223B9A783003200FA /* TeamTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamTableViewCell.h; sourceTree = "<group>"; };
 		647ED0B323B9A783003200FA /* TeamTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamTableViewCell.m; sourceTree = "<group>"; };
+		6481D54E23C7063400BEDB22 /* OrderListSectionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderListSectionTableViewCell.h; sourceTree = "<group>"; };
+		6481D54F23C7063400BEDB22 /* OrderListSectionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderListSectionTableViewCell.m; sourceTree = "<group>"; };
+		6481D55223C70A2B00BEDB22 /* OrderContentHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderContentHeaderView.h; sourceTree = "<group>"; };
+		6481D55323C70A2B00BEDB22 /* OrderContentHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderContentHeaderView.m; sourceTree = "<group>"; };
 		6486B56523A8E01200D7A40A /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		6486B56723A8EC2A00D7A40A /* AreaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
 		6486B56823A8EC2A00D7A40A /* AreaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AreaModel.m; sourceTree = "<group>"; };
@@ -1228,7 +1234,6 @@
 			children = (
 				643DA02D23A7DF3E00BA26B8 /* UILabelAlignToBottomLeft */,
 				64AE30492395149100C0AB8F /* UILabelTextAlignToTopLeft */,
-				649821C9238E15400055746D /* TableViewWithCornerRadiusShadow */,
 				649821B72387B27E0055746D /* KLTAnimateNav */,
 				641E487F238269A100F07A09 /* BaseViewController */,
 				641E4A5B23826DFA00F07A09 /* HCTextView */,
@@ -2129,6 +2134,7 @@
 		647ED09123B7A936003200FA /* OrderList */ = {
 			isa = PBXGroup;
 			children = (
+				649821C9238E15400055746D /* TableViewWithCornerRadiusShadow */,
 				647ED09E23B7C159003200FA /* View */,
 				647ED09223B7A94E003200FA /* OrderListViewController.h */,
 				647ED09323B7A94E003200FA /* OrderListViewController.m */,
@@ -2143,10 +2149,11 @@
 		647ED09E23B7C159003200FA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				647ED09B23B7AB09003200FA /* OrderListContentTableViewCell.h */,
-				647ED09C23B7AB09003200FA /* OrderListContentTableViewCell.m */,
+				6481D55123C709E800BEDB22 /* Content */,
 				647ED09F23B849BC003200FA /* OrderListHeaderView.h */,
 				647ED0A023B849BC003200FA /* OrderListHeaderView.m */,
+				6481D54E23C7063400BEDB22 /* OrderListSectionTableViewCell.h */,
+				6481D54F23C7063400BEDB22 /* OrderListSectionTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2181,6 +2188,17 @@
 				647ED0B323B9A783003200FA /* TeamTableViewCell.m */,
 			);
 			path = Team;
+			sourceTree = "<group>";
+		};
+		6481D55123C709E800BEDB22 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				647ED09B23B7AB09003200FA /* OrderListContentTableViewCell.h */,
+				647ED09C23B7AB09003200FA /* OrderListContentTableViewCell.m */,
+				6481D55223C70A2B00BEDB22 /* OrderContentHeaderView.h */,
+				6481D55323C70A2B00BEDB22 /* OrderContentHeaderView.m */,
+			);
+			path = Content;
 			sourceTree = "<group>";
 		};
 		6486B56D23ACC58B00D7A40A /* View */ = {
@@ -2872,6 +2890,7 @@
 				64216A9123C06F6C005489F1 /* OrderDetailTableViewCell.m in Sources */,
 				647ED08023B31296003200FA /* SetLoginPasswordViewController.m in Sources */,
 				645C85C023A7737600E31AAE /* DeliveryAddressModel.m in Sources */,
+				6481D55023C7063400BEDB22 /* OrderListSectionTableViewCell.m in Sources */,
 				641E49E1238269A200F07A09 /* SDWaitingView.m in Sources */,
 				641E4B6323862B3A00F07A09 /* StoreCategoryContentViewController.m in Sources */,
 				641E49D5238269A200F07A09 /* XDAutoresizeLabelFlowCell.m in Sources */,
@@ -2907,6 +2926,7 @@
 				641E4A3C238269A200F07A09 /* UITableView+HPTableView.m in Sources */,
 				649821C52387E6A00055746D /* ClassificationContentCollectionViewCell.m in Sources */,
 				641E4A41238269A200F07A09 /* NSObject+HPPerformBlock.m in Sources */,
+				6481D55423C70A2B00BEDB22 /* OrderContentHeaderView.m in Sources */,
 				64AE30622396484900C0AB8F /* ShoppingCartModel.m in Sources */,
 				641E4AA62382731C00F07A09 /* ClassificationContentViewController.m in Sources */,
 				64AE30482395090E00C0AB8F /* StoreGoodsIndexCollectionViewCell.m in Sources */,
@@ -3178,7 +3198,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/greengreatwall/Common/AliPay",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tongantianxia.greengreatwall;
 				PRODUCT_NAME = "绿色长城";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3227,7 +3247,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/greengreatwall/Common/AliPay",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tongantianxia.greengreatwall;
 				PRODUCT_NAME = "绿色长城";
 				PROVISIONING_PROFILE_SPECIFIER = "";

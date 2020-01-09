@@ -67,7 +67,7 @@
         
         
         
-        cellSetBackgroundColor(kColorCellBackground);
+        cellSetBackgroundColor([UIColor whiteColor]);
         
         [self.contentView addSubview:_imageViewLeft];
         [self.contentView addSubview:_labelTitle];

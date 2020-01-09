@@ -12,10 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OrderListHeaderView : UITableViewHeaderFooterView
 @property (nonatomic, strong) UIView        *viewRoundBack;
-@property (nonatomic, strong) UILabel       *labelStoreName;
 @property (nonatomic, strong) UILabel       *labelState;
-@property (nonatomic, strong) UIImageView   *imageViewLeft;
--(void)setStore_name:(NSString *)store_name andState:(NSString *)state;
+-(void)setState:(NSString *)state;
 
 @end
 

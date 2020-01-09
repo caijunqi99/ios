@@ -18,6 +18,8 @@
 
 #import "SearchResultListViewController.h"
 
+#import "ViewController.h"
+
 #define tagMenu  500
 #define tagPromotion  600
 #define tagDiscount  700
@@ -507,8 +509,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)rightClick
 {
-    NoticeViewController *vc = [[NoticeViewController alloc]init];
-    
+//    NoticeViewController *vc = [[NoticeViewController alloc]init];
+    ViewController *vc = [[ViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

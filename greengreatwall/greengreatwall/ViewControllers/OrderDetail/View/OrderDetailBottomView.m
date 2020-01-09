@@ -56,9 +56,9 @@
 -(void)setStyle:(NSString *)style
 {
     if ([style isEqualToString:@"未付款"]) {
-        [_buttonCancel setFrame:RectWithScale(CGRectMake(800 - 250, 40, 200, 100), GPCommonLayoutScaleSizeWidthIndex)];
-        [_buttonToPay setFrame:RectWithScale(CGRectMake(800, 40, 200, 100), GPCommonLayoutScaleSizeWidthIndex)];
-        [_buttonToPay setHidden:NO];
+        [_buttonCancel setFrame:RectWithScale(CGRectMake(800 , 40, 200, 100), GPCommonLayoutScaleSizeWidthIndex)];
+//        [_buttonToPay setFrame:RectWithScale(CGRectMake(800, 40, 200, 100), GPCommonLayoutScaleSizeWidthIndex)];
+        [_buttonToPay setHidden:YES];
         [_buttonCancel setHidden:NO];
         [_buttonDelete setHidden:YES];
         [_buttonConfirm setHidden:YES];

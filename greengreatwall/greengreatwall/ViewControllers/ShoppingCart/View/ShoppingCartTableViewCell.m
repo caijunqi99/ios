@@ -133,7 +133,7 @@
     if (count <= 0) {
         return;
     }
-    self.labelCount.text = [NSString stringWithFormat:@"%ld", count];
+    self.labelCount.text = [NSString stringWithFormat:@"%ld", (long)count];
     if (self.CutBlock) {
         self.CutBlock(self.labelCount);
     }
@@ -143,7 +143,7 @@
 - (void)add:(UIButton *)sender {
     NSInteger count = [self.labelCount.text integerValue];
     count++;
-    self.labelCount.text = [NSString stringWithFormat:@"%ld", count];
+    self.labelCount.text = [NSString stringWithFormat:@"%ld", (long)count];
     if (self.AddBlock) {
         self.AddBlock(self.labelCount);
     }
@@ -174,7 +174,7 @@
     self.labelCount.text = [NSString stringWithFormat:@"%@", goodsModel.goods_num];
     [self.imageViewLeft sd_setImageWithURL:URL(goodsModel.goods_image_url) placeholderImage:defaultImage];
     self.labelTitle.text = goodsModel.goods_name;
-    self.labelPrice.text = [NSString stringWithFormat:@"%@元", goodsModel.goods_price];
+    self.labelPrice.text = [NSString stringWithFormat:@"%.2f元", [goodsModel.goods_price floatValue]];
     self.labelGoodsType.text = [NSString stringWithFormat:@"%@", goodsModel.goods_advword];
 }
 

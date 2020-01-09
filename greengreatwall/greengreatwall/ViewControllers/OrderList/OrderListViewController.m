@@ -78,10 +78,10 @@ static NSString * const ReuseIdentify  = @"ReuseIdentify";
 {
     [self setBackButtonWithTarget:self action:@selector(leftClick)];
     [self settingNavTitle:@"订单列表"];
-    viewSetBackgroundColor(kColorViewBackground);
+    viewSetBackgroundColor([UIColor groupTableViewBackgroundColor]);
     
     _categoryBar = [[CategoryBar alloc] initWithFrame:CGRectMake(0, 0, GPScreenWidth , 20)];
-    _categoryBar.backgroundColor = [UIColor clearColor];
+    _categoryBar.backgroundColor = [UIColor whiteColor];
     _categoryBar.delegate = self;
     _categoryBar.lineColor = [UIColor clearColor];
     _categoryBar.itemTitles = _arrayTitles;

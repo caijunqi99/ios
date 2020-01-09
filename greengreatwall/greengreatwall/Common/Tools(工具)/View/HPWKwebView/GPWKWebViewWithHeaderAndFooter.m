@@ -407,7 +407,7 @@
 }
 
 
-#pragma mark======================WKWebView - alert不弹出（这是WKWebView相对于UIWebView的一个坑）===========================================
+#pragma mark======================WKWebView - alert不弹出（这是WKWebView相对于的一个坑）===========================================
 //WKWebView默认不响应js的alert()事件,如何可以开启alert权限呢?
 //设置wkwebview.delegate = self;
 //实现下面三个方法：

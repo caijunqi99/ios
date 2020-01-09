@@ -1,10 +1,4 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
   - AFNetworking/NSURLSession (3.1.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -12,8 +6,6 @@ PODS:
   - AFNetworking/Reachability (3.1.0)
   - AFNetworking/Security (3.1.0)
   - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
-    - AFNetworking/NSURLSession
   - AlipaySDK-iOS (15.5.9)
   - AliyunOSSiOS (2.10.7)
   - BaiduMapKit (5.0.0)
@@ -42,7 +34,10 @@ PODS:
   - YYModel (1.0.4)
 
 DEPENDENCIES:
-  - AFNetworking (~> 3.1.0)
+  - AFNetworking/NSURLSession (~> 3.1.0)
+  - AFNetworking/Reachability (~> 3.1.0)
+  - AFNetworking/Security (~> 3.1.0)
+  - AFNetworking/Serialization (~> 3.1.0)
   - AlipaySDK-iOS (~> 15.5.9)
   - AliyunOSSiOS (~> 2.10.7)
   - BaiduMapKit (~> 5.0.0)
@@ -107,6 +102,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 0c7a07ab11412b2cbae2490a0e941d7c34bc6aa9
+PODFILE CHECKSUM: 892f7e5fbd48d2196b1f37e25a34ac057ef971ee
 
 COCOAPODS: 1.8.4

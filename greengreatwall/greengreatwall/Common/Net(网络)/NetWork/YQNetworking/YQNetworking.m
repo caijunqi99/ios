@@ -7,8 +7,8 @@
 //
 
 #import "YQNetworking.h"
-#import "AFNetworking.h"
-#import "AFNetworkActivityIndicatorManager.h"
+//#import "AFNetworking.h"
+//#import "AFNetworkActivityIndicatorManager.h"
 #import "YQNetworking+RequestManager.h"
 #import "YQCacheManager.h"
 
@@ -27,7 +27,7 @@ static NSTimeInterval   requestTimeout = 20.f;
 @implementation YQNetworking
 #pragma mark - manager
 + (AFHTTPSessionManager *)manager {
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+//    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     

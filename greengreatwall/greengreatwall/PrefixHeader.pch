@@ -46,6 +46,8 @@
 #import <BaiduMapAPI_Utils/BMKUtilsComponent.h>
 #import <BMKLocationkit/BMKLocationComponent.h>
 
+#import <AFHTTPSessionManager.h>
+
 #pragma mark - 工程内
 
 #import "AppDelegate.h"

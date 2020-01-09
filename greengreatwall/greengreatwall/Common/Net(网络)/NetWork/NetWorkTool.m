@@ -7,8 +7,8 @@
 //
 
 #import "NetWorkTool.h"
-#import "AFNetworking.h"
-
+//#import "AFNetworking.h"
+#import <AFHTTPSessionManager.h>
 @interface NetWorkTool()
 @property (strong, nonatomic) AFHTTPSessionManager *AFManager;
 

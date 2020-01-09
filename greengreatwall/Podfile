@@ -8,7 +8,7 @@ target 'greengreatwall' do
   pod 'WechatOpenSDK', '~> 1.8.6'
   pod 'AliyunOSSiOS', '~> 2.10.7'
   
-  pod 'AFNetworking', '~> 3.1.0'
+  pod 'AFNetworking', '~> 3.1.0',:subspecs => ['Reachability', 'Serialization', 'Security', 'NSURLSession']
   pod 'SDWebImage', '~> 5.3.0'
   pod 'MJRefresh', '~> 3.1.15.3'
   pod 'Masonry', '~> 1.1.0'

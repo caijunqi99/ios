@@ -7,8 +7,9 @@
 //
 
 #import "HYBNetworking.h"
-#import "AFNetworkActivityIndicatorManager.h"
-#import "AFNetworking.h"
+//#import "AFNetworkActivityIndicatorManager.h"
+#import <AFNetworking/AFHTTPSessionManager.h>
+//#import "AFNetworking.h"
 #import "AFHTTPSessionManager.h"
 
 #import <CommonCrypto/CommonDigest.h>
@@ -688,7 +689,7 @@ static inline NSString *cachePath() {
     // 只要不切换baseurl，就一直使用同一个session manager
     if (sg_sharedManager == nil || sg_isBaseURLChanged) {
       // 开启转圈圈
-      [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+//      [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
       
       AFHTTPSessionManager *manager = nil;;
       if ([self baseUrl] != nil) {

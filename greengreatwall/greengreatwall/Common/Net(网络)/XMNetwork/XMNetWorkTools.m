@@ -7,7 +7,7 @@
 //
 
 #import "XMNetWorkTools.h"
-#import <AFNetworking.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 #import "UIView+HPProgressHUD.h"
 #import "NSString+HPCategory.h"
 

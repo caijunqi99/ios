@@ -18,8 +18,8 @@
 /*! 系统相册 */
 #import <Photos/Photos.h>
 
-#import "AFNetworking.h"
-#import "AFNetworkActivityIndicatorManager.h"
+//#import "AFNetworking.h"
+//#import "AFNetworkActivityIndicatorManager.h"
 #import "HPNetManagerCache.h"
 
 static NSMutableArray *tasks;
@@ -64,7 +64,7 @@ static NSMutableArray *tasks;
     /*! 设置请求超时时间，默认：30秒 */
     HPNetManagerShare.timeoutInterval = 30;
     /*! 打开状态栏的等待菊花 */
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+//    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     /*! 设置返回数据类型为 json, 分别设置请求以及相应的序列化器 */
     /*!
      根据服务器的设定不同还可以设置：
@@ -296,7 +296,7 @@ static NSMutableArray *tasks;
         [[weakSelf tasks] removeObject:sessionTask];
         return nil;
     }
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+//    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     if (type == HPHttpRequestTypeGet)
     {
@@ -320,7 +320,7 @@ static NSMutableArray *tasks;
                             
                             if (btnIndex == 1) {
                                 [currentVC.navigationController popToRootViewControllerAnimated:NO];
-                                
+                                currentVC.tabBarController.tabBar.hidden = NO;
                                 [HPUserDefault removeUserDefaultObjectFromKey:@"token"];
                                 
                                 //设置indextabbar为主窗口的根视图控制器
@@ -334,6 +334,7 @@ static NSMutableArray *tasks;
                                 
                                 IndexTabBarViewController *vc = [IndexTabBarViewController shareInstance];
                                 [vc setSelectedIndex:0];
+                                vc.tabBar.hidden = NO;
                                 //                                GPKeyWindow.rootViewController = vc;
                                 //                                [GPKeyWindow makeKeyAndVisible];
                             }
@@ -386,7 +387,7 @@ static NSMutableArray *tasks;
                             
                             if (btnIndex == 1) {
                                 [currentVC.navigationController popToRootViewControllerAnimated:NO];
-                                
+                                currentVC.tabBarController.tabBar.hidden = NO;
                                 [HPUserDefault removeUserDefaultObjectFromKey:@"token"];
                                 
                                 //设置indextabbar为主窗口的根视图控制器
@@ -400,6 +401,7 @@ static NSMutableArray *tasks;
                                 
                                 IndexTabBarViewController *vc = [IndexTabBarViewController shareInstance];
                                 [vc setSelectedIndex:0];
+                                vc.tabBar.hidden = NO;
                                 //                                GPKeyWindow.rootViewController = vc;
                                 //                                [GPKeyWindow makeKeyAndVisible];
                             }
@@ -843,7 +845,7 @@ static NSMutableArray *tasks;
     /*! 1.获得网络监控的管理者 */
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
     /*! 当使用AF发送网络请求时,只要有网络操作,那么在状态栏(电池条)wifi符号旁边显示  菊花提示 */
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+//    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     /*! 2.设置网络状态改变后的处理 */
     [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         /*! 当网络状态改变了, 就会调用这个block */

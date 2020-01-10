@@ -341,8 +341,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     footer.stateLabel.textColor = kColorFontRegular;
     
     //尾部刷新控件
-    //    scrollView.mj_footer = footer;
-    //    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
+    scrollView.mj_footer = footer;
+    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
 }
 
 
@@ -355,7 +355,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_arrayDataSource removeAllObjects];
     [_tableViewTemp reloadData];
     
-    [HPNetManager POSTWithUrlString:Hostmemberpointspointslog isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_strParameter,@"page",@"5",@"pagesize", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostmemberpointspointslog isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_strParameter,@"page",@"10",@"pagesize", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         
         if ([response[@"code"] integerValue] == 200) {
@@ -399,7 +399,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //上拉加载更多
 - (void)footerRereshing
 {
-    [HPNetManager POSTWithUrlString:Hostmemberpointspointslog isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_strParameter,@"page",@"5",@"pagesize", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostmemberpointspointslog isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_strParameter,@"page",@"10",@"pagesize", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"][@"log_list"]] count]) {

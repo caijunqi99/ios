@@ -81,7 +81,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     
     _viewTemp = [UIView initViewBackColor:[UIColor whiteColor]];
-//    [self.view addSubview:_viewTemp];
+    //    [self.view addSubview:_viewTemp];
     [_viewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, 300*GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelPhoneIntro = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@"收货人电话:"];
@@ -119,7 +119,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     _tableViewTemp.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_tableViewTemp];
-//    _tableViewTemp.tableHeaderView = _viewTemp;
+    //    _tableViewTemp.tableHeaderView = _viewTemp;
     
     [self setupRefreshWithScrollView:_tableViewTemp];
 }
@@ -145,9 +145,9 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 {
     [HPNetManager POSTWithUrlString:HostMemberorderget_express isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_string_express_code,@"express_code",_string_shipping_code,@"shipping_code",_string_phone,@"phone", nil]  successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
-
+        
         if ([response[@"code"] integerValue] == 200) {
-//            self->_arrayDataSource = [NSMutableArray arrayWithArray:response[@"result"][@"goods_image"]];
+            //            self->_arrayDataSource = [NSMutableArray arrayWithArray:response[@"result"][@"goods_image"]];
             
         }
         else
@@ -211,8 +211,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     footer.stateLabel.textColor = kColorFontRegular;
     
     //尾部刷新控件
-//    scrollView.mj_footer = footer;
-//    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
+    scrollView.mj_footer = footer;
+    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
 }
 
 
@@ -224,7 +224,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_tableViewTemp reloadData];
     
     _strParameter = @"1";
-    [HPNetManager POSTWithUrlString:Hostmemberfundpdcashlist isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"5",@"pagesize",_strParameter,@"page", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostmemberfundpdcashlist isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"10",@"pagesize",_strParameter,@"page", nil] successBlock:^(id response) {
         //        GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"][@"list"]] count]) {
@@ -253,7 +253,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //上拉加载更多
 - (void)footerRereshing
 {
-    [HPNetManager POSTWithUrlString:Hostmemberfundpdcashlist isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"5",@"pagesize",_strParameter,@"page", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostmemberfundpdcashlist isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"10",@"pagesize",_strParameter,@"page", nil] successBlock:^(id response) {
         //        GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"][@"list"]] count]) {
@@ -298,7 +298,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     // 获得索引
-//    NSUInteger index = scrollView.contentOffset.x / scrollView.width;
+    //    NSUInteger index = scrollView.contentOffset.x / scrollView.width;
     //GPDebugLog(@"ScrollIndex:%ld",(long)index);
 }
 
@@ -336,10 +336,10 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    GoodsViewController *vc = [[GoodsViewController alloc]init];
-//    vc.hidesBottomBarWhenPushed = YES;
-//    vc.goods_id = _arrayDataSource[indexPath.row][@"goods_id"];
-//    [self.navigationController pushViewController:vc animated:YES];
+    //    GoodsViewController *vc = [[GoodsViewController alloc]init];
+    //    vc.hidesBottomBarWhenPushed = YES;
+    //    vc.goods_id = _arrayDataSource[indexPath.row][@"goods_id"];
+    //    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

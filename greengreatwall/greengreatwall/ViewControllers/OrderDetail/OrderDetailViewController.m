@@ -609,7 +609,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 100*GPCommonLayoutScaleSizeWidthIndex;
+    return 0*GPCommonLayoutScaleSizeWidthIndex;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
@@ -626,11 +626,11 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *viewFooter = [[UIView alloc]init];
-    [viewFooter setFrame:CGRectMake(0, 0, GPScreenWidth, 80*GPCommonLayoutScaleSizeWidthIndex)];
+    [viewFooter setFrame:CGRectMake(0, 0, GPScreenWidth, 0*GPCommonLayoutScaleSizeWidthIndex)];
     UIView *view = [[UIView alloc]init];
     view.backgroundColor = [UIColor whiteColor];
     [viewFooter addSubview:view];
-    [view setFrame:CGRectMake(0, 0, GPScreenWidth, 80*GPCommonLayoutScaleSizeWidthIndex)];
+    [view setFrame:CGRectMake(0, 0, GPScreenWidth, 0*GPCommonLayoutScaleSizeWidthIndex)];
     //    [view rounded:10 rectCorners:(UIRectCornerBottomLeft|UIRectCornerBottomRight)];
     
     return viewFooter;

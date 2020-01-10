@@ -509,8 +509,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 
 -(void)rightClick
 {
-//    NoticeViewController *vc = [[NoticeViewController alloc]init];
-    ViewController *vc = [[ViewController alloc]init];
+    NoticeViewController *vc = [[NoticeViewController alloc]init];
+//    ViewController *vc = [[ViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

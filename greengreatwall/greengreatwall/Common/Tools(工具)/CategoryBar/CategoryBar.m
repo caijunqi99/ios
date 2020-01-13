@@ -153,7 +153,7 @@
         button.titleLabel.font = _font;
         [button.titleLabel setSize:CGSizeMake(_selfFrame.size.width,[Heights[index] floatValue])];
         button.titleLabel.numberOfLines = 0;
-        button.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        button.titleLabel.lineBreakMode = LineBreakModeDefault;
         button.frame = CGRectMake(0, buttonY,_selfFrame.size.width,[Heights[index] floatValue]+ _buttonInset*2);
         
         //字体颜色

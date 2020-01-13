@@ -49,8 +49,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     if (self = [super init]) {
         _arrayDataSource = [[NSMutableArray alloc]initWithCapacity:0];
         _strParameter = @"1";
-        //        _arrayButtonTitle = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"交易码",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"商学院",@"视频",
-        //        _arrayButtonImageName = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"交易码",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"商学院",@"视频",
+        //        _arrayButtonTitle = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"认筹股",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"商学院",@"视频",
+        //        _arrayButtonImageName = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"认筹股",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"商学院",@"视频",
     }
     return self;
 }
@@ -122,7 +122,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     for (NSInteger i = 0; i < arrayLabelText.count; i++) {
         
         _labelTemp[i] = [UILabel initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:arrayLabelText[i]];
-        _labelTemp[i].lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTemp[i].lineBreakMode = LineBreakModeDefault;
         _labelTemp[i].backgroundColor = [UIColor clearColor];
         [_labelTemp[i] setTextColor:[UIColor blackColor]];
         _labelTemp[i].textAlignment = NSTextAlignmentLeft;
@@ -181,6 +181,15 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         if ([response[@"code"] integerValue] == 200) {
             [self updateInterfaceWithDic:response[@"result"]];
         }
+        //实名认证
+        else if([response[@"code"] integerValue] == 10086)
+        {
+            [HPAlertTools showAlertWith:self title:@"提示信息" message:response[@"message"] callbackBlock:^(NSInteger btnIndex) {
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            } cancelButtonTitle:nil destructiveButtonTitle:@"确定" otherButtonTitles:nil];
+        }
         else
         {
             [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:response[@"message"] buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
@@ -228,7 +237,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     {
         
     }
-    else if([buttonName containsString:@"交易码"])
+    else if([buttonName containsString:@"认筹股"])
     {
         
     }
@@ -299,8 +308,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     footer.stateLabel.textColor = kColorFontRegular;
     
     //尾部刷新控件
-    //    scrollView.mj_footer = footer;
-    //    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
+    scrollView.mj_footer = footer;
+    scrollView.mj_footer.ignoredScrollViewContentInsetBottom = kScrollViewFooterIgnored;
 }
 
 
@@ -313,7 +322,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_arrayDataSource removeAllObjects];
     [_tableViewTemp reloadData];
     
-    [HPNetManager POSTWithUrlString:Hostmemberfundpredepositlog isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_strParameter,@"page",@"5",@"pagesize", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostmemberfundpredepositlog isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_strParameter,@"page",@"10",@"pagesize", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         
         if ([response[@"code"] integerValue] == 200) {
@@ -336,10 +345,10 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         else if([response[@"code"] integerValue] == 10086)
         {
             [HPAlertTools showAlertWith:self title:@"提示信息" message:response[@"message"] callbackBlock:^(NSInteger btnIndex) {
-                if (btnIndex == 1) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-            } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            } cancelButtonTitle:nil destructiveButtonTitle:@"确定" otherButtonTitles:nil];
         }
         else
         {
@@ -357,7 +366,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 //上拉加载更多
 - (void)footerRereshing
 {
-    [HPNetManager POSTWithUrlString:Hostmemberfundpredepositlog isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_strParameter,@"page",@"5",@"pagesize", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostmemberfundpredepositlog isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",_strParameter,@"page",@"10",@"pagesize", nil] successBlock:^(id response) {
         //GPDebugLog(@"response:%@",response);
         if ([response[@"code"] integerValue] == 200) {
             if ([[NSArray arrayWithArray:response[@"result"][@"list"]] count]) {
@@ -375,10 +384,10 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         else if([response[@"code"] integerValue] == 10086)
         {
             [HPAlertTools showAlertWith:self title:@"提示信息" message:response[@"message"] callbackBlock:^(NSInteger btnIndex) {
-                if (btnIndex == 1) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-            } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            } cancelButtonTitle:nil destructiveButtonTitle:@"确定" otherButtonTitles:nil];
         }
         else
         {

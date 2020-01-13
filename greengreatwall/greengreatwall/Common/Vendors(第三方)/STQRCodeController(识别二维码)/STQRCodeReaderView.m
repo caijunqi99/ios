@@ -289,7 +289,7 @@
         _labelAlert = [[UILabel alloc]initWithFrame:CGRectMake(viewX, viewY, viewW, viewH)];
         [_labelAlert setText:@"将二维码/条形码放置框内，即开始扫描"];
         [_labelAlert setTextColor:[UIColor whiteColor]];
-        [_labelAlert setFont:[UIFont systemFontOfSize:15]];
+        [_labelAlert setFont:FontRegularWithSize(16)];
         [_labelAlert setTextAlignment:NSTextAlignmentCenter];
     }
     return _labelAlert;

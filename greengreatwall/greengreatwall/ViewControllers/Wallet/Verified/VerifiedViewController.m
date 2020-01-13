@@ -12,16 +12,20 @@
 #import "AreaModel.h"
 @interface VerifiedViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,AreaSelectDelegate>
 {
+    UIScrollView            *_scrollViewContent;
     UIImageView             *_imageViewWallet;
     
     UIView                  *_viewContent[3];
     
-    UILabelAlignToTopLeft   *_labelTemp[7];
+    UILabelAlignToTopLeft   *_labelTemp[8];
     UITextField             *_textFieldTemp[5];
     
     UIButton                *_buttonTemp;
     UIButton                *_buttonIDCardpositive;
     UIButton                *_buttonIDCardReverse;
+    
+    UIButton                *_buttonIDCardTaker;
+    UIButton                *_buttonIDCardTakerDemo;
     
     UIButton                *_buttonSelect;
     
@@ -65,7 +69,7 @@
 -(instancetype)init
 {
     if (self = [super init]) {
-        _arrayDataSourcePhoto = [[NSMutableArray alloc]initWithObjects:@"0",@"0", nil];
+        _arrayDataSourcePhoto = [[NSMutableArray alloc]initWithObjects:@"0",@"0",@"0", nil];
         _arrayDataSource = [[NSMutableArray alloc]init];
         areaIndex1 = 99999999;
         areaIndex = 0;
@@ -100,33 +104,41 @@
     
     viewSetBackgroundColor(kColorBasic);
     
+    _scrollViewContent = [[UIScrollView alloc]init];
+    [_scrollViewContent setFrame:CGRectMake(0, 0, GPScreenWidth, GPScreenHeight- kNavBarAndStatusBarHeight)];
+    [_scrollViewContent setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:_scrollViewContent];
+    [_scrollViewContent setContentSize:CGSizeMake(GPScreenWidth, 2100*GPCommonLayoutScaleSizeWidthIndex)];
+    
     _imageViewWallet = [[UIImageView alloc]init];
     [_imageViewWallet setFrame:RectWithScale(CGRectMake(0, 0, 1080, 364), GPCommonLayoutScaleSizeWidthIndex)];
     [_imageViewWallet setImage:GetImage(@"身份认证")];
-    [self.view addSubview:_imageViewWallet];
+//    [self.view addSubview:_imageViewWallet];
+    [_scrollViewContent addSubview:_imageViewWallet];
     _imageViewWallet.userInteractionEnabled= NO;
     
     for (NSInteger i = 0; i<3; i++) {
         _viewContent[i] = [[UIView alloc]init];
         [_viewContent[i] setBackgroundColor:[UIColor whiteColor]];
-        [self.view addSubview:_viewContent[i]];
+//        [self.view addSubview:_viewContent[i]];
+        [_scrollViewContent addSubview:_viewContent[i]];
     }
     
     
     
     [_viewContent[0] setFrame:RectWithScale(CGRectMake(0, 290, 1080, 430), GPCommonLayoutScaleSizeWidthIndex)];
-    [_viewContent[1] setFrame:RectWithScale(CGRectMake(0, 740, 1080, 430), GPCommonLayoutScaleSizeWidthIndex)];
-    [_viewContent[2] setFrame:RectWithScale(CGRectMake(0, 1200, 1080, 220), GPCommonLayoutScaleSizeWidthIndex)];
+    [_viewContent[1] setFrame:RectWithScale(CGRectMake(0, 740, 1080, 830), GPCommonLayoutScaleSizeWidthIndex)];
+    [_viewContent[2] setFrame:RectWithScale(CGRectMake(0, 1600, 1080, 220), GPCommonLayoutScaleSizeWidthIndex)];
     
     [_viewContent[0] rounded:10 rectCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)];
     
-    NSArray *arrayLabelText = @[@"真实姓名",@"身份证号",@"所在地区",@"银行名称",@"银行卡账号",@"基本信息",@"身份证照片"];
+    NSArray *arrayLabelText = @[@"真实姓名",@"身份证号",@"所在地区",@"银行名称",@"银行卡账号",@"基本信息",@"身份证照片",@"手持身份证照片"];
     NSArray *arrayPlaceHolderText = @[@"请输入真实姓名",@"15-18位身份证号",@"请选择",@"请输入",@"请输入"];
     
-    for (NSInteger i = 0; i<7; i++) {
+    for (NSInteger i = 0; i<8; i++) {
         
         _labelTemp[i] = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:arrayLabelText[i]];
-        _labelTemp[i].lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTemp[i].lineBreakMode = LineBreakModeDefault;
         _labelTemp[i].backgroundColor = [UIColor clearColor];
         [_labelTemp[i] setFrame:CGRectMake(10, 10, 80, 40)];
         
@@ -175,8 +187,11 @@
     [_viewContent[0] addSubview:_labelTemp[5]];
     
     
-    [_labelTemp[6] setFrame:CGRectMake(10, 10+(_viewContent[1].height/4.0) *0, _viewContent[1].width - 10 - 10, (_viewContent[1].height/4.0)-20)];
+    [_labelTemp[6] setFrame:CGRectMake(10, 10+(_viewContent[1].height/4.0) *0, _viewContent[1].width - 10 - 10, (_viewContent[1].height/6.0)-20)];
     [_viewContent[1] addSubview:_labelTemp[6]];
+    
+    [_labelTemp[7] setFrame:CGRectMake(10, 10+(_viewContent[1].height/2.0) *1, _viewContent[1].width - 10 - 10, (_viewContent[1].height/6.0)-20)];
+    [_viewContent[1] addSubview:_labelTemp[7]];
     
     
     CGFloat width = (_viewContent[1].width - 200*GPCommonLayoutScaleSizeWidthIndex)/2.0;
@@ -195,13 +210,26 @@
     [_viewContent[1] addSubview:_buttonIDCardReverse];
     
     
+    _buttonIDCardTaker = [UIButton initButtonTitleFont:22 titleColor:[UIColor clearColor] backgroundColor:[UIColor clearColor] imageName:nil titleName:@"手持身份证照片"];
+    [_buttonIDCardTaker setImage:GetImage(@"手持身份证照片") forState:UIControlStateNormal];
+    [_buttonIDCardTaker addTarget:self tag:15 action:@selector(buttonClick:)];
+    [_buttonIDCardTaker setFrame:CGRectMake(60*GPCommonLayoutScaleSizeWidthIndex, 530*GPCommonLayoutScaleSizeWidthIndex, width, height)];
+    [_viewContent[1] addSubview:_buttonIDCardTaker];
+    
+    _buttonIDCardTakerDemo = [UIButton initButtonTitleFont:22 titleColor:[UIColor clearColor] backgroundColor:[UIColor clearColor] imageName:nil titleName:@"手持身份证照片demo"];
+    [_buttonIDCardTakerDemo setImage:GetImage(@"手持身份证照片demo") forState:UIControlStateNormal];
+//    [_buttonIDCardTakerDemo addTarget:self tag:14 action:@selector(buttonClick:)];
+    [_buttonIDCardTakerDemo setFrame:CGRectMake(_viewContent[1].width/2.0 +_buttonIDCardTaker.left, _buttonIDCardTaker.top, width, height)];
+    [_viewContent[1] addSubview:_buttonIDCardTakerDemo];
+    [_buttonIDCardTakerDemo setUserInteractionEnabled:NO];
     
     
     
     _buttonTemp = [UIButton initButtonTitleFont:22 titleColor:[UIColor whiteColor] backgroundColor:kColorTheme imageName:@"" titleName:@"提交认证"];
     [_buttonTemp addTarget:self tag:11 action:@selector(buttonClick:)];
-    [self.view addSubview:_buttonTemp];
-    [_buttonTemp setFrame:CGRectMake(self.view.centerX - 395*GPCommonLayoutScaleSizeWidthIndex, GPScreenHeight - kNavBarAndStatusBarHeight - 270*GPCommonLayoutScaleSizeWidthIndex, 790*GPCommonLayoutScaleSizeWidthIndex, 790*(110.0/790.0)*GPCommonLayoutScaleSizeWidthIndex)];
+//    [self.view addSubview:_buttonTemp];
+    [_scrollViewContent addSubview:_buttonTemp];
+    [_buttonTemp setFrame:CGRectMake(self.view.centerX - 395*GPCommonLayoutScaleSizeWidthIndex, _viewContent[2].bottom + 30*GPCommonLayoutScaleSizeWidthIndex, 790*GPCommonLayoutScaleSizeWidthIndex, 790*(110.0/790.0)*GPCommonLayoutScaleSizeWidthIndex)];//GPScreenHeight - kNavBarAndStatusBarHeight - 270*GPCommonLayoutScaleSizeWidthIndex,
     [_buttonTemp rounded:(55.0*GPCommonLayoutScaleSizeWidthIndex)];
 }
 
@@ -272,11 +300,14 @@
                 self->stringProvince_id = response[@"result"][@"member_provinceid"];
                 self->stringCity_id = response[@"result"][@"member_cityid"];
                 self->stringRegion_id = response[@"result"][@"member_areaid"];
-                [self->_buttonIDCardpositive sd_setImageWithURL:URL(response[@"result"][@"member_idcard_image2"]) forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                [self->_buttonIDCardTaker sd_setImageWithURL:URL(response[@"result"][@"member_idcard_image1"]) forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                     [self->_arrayDataSourcePhoto replaceObjectAtIndex:0 withObject:image];
                 }];
-                [self->_buttonIDCardReverse sd_setImageWithURL:URL(response[@"result"][@"member_idcard_image3"]) forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                [self->_buttonIDCardpositive sd_setImageWithURL:URL(response[@"result"][@"member_idcard_image2"]) forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                     [self->_arrayDataSourcePhoto replaceObjectAtIndex:1 withObject:image];
+                }];
+                [self->_buttonIDCardReverse sd_setImageWithURL:URL(response[@"result"][@"member_idcard_image3"]) forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                    [self->_arrayDataSourcePhoto replaceObjectAtIndex:2 withObject:image];
                 }];
                 [self->_textFieldTemp[3] setText:response[@"result"][@"member_bankname"]];
                 [self->_textFieldTemp[4] setText:response[@"result"][@"member_bankcard"]];
@@ -289,6 +320,7 @@
                 
                 [self->_buttonIDCardpositive setUserInteractionEnabled:NO];
                 [self->_buttonIDCardReverse setUserInteractionEnabled:NO];
+                [self->_buttonIDCardTaker setUserInteractionEnabled:NO];
                 for (NSInteger i = 0; i <5; i++) {
                     [self->_textFieldTemp[i] setUserInteractionEnabled:NO];
                 }
@@ -306,6 +338,7 @@
                 
                 [self->_buttonIDCardpositive setUserInteractionEnabled:NO];
                 [self->_buttonIDCardReverse setUserInteractionEnabled:NO];
+                [self->_buttonIDCardTaker setUserInteractionEnabled:NO];
                 for (NSInteger i = 0; i <5; i++) {
                     [self->_textFieldTemp[i] setUserInteractionEnabled:NO];
                 }
@@ -338,7 +371,7 @@
     }
     
     WaittingMBProgressHUD(GPKeyWindow, @"正在上传,请等待...");
-    [HPNetManager uploadImageWithUrlString:HostMmemberauthauth parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"userid"],@"member_id",_textFieldTemp[0].text,@"username",_textFieldTemp[1].text,@"idcard",_textFieldTemp[2].text,@"member_areainfo",_textFieldTemp[3].text,@"member_bankname",_textFieldTemp[4].text,@"member_bankcard",stringCity_id,@"member_cityid",stringRegion_id,@"member_areaid",stringProvince_id,@"member_provinceid",@"1",@"commit", nil] imageArray:_arrayDataSourcePhoto fileNames:@[@"member_idcard_image2",@"member_idcard_image3"] imageType:@"jpg" imageScale:1 successBlock:^(id response) {
+    [HPNetManager uploadImageWithUrlString:HostMmemberauthauth parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"userid"],@"member_id",_textFieldTemp[0].text,@"username",_textFieldTemp[1].text,@"idcard",_textFieldTemp[2].text,@"member_areainfo",_textFieldTemp[3].text,@"member_bankname",_textFieldTemp[4].text,@"member_bankcard",stringCity_id,@"member_cityid",stringRegion_id,@"member_areaid",stringProvince_id,@"member_provinceid",@"1",@"commit", nil] imageArray:_arrayDataSourcePhoto fileNames:@[@"member_idcard_image1",@"member_idcard_image2",@"member_idcard_image3"] imageType:@"jpg" imageScale:1 successBlock:^(id response) {
         
         FinishMBProgressHUD(GPKeyWindow);
         //GPDebugLog(@"response:%@",response);
@@ -382,6 +415,10 @@
         [self changeIconAction];
     }
     else if (_buttonIDCardpositive == btn)
+    {
+        [self changeIconAction];
+    }
+    else if (_buttonIDCardTaker == btn)
     {
         [self changeIconAction];
     }
@@ -577,10 +614,12 @@
     }];
     [_buttonSelect setImage:userImage forState:UIControlStateNormal];
     _buttonSelect.clipsToBounds = YES;
-    if (_buttonSelect == _buttonIDCardpositive) {
+    if (_buttonSelect == _buttonIDCardTaker){
         [_arrayDataSourcePhoto replaceObjectAtIndex:0 withObject:userImage];
-    }else if (_buttonSelect == _buttonIDCardReverse){
+    }else if (_buttonSelect == _buttonIDCardpositive) {
         [_arrayDataSourcePhoto replaceObjectAtIndex:1 withObject:userImage];
+    }else if (_buttonSelect == _buttonIDCardReverse){
+        [_arrayDataSourcePhoto replaceObjectAtIndex:2 withObject:userImage];
     }
 }
 

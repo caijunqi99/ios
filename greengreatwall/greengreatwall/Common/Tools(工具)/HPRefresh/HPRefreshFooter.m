@@ -25,7 +25,7 @@
         [self setTitle:@"没有更多了 " forState:MJRefreshStateNoMoreData];
         
         // 设置字体
-        self.stateLabel.font = [UIFont systemFontOfSize:13];
+        self.stateLabel.font = FontRegularWithSize(12);
         
         // 设置颜色
         self.stateLabel.textColor = [UIColor grayColor];

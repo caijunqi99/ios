@@ -14,9 +14,9 @@
 //
 //    UILabel *label = [[UILabel alloc]init];
 //    label.text = text;
-//    label.font = [UIFont hp_systemFontOfSize:font];
+//    label.font = FontRegularWithSize(font);
 //    label.textColor = textColor;
-//    label.lineBreakMode = NSLineBreakByTruncatingTail;
+//    label.lineBreakMode = LineBreakModeDefault;
 //    return label;
 //}
 
@@ -32,7 +32,7 @@
 - (void)setLabelTextFont:(CGFloat)font textColor:(UIColor *)textColor title:(NSString *)text {
     
     self.text = text;
-    self.font = [UIFont hp_systemFontOfSize:font];
+    self.font = FontRegularWithSize(font);
     self.textColor = textColor;
 }
 
@@ -40,13 +40,13 @@
     
     UILabel *label = [[UILabel alloc]init];
     label.textColor = otherColor;
-    label.font = [UIFont hp_systemFontOfSize:otherFont];
+    label.font = FontRegularWithSize(otherFont);
     NSString *str = [NSString stringWithFormat:@"%@%@%@",leftText,middleText,rightText];
     long leftLength = [leftText length];
     long middleLength = [middleText length];
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:str];
     [attributeStr addAttribute:NSForegroundColorAttributeName value:textColor range:NSMakeRange(leftLength,middleLength)];
-    [attributeStr addAttribute:NSFontAttributeName value:[UIFont hp_systemFontOfSize:font] range:NSMakeRange(leftLength,middleLength)];
+    [attributeStr addAttribute:NSFontAttributeName value:FontRegularWithSize(font) range:NSMakeRange(leftLength,middleLength)];
     label.attributedText = attributeStr;
     return label;
 }
@@ -54,13 +54,13 @@
 - (void)setAttributeLabelAttributeFont:(CGFloat)font attributeColor:(UIColor *)textColor otherFont:(CGFloat)otherFont otherColor:(UIColor *)otherColor leftText:(NSString *)leftText middleText:(NSString *)middleText rightText:(NSString *)rightText {
     
     self.textColor = otherColor;
-    self.font = [UIFont hp_systemFontOfSize:otherFont];
+    self.font = FontRegularWithSize(otherFont);
     NSString *str = [NSString stringWithFormat:@"%@%@%@",leftText,middleText,rightText];
     long leftLength = [leftText length];
     long middleLength = [middleText length];
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:str];
     [attributeStr addAttribute:NSForegroundColorAttributeName value:textColor range:NSMakeRange(leftLength,middleLength)];
-    [attributeStr addAttribute:NSFontAttributeName value:[UIFont hp_systemFontOfSize:font] range:NSMakeRange(leftLength,middleLength)];
+    [attributeStr addAttribute:NSFontAttributeName value:FontRegularWithSize(font) range:NSMakeRange(leftLength,middleLength)];
     self.attributedText = attributeStr;
 }
 
@@ -70,7 +70,7 @@
     NSString *tmp = text == nil ? @"" : text;
     long length = [tmp length];
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:text];
-    NSDictionary *dict = @{NSFontAttributeName : [UIFont hp_systemFontOfSize:font],
+    NSDictionary *dict = @{NSFontAttributeName : FontRegularWithSize(font),
                            NSStrikethroughColorAttributeName : [UIColor blackColor],
                            NSStrikethroughStyleAttributeName :@(NSUnderlineStyleSingle),
                            NSForegroundColorAttributeName:color,
@@ -87,7 +87,7 @@
     long length = [tmp length];
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:tmp];
     
-    NSDictionary *dict = @{NSFontAttributeName : [UIFont hp_systemFontOfSize:font],
+    NSDictionary *dict = @{NSFontAttributeName : FontRegularWithSize(font),
                            NSStrikethroughColorAttributeName : [UIColor blackColor],
                            NSStrikethroughStyleAttributeName :@(NSUnderlineStyleSingle),
                            NSForegroundColorAttributeName:color,
@@ -102,8 +102,8 @@
 - (CGSize)getLableCGSizeWithString:(NSString *)text fontSize:(CGFloat)fontSize maxWidth:(CGFloat)maxWidth {
     
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-    paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
-    NSDictionary * attributes = @{NSFontAttributeName:[UIFont hp_systemFontOfSize:fontSize], NSParagraphStyleAttributeName:paragraphStyle.copy};
+    paragraphStyle.lineBreakMode = LineBreakModeDefault;
+    NSDictionary * attributes = @{NSFontAttributeName:FontRegularWithSize(fontSize), NSParagraphStyleAttributeName:paragraphStyle.copy};
     
     CGSize labelSize = [text boundingRectWithSize:CGSizeMake(maxWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine attributes:attributes context:nil].size;
     
@@ -160,7 +160,7 @@
     
     if (text && fontSize) {
         NSRange itemRange = [self.text rangeOfString:text];
-        [attributedString addAttribute:NSFontAttributeName value:[UIFont hp_systemFontOfSize:fontSize] range:itemRange];
+        [attributedString addAttribute:NSFontAttributeName value:FontRegularWithSize(fontSize) range:itemRange];
     }
     
     self.attributedText = attributedString;
@@ -172,7 +172,7 @@
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:space];
-    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    paragraphStyle.lineBreakMode = LineBreakModeDefault;
 //    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
     self.attributedText = attributedString;
@@ -218,7 +218,7 @@
     [style setLineSpacing:10];
     //1.3配置计算时的字体的大小
     //1.4配置属性字典
-    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:font], NSParagraphStyleAttributeName:style};
+    NSDictionary *dic = @{NSFontAttributeName:FontRegularWithSize(font), NSParagraphStyleAttributeName:style};
     //2.计算
     //如果想保留多个枚举值,则枚举值中间加按位或|即可,并不是所有的枚举类型都可以按位或,只有枚举值的赋值中有左移运算符时才可以
     CGFloat height = [string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:dic context:nil].size.height;

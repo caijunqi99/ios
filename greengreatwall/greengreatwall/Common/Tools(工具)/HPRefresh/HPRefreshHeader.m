@@ -24,8 +24,8 @@
         [self setTitle:@"正在刷新..." forState:MJRefreshStateRefreshing];
         
         // 设置字体
-        self.stateLabel.font = [UIFont systemFontOfSize:13];
-        self.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:13];
+        self.stateLabel.font = FontRegularWithSize(12);
+        self.lastUpdatedTimeLabel.font = FontRegularWithSize(12);
         
         // 设置颜色
         self.stateLabel.textColor = [UIColor grayColor];

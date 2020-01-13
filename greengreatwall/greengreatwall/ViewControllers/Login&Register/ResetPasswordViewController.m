@@ -347,7 +347,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 {
     if (!_labelStateSuccess) {
         _labelStateSuccess = [UILabel initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:@"密码重置成功"];
-        _labelStateSuccess.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelStateSuccess.lineBreakMode = LineBreakModeDefault;
         _labelStateSuccess.backgroundColor = [UIColor clearColor];
         _labelStateSuccess.textAlignment = NSTextAlignmentCenter;
     }
@@ -416,9 +416,9 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         _textFieldVerify.leftViewMode = UITextFieldViewModeAlways;
         
         
-        [self.buttonGetVerifyCode setFrame:CGRectMake(10*GPCommonLayoutScaleSizeWidthIndex, 20*GPCommonLayoutScaleSizeWidthIndex, 200*GPCommonLayoutScaleSizeWidthIndex, 80*GPCommonLayoutScaleSizeWidthIndex)];
+        [self.buttonGetVerifyCode setFrame:CGRectMake(10*GPCommonLayoutScaleSizeWidthIndex, 20*GPCommonLayoutScaleSizeWidthIndex, 300*GPCommonLayoutScaleSizeWidthIndex, 80*GPCommonLayoutScaleSizeWidthIndex)];
         UIView *viewRight = [UIView initViewBackColor:[UIColor whiteColor]];
-        [viewRight setFrame:CGRectMake(0*GPCommonLayoutScaleSizeWidthIndex, 0*GPCommonLayoutScaleSizeWidthIndex, 220*GPCommonLayoutScaleSizeWidthIndex, 120*GPCommonLayoutScaleSizeWidthIndex)];
+        [viewRight setFrame:CGRectMake(0*GPCommonLayoutScaleSizeWidthIndex, 0*GPCommonLayoutScaleSizeWidthIndex, 320*GPCommonLayoutScaleSizeWidthIndex, 120*GPCommonLayoutScaleSizeWidthIndex)];
         [viewRight addSubview:self.buttonGetVerifyCode];
         _textFieldVerify.rightView = viewRight;
         _textFieldVerify.rightView.contentMode = UIViewContentModeScaleAspectFit;

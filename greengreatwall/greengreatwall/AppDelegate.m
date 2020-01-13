@@ -57,6 +57,8 @@
     // 设置顶部状态栏为白色
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
+    GPDebugLog(@"GPScreenWidth: %f",GPScreenWidth);
+    
     [self setTabbarApperence];
     [self setNavigationBarApperence];
     [self setApperence];
@@ -356,11 +358,11 @@
 }
 
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
-    NSDictionary * userInfo = [notification userInfo];
-    NSString *content = [userInfo valueForKey:@"content"];
-    NSString *messageID = [userInfo valueForKey:@"_j_msgid"];
-    NSDictionary *extras = [userInfo valueForKey:@"extras"];
-    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的 Extras 附加字段，key 是自己定义的
+//    NSDictionary * userInfo = [notification userInfo];
+//    NSString *content = [userInfo valueForKey:@"content"];
+//    NSString *messageID = [userInfo valueForKey:@"_j_msgid"];
+//    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+//    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的 Extras 附加字段，key 是自己定义的
 }
 
 - (void)application:(UIApplication *)application
@@ -678,8 +680,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
      */
     // 设置TabBarItem选中文字颜色
     //    UITabBarItem *bar = [UITabBarItem appearance];
-    //    [bar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor hex:@"1296db"], NSFontAttributeName: [UIFont hp_systemFontOfSize:14]} forState:UIControlStateSelected];
-    //    [bar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor hex:@"707070"], NSFontAttributeName:[UIFont hp_systemFontOfSize:14]} forState:UIControlStateNormal];
+    //    [bar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor hex:@"1296db"], NSFontAttributeName: FontRegularWithSize(14)} forState:UIControlStateSelected];
+    //    [bar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor hex:@"707070"], NSFontAttributeName:FontRegularWithSize(14)} forState:UIControlStateNormal];
     //    [UITabBar appearance].translucent = NO;
 }
 

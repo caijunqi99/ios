@@ -50,7 +50,7 @@
         
         _labelTitle = [[UILabel alloc] init];
         _labelTitle.numberOfLines = 1;
-        _labelTitle.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTitle.lineBreakMode = LineBreakModeDefault;
         _labelTitle.textColor = kColorFontMedium;
         _labelTitle.backgroundColor = [UIColor clearColor];
         _labelTitle.textAlignment = NSTextAlignmentLeft;
@@ -59,7 +59,7 @@
         
         _labelContent = [[UILabelAlignToTopLeft alloc] init];
         _labelContent.numberOfLines = 3;
-        _labelContent.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelContent.lineBreakMode = LineBreakModeDefault;
         _labelContent.textColor = kColorFontMedium;
         _labelContent.backgroundColor = [UIColor clearColor];
         _labelContent.textAlignment = NSTextAlignmentLeft;
@@ -67,7 +67,7 @@
         
         _labelTime = [[UILabel alloc] init];
         _labelTime.numberOfLines = 1;
-        _labelTime.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTime.lineBreakMode = LineBreakModeDefault;
         _labelTime.textColor = kColorFontMedium;
         _labelTime.backgroundColor = [UIColor clearColor];
         _labelTime.textAlignment = NSTextAlignmentLeft;

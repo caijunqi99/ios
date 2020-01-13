@@ -233,7 +233,7 @@
     _labelTitle.textAlignment = NSTextAlignmentLeft;
     _labelTitle.font = FontMediumWithSize(16);
     _labelTitle.numberOfLines = 2;
-    _labelTitle.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelTitle.lineBreakMode = LineBreakModeDefault;
     [_viewTop addSubview:_labelTitle];
     _labelTitle.text = @"";
     
@@ -243,7 +243,7 @@
     _labelAdv.textAlignment = NSTextAlignmentLeft;
     _labelAdv.font = FontMediumWithSize(14);
     _labelAdv.numberOfLines = 2;
-    _labelAdv.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelAdv.lineBreakMode = LineBreakModeDefault;
     [_viewTop addSubview:_labelAdv];
     _labelAdv.text = @"";
     

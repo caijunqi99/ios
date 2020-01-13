@@ -19,7 +19,7 @@
     [btn setTitle:name forState:UIControlStateNormal];
     [btn setTitleColor:color forState:UIControlStateNormal];
     [btn setTitleColor:[color colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
-    [btn.titleLabel setFont:[UIFont hp_systemFontOfSize:font]];
+    [btn.titleLabel setFont:FontRegularWithSize(font)];
     return btn;
 }
 
@@ -27,7 +27,7 @@
     
     [self setTitle:name forState:UIControlStateNormal];
     [self setTitleColor:color forState:UIControlStateNormal];
-    [self.titleLabel setFont:[UIFont hp_systemFontOfSize:font]];
+    [self.titleLabel setFont:FontRegularWithSize(font)];
 }
 
 
@@ -40,7 +40,7 @@
     [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [btn setTitle:titleName forState:UIControlStateNormal];
     [btn setTitleColor:titleColor forState:UIControlStateNormal];
-    [btn.titleLabel setFont:[UIFont hp_systemFontOfSize:font]];
+    [btn.titleLabel setFont:FontRegularWithSize(font)];
     btn.backgroundColor = backColor;
     return btn;
 }
@@ -50,7 +50,7 @@
     [self setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [self setTitle:titleName forState:UIControlStateNormal];
     [self setTitleColor:titleColor forState:UIControlStateNormal];
-    [self.titleLabel setFont:[UIFont hp_systemFontOfSize:font]];
+    [self.titleLabel setFont:FontRegularWithSize(font)];
 }
 
 
@@ -60,7 +60,7 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:titleName forState:UIControlStateNormal];
     [btn setTitleColor:titleColor forState:UIControlStateNormal];
-    [btn.titleLabel setFont:[UIFont hp_systemFontOfSize:font]];
+    [btn.titleLabel setFont:FontRegularWithSize(font)];
     btn.backgroundColor = backColor;
     if (radius > 0) {
         btn.layer.cornerRadius = radius;
@@ -73,7 +73,7 @@
     
     [self setTitle:titleName forState:UIControlStateNormal];
     [self setTitleColor:titleColor forState:UIControlStateNormal];
-    [self.titleLabel setFont:[UIFont hp_systemFontOfSize:font]];
+    [self.titleLabel setFont:FontRegularWithSize(font)];
     self.backgroundColor = backColor;
     if (radius > 0) {
         self.layer.cornerRadius = radius;

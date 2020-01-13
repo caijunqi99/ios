@@ -134,7 +134,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
             [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:@"登录成功" buttonTitle:nil buttonStyle:HPAlertActionStyleDefault];
             
             //设置indextabbar为主窗口的根视图控制器
-            IndexTabBarViewController *vc = [IndexTabBarViewController shareInstance];
+            IndexTabBarViewController *vc = [[IndexTabBarViewController alloc] init];
             [vc setSelectedIndex:0];
             GPKeyWindow.rootViewController = vc;
             [GPKeyWindow makeKeyAndVisible];

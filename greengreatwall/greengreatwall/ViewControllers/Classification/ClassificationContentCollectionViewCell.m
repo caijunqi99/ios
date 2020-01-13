@@ -38,7 +38,7 @@
         
         _labelTitle = [[UILabel alloc] init];
         _labelTitle.numberOfLines = 1;
-        _labelTitle.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTitle.lineBreakMode = LineBreakModeDefault;
         _labelTitle.textColor = kColorFontMedium;
         _labelTitle.backgroundColor = [UIColor clearColor];
         _labelTitle.textAlignment = NSTextAlignmentCenter;

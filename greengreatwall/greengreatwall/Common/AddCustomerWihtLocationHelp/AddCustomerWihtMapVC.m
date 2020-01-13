@@ -75,7 +75,7 @@ static NSString *const UITableViewCellID = @"UITableViewCellID";
         UILabel *lab = [[UILabel alloc]init];
         lab.textColor = [UIColor blackColor];
         lab.text = @"搜索客户名称";
-        lab.font = [UIFont systemFontOfSize:16];
+        lab.font = FontRegularWithSize(16);
         
         [_searchBtn addSubview:lab];
         
@@ -266,11 +266,11 @@ static NSString *const UITableViewCellID = @"UITableViewCellID";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:UITableViewCellID];
     }
     cell.textLabel.text = self.dataArry[indexPath.row].name;
-    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.font = FontRegularWithSize(16);
     cell.textLabel.textColor = [UIColor getHEXRGB:@"222222"];
     
     cell.detailTextLabel.text = self.dataArry[indexPath.row].address;
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
+    cell.detailTextLabel.font = FontRegularWithSize(12);
     cell.detailTextLabel.textColor = [UIColor getHEXRGB:@"666666"];
     cell.detailTextLabel.numberOfLines = 0;
     

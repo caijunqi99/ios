@@ -97,7 +97,7 @@
     for (NSInteger i = 0; i<arrayLabelText.count; i++) {
         
         _labelTemp[i] = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:arrayLabelText[i]];
-        _labelTemp[i].lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTemp[i].lineBreakMode = LineBreakModeDefault;
         _labelTemp[i].backgroundColor = [UIColor clearColor];
         [_labelTemp[i] setFrame:RectWithScale(CGRectMake(40, 0, 160, 120), GPCommonLayoutScaleSizeWidthIndex)];
         
@@ -241,10 +241,10 @@
         else if([response[@"code"] integerValue] == 10086)
         {
             [HPAlertTools showAlertWith:self title:@"提示信息" message:response[@"message"] callbackBlock:^(NSInteger btnIndex) {
-                if (btnIndex == 1) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-            } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            } cancelButtonTitle:nil destructiveButtonTitle:@"确定" otherButtonTitles:nil];
         }
         else
         {

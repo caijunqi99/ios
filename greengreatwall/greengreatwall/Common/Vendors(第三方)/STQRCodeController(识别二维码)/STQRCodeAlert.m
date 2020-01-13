@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_END
         [_labelTitle setTextColor:[UIColor whiteColor]];
         [_labelTitle setTextAlignment:NSTextAlignmentCenter];
         [_labelTitle setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.7]];
-        [_labelTitle setFont:[UIFont systemFontOfSize:15]];
+        [_labelTitle setFont:FontRegularWithSize(16)];
         [_labelTitle.layer setCornerRadius:4];
         [_labelTitle setNumberOfLines:0];
         [_labelTitle.layer setMasksToBounds:YES];

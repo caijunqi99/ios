@@ -354,7 +354,7 @@
     paraStyle.paragraphSpacingBefore = 0.0;
     paraStyle.headIndent = 0;
     paraStyle.tailIndent = 0;
-    paraStyle.lineBreakMode = NSLineBreakByCharWrapping;
+    paraStyle.lineBreakMode = LineBreakModeDefault;
     NSDictionary *attribute = @{NSFontAttributeName: FontMediumWithSize(fontSize),NSParagraphStyleAttributeName:paraStyle};
     CGSize size = [textStr boundingRectWithSize:CGSizeMake(1000, labelHeight) options:NSStringDrawingUsesLineFragmentOrigin attributes:attribute context:nil].size;
     return size.width;

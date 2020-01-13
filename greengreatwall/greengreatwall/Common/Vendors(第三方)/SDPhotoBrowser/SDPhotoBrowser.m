@@ -62,7 +62,7 @@
     indexLabel.bounds = CGRectMake(0, 0, 80, 30);
     indexLabel.textAlignment = NSTextAlignmentCenter;
     indexLabel.textColor = [UIColor whiteColor];
-    indexLabel.font = [UIFont boldSystemFontOfSize:20];
+    indexLabel.font = FontRegularWithSize(20);
     indexLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     indexLabel.layer.cornerRadius = indexLabel.bounds.size.height * 0.5;
     indexLabel.clipsToBounds = YES;
@@ -111,7 +111,7 @@
     label.bounds = CGRectMake(0, 0, 150, 30);
     label.center = self.center;
     label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont boldSystemFontOfSize:17];
+    label.font = FontRegularWithSize(16);
     [[UIApplication sharedApplication].keyWindow addSubview:label];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:label];
     if (error) {

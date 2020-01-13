@@ -29,7 +29,7 @@ NSString const *badgeValueKey            = @"badgeValueKey";
     // 初始化，设定默认值
     self.badgeBGColor   = [UIColor redColor];
     self.badgeTextColor = [UIColor whiteColor];
-    self.badgeFont      = [UIFont systemFontOfSize:14];
+    self.badgeFont      = FontRegularWithSize(14);
     self.badgePadding   = 0;
     self.badgeMinSize   = 0;
     self.badgeOriginX   = self.frame.size.width - 4;

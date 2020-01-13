@@ -243,7 +243,7 @@ typedef NS_ENUM(NSInteger, LEEBackgroundStyle) {
             
             action.title = title;
             
-            action.font = [UIFont boldSystemFontOfSize:18.0f];
+            action.font = FontRegularWithSize(16);
             
             action.clickBlock = block;
         });
@@ -2034,7 +2034,7 @@ static NSString *const LEEShadowViewHandleKeyBackgroundColor = @"backgroundColor
                 
                 label.textAlignment = NSTextAlignmentCenter;
                 
-                label.font = [UIFont boldSystemFontOfSize:18.0f];
+                label.font = FontRegularWithSize(16);
                 
                 label.textColor = [UIColor blackColor];
                 
@@ -2063,7 +2063,7 @@ static NSString *const LEEShadowViewHandleKeyBackgroundColor = @"backgroundColor
                 
                 label.textAlignment = NSTextAlignmentCenter;
                 
-                label.font = [UIFont systemFontOfSize:14.0f];
+                label.font = FontRegularWithSize(12);
                 
                 label.textColor = [UIColor blackColor];
                 
@@ -2135,7 +2135,7 @@ static NSString *const LEEShadowViewHandleKeyBackgroundColor = @"backgroundColor
         
         if (block) block(action);
         
-        if (!action.font) action.font = [UIFont systemFontOfSize:18.0f];
+        if (!action.font) action.font = FontRegularWithSize(16);
         
         if (!action.title) action.title = @"按钮";
         
@@ -2735,7 +2735,7 @@ static NSString *const LEEShadowViewHandleKeyBackgroundColor = @"backgroundColor
                 
                 label.textAlignment = NSTextAlignmentCenter;
                 
-                label.font = [UIFont boldSystemFontOfSize:16.0f];
+                label.font = FontRegularWithSize(16);
                 
                 label.textColor = [UIColor darkGrayColor];
                 
@@ -2764,7 +2764,7 @@ static NSString *const LEEShadowViewHandleKeyBackgroundColor = @"backgroundColor
                 
                 label.textAlignment = NSTextAlignmentCenter;
                 
-                label.font = [UIFont systemFontOfSize:14.0f];
+                label.font = FontRegularWithSize(12);
                 
                 label.textColor = [UIColor grayColor];
                 
@@ -2815,7 +2815,7 @@ static NSString *const LEEShadowViewHandleKeyBackgroundColor = @"backgroundColor
         
         if (block) block(action);
         
-        if (!action.font) action.font = [UIFont systemFontOfSize:18.0f];
+        if (!action.font) action.font = FontRegularWithSize(16);
         
         if (!action.title) action.title = @"按钮";
         

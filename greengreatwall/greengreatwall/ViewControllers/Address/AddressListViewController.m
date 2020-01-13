@@ -351,7 +351,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 {
     if (!_labelTemp) {
         _labelTemp = [UILabel initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:@"this is label"];
-        _labelTemp.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTemp.lineBreakMode = LineBreakModeDefault;
         _labelTemp.backgroundColor = [UIColor clearColor];
         _labelTemp.textAlignment = NSTextAlignmentCenter;
         _labelTemp.textColor = [UIColor grayColor];

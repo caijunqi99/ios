@@ -104,20 +104,21 @@
 /**
 *实名认证
 *https://shop.bayi-shop.com/mobile/memberauth/auth
-*member_id Number 用户id
-*username String 姓名
-*idcard String 身份证号
-*member_bankname String 银行名称
-*member_bankcard String 银行卡账号
-*member_idcard_image2 String 身份证正面照，file文件
-*member_idcard_image3 String 身份证反面照，file文件
-*member_provinceid Number 0  省id
-*member_cityid Number 0 市id, 没有传0
-*member_areaid Number 0 区id, 没有传0
-*member_townid Number 0 镇/乡id， 没有传0
-*member_villageid Number 0 村id, 没有传0
-*member_areainfo String 地区信息
-*commit 等于1为提交，否则为获取数据
+*member_id                  用户id
+*username                   姓名
+*idcard                     身份证号
+*member_bankname            银行名称
+*member_bankcard            银行卡账号
+*member_idcard_image1       身份证正面照，file文件
+*member_idcard_image2       身份证正面照，file文件
+*member_idcard_image3       身份证反面照，file文件
+*member_provinceid          省id
+*member_cityid              市id, 没有传0
+*member_areaid              区id, 没有传0
+*member_townid              镇/乡id， 没有传0
+*member_villageid           村id, 没有传0
+*member_areainfo            地区信息
+*commit                     等于1为提交，否则为获取数据
 */
 #define HostMmemberauthauth        Host@"/memberauth/auth"//实名认证
 
@@ -157,14 +158,14 @@
 #define Hostmembermy_withdraw        Host@"/member/my_withdraw"//提现申请
 
 
-#pragma mark - 可用积分/冻结积分/储值卡/交易码 查询接口
+#pragma mark - 可用积分/冻结积分/储值卡/认筹股 查询接口
 /**
- *可用积分/冻结积分/储值卡/交易码 查询接口
+ *可用积分/冻结积分/储值卡/认筹股 查询接口
  *https://shop.bayi-shop.com/mobile/member/my_asset
  *key       token
- *fields    available：可用积分；point：冻结积分；predepoit：储值卡；transaction：交易码
+ *fields    available：可用积分；point：冻结积分；predepoit：储值卡；transaction：认筹股
  */
-    #define Hostmembermy_asset        Host@"/member/my_asset"//可用积分/冻结积分/储值卡/交易码 查询接口
+    #define Hostmembermy_asset        Host@"/member/my_asset"//可用积分/冻结积分/储值卡/认筹股 查询接口
 
 
 #pragma mark - 钱包页面个人资产查询
@@ -185,15 +186,15 @@
 #define Hostmemberinviter        Host@"/member/inviter"//获取推荐下级信息
 
 
-#pragma mark - 可用积分转换为交易码
+#pragma mark - 可用积分转换为认筹股
 /**
- *可用积分转换为交易码
+ *可用积分转换为认筹股
  *https://shop.bayi-shop.com/mobile/Membertransform/PointTransform
  *key               token
- *transtype         1为到储值卡，2为到交易码
+ *transtype         1为到储值卡，2为到认筹股
  *point             数量
  */
-#define HostMembertransformPointTransform       Host@"/Membertransform/PointTransform"//可用积分转换为交易码
+#define HostMembertransformPointTransform       Host@"/Membertransform/PointTransform"//可用积分转换为认筹股
 
 
 #pragma mark - 积分交易明细
@@ -218,15 +219,15 @@
 #define Hostmemberfundpredepositlog        Host@"/memberfund/predepositlog"//储值卡交易明细
 
 
-#pragma mark - 交易码交易明细
+#pragma mark - 认筹股交易明细
 /**
- *交易码交易明细
+ *认筹股交易明细
  *https://shop.bayi-shop.com/mobile/memberfund/transactionlog
  *key      token
  *page          分页，默认第1页
  *pagesize      每页数量，默认5条
  */
-#define Hostmemberfundtransactionlog        Host@"/memberfund/transactionlog"//交易码交易明细
+#define Hostmemberfundtransactionlog        Host@"/memberfund/transactionlog"//认筹股交易明细
 
 
 

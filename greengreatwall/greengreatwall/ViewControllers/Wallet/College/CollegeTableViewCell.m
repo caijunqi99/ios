@@ -50,7 +50,7 @@
         
         _labelTitle = [[UILabelAlignToTopLeft alloc] init];
         _labelTitle.numberOfLines = 5;
-        _labelTitle.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTitle.lineBreakMode = LineBreakModeDefault;
         _labelTitle.textColor = kColorFontMedium;
         _labelTitle.backgroundColor = [UIColor clearColor];
         _labelTitle.textAlignment = NSTextAlignmentLeft;
@@ -58,7 +58,7 @@
         
 //        _labelPriceOrigin = [[UILabel alloc] init];
 //        _labelPriceOrigin.numberOfLines = 1;
-//        _labelPriceOrigin.lineBreakMode = NSLineBreakByCharWrapping;
+//        _labelPriceOrigin.lineBreakMode = LineBreakModeDefault;
 //        _labelPriceOrigin.textColor = GPHexColor(0xAAAAAA);
 //        _labelPriceOrigin.backgroundColor = [UIColor clearColor];
 //        _labelPriceOrigin.textAlignment = NSTextAlignmentLeft;
@@ -66,7 +66,7 @@
 //
 //        _labelPrice = [[UILabel alloc] init];
 //        _labelPrice.numberOfLines = 1;
-//        _labelPrice.lineBreakMode = NSLineBreakByCharWrapping;
+//        _labelPrice.lineBreakMode = LineBreakModeDefault;
 //        _labelPrice.textColor = [UIColor redColor];
 //        _labelPrice.backgroundColor = [UIColor clearColor];
 //        _labelPrice.textAlignment = NSTextAlignmentLeft;
@@ -75,7 +75,7 @@
         
         _labelTime = [[UILabel alloc] init];
         _labelTime.numberOfLines = 1;
-        _labelTime.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTime.lineBreakMode = LineBreakModeDefault;
         _labelTime.textColor = GPHexColor(0xAAAAAA);
         _labelTime.backgroundColor = [UIColor clearColor];
         _labelTime.textAlignment = NSTextAlignmentLeft;

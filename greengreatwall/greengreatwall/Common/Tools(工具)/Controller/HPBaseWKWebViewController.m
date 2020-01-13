@@ -10,7 +10,7 @@
 #import <WebKit/WebKit.h>
 static void *WKWebBrowserContext = &WKWebBrowserContext;
 
-@interface HPBaseWKWebViewController () <WKNavigationDelegate>
+@interface HPBaseWKWebViewController () <WKNavigationDelegate,WKUIDelegate>
 @property(nonatomic,strong)WKWebView *contentWebView;
 @property(nonatomic,strong)UIProgressView *progressView;
 
@@ -91,6 +91,12 @@ static void *WKWebBrowserContext = &WKWebBrowserContext;
     }
 }
 
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+{
+    [HPAlertTools showAlertWith:self title:@"提示信息" message:message callbackBlock:^(NSInteger btnIndex) {
+        completionHandler();
+    } cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"确定",nil];
+}
 
 #pragma mark - WKNavigationDelegate
 //开始加载
@@ -175,6 +181,7 @@ static void *WKWebBrowserContext = &WKWebBrowserContext;
         _contentWebView.scrollView.showsVerticalScrollIndicator = NO;
         // 设置代理
         _contentWebView.navigationDelegate = self;
+        _contentWebView.UIDelegate = self;
         //kvo 添加进度监控
         [_contentWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:WKWebBrowserContext];
         

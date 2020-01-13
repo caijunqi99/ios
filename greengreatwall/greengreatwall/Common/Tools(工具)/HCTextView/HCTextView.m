@@ -77,7 +77,7 @@
     if ([[self placeholder] length] > 0) {
         if (_placeHolderLabel == nil) {
             _placeHolderLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 8, self.bounds.size.width - 16, 0)];
-            _placeHolderLabel.lineBreakMode = NSLineBreakByCharWrapping;
+            _placeHolderLabel.lineBreakMode = LineBreakModeDefault;
             _placeHolderLabel.numberOfLines = 0;
             _placeHolderLabel.font = self.placeholderFont;
             _placeHolderLabel.backgroundColor = [UIColor clearColor];

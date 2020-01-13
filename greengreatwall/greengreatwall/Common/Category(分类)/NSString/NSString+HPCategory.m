@@ -107,13 +107,13 @@
 
 -(CGFloat)heightWithFontSize:(CGFloat)fontSize width:(CGFloat)width
 {
-    NSDictionary *attrs = @{NSFontAttributeName:[UIFont hp_systemFontOfSize:fontSize]};
+    NSDictionary *attrs = @{NSFontAttributeName:FontRegularWithSize(fontSize)};
     return  [self boundingRectWithSize:CGSizeMake(width, 0) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size.height;
 }
 
 - (CGFloat) widthWithFontSize:(CGFloat)fontSize height:(CGFloat)maxHeight
 {
-    NSDictionary *attrs = @{NSFontAttributeName:[UIFont hp_systemFontOfSize:fontSize]};
+    NSDictionary *attrs = @{NSFontAttributeName:FontRegularWithSize(fontSize)};
     return  [self boundingRectWithSize:CGSizeMake(0, maxHeight) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size.width;
 }
 

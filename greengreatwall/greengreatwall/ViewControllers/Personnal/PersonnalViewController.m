@@ -247,6 +247,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_buttonWallet setFrame:RectWithScale(CGRectMake(630,34,196,68), GPCommonLayoutScaleSizeWidthIndex)];
     [_buttonWallet setBackgroundImage:GetImage(@"go按钮") forState:UIControlStateNormal];
     [_buttonWallet setTitle:@"go >>" forState:UIControlStateNormal];
+    [_buttonWallet.titleLabel setFont:FontRegularWithSize(16)];
     [_buttonWallet setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_buttonWallet setTag:99];
     [_buttonWallet addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];

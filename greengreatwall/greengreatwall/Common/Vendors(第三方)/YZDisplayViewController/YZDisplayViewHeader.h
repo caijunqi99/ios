@@ -49,7 +49,7 @@ static CGFloat const YZUnderLineH = 2;
 #define YZScreenH [UIScreen mainScreen].bounds.size.height
 
 // 默认标题字体
-#define YZTitleFont [UIFont systemFontOfSize:15]
+#define YZTitleFont FontRegularWithSize(16)
 
 // 默认标题间距
 static CGFloat const margin = 20;

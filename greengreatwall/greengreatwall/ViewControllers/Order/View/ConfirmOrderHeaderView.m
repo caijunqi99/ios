@@ -24,7 +24,7 @@
         
         _labelStoreName = [[UILabelAlignToTopLeft alloc] init];
         _labelStoreName.numberOfLines = 3;
-        _labelStoreName.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelStoreName.lineBreakMode = LineBreakModeDefault;
         _labelStoreName.textColor = kColorFontMedium;
         _labelStoreName.backgroundColor = [UIColor clearColor];
         _labelStoreName.textAlignment = NSTextAlignmentLeft;

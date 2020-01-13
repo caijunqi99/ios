@@ -73,7 +73,7 @@ static NSString * const ListTableViewID = @"ListTableViewCell";
 -(void)setFont:(UIFont *)font
 {
     _font = font;
-    [_menu.titleLabel setFont:_font ? : [UIFont systemFontOfSize:20]];
+    [_menu.titleLabel setFont:_font ? : FontRegularWithSize(20)];
 }
 
 - (void)setChooseMode:(HPChooseMode)chooseMode {
@@ -178,7 +178,7 @@ static NSString * const ListTableViewID = @"ListTableViewCell";
     }
     cell.textLabel.text = self.menuTitleArr[indexPath.row];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
-    cell.textLabel.font = self.font ? : [UIFont systemFontOfSize:20];
+    cell.textLabel.font = self.font ? : FontRegularWithSize(20);
     cell.textLabel.textColor = self.no_selectColor? _no_selectColor : [UIColor darkGrayColor];
     if ([cell.textLabel.text isEqualToString:currentMenu]) {
 //        cell.tintColor = _selectColor ? _selectColor : [UIColor darkGrayColor];
@@ -208,7 +208,7 @@ static NSString * const ListTableViewID = @"ListTableViewCell";
         [_menu setTitleColor:[UIColor darkGrayColor] forState:UIControlStateSelected];
         [_menu addTarget:self action:@selector(sectionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [_menu setBackgroundColor: [UIColor whiteColor]];
-        _menu.titleLabel.font = [UIFont systemFontOfSize:20];
+        _menu.titleLabel.font = FontRegularWithSize(20);
         _menu.center =CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     }
     

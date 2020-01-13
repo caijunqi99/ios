@@ -42,28 +42,28 @@
         
         _labelTime = [[UILabel alloc] init];
         _labelTime.numberOfLines = 1;
-        _labelTime.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTime.lineBreakMode = LineBreakModeDefault;
         _labelTime.textColor = [UIColor grayColor];
         _labelTime.backgroundColor = [UIColor clearColor];
         _labelTime.textAlignment = NSTextAlignmentLeft;
         
         _labelDescribe = [[UILabel alloc] init];
         _labelDescribe.numberOfLines = 1;
-        _labelDescribe.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelDescribe.lineBreakMode = LineBreakModeDefault;
         _labelDescribe.textColor = [UIColor grayColor];
         _labelDescribe.backgroundColor = [UIColor clearColor];
         _labelDescribe.textAlignment = NSTextAlignmentRight;
         
 //        _labellevel = [[UILabel alloc] init];
 //        _labellevel.numberOfLines = 1;
-//        _labellevel.lineBreakMode = NSLineBreakByCharWrapping;
+//        _labellevel.lineBreakMode = LineBreakModeDefault;
 //        _labellevel.textColor = [UIColor blackColor];
 //        _labellevel.backgroundColor = [UIColor clearColor];
 //        _labellevel.textAlignment = NSTextAlignmentCenter;
 //
 //        _labeladdtime = [[UILabel alloc] init];
 //        _labeladdtime.numberOfLines = 1;
-//        _labeladdtime.lineBreakMode = NSLineBreakByCharWrapping;
+//        _labeladdtime.lineBreakMode = LineBreakModeDefault;
 //        _labeladdtime.textColor = [UIColor blackColor];
 //        _labeladdtime.backgroundColor = [UIColor clearColor];
 //        _labeladdtime.textAlignment = NSTextAlignmentCenter;

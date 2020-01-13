@@ -112,7 +112,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     
     _labelTemp = [UILabel initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:@"this is label"];
-    _labelTemp.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelTemp.lineBreakMode = LineBreakModeDefault;
     _labelTemp.backgroundColor = [UIColor clearColor];
     [_viewTemp addSubview:_labelTemp];
     [_labelTemp setFrame:CGRectMake(80, 10, _viewTemp.width - 90, 30)];

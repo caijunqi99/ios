@@ -21,7 +21,7 @@
 
 -(void)createInterface
 {
-    [self.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [self.titleLabel setFont:FontRegularWithSize(15)];
     self.adjustsImageWhenHighlighted = NO;
     self.sortMode = HPSortModeNone;
     

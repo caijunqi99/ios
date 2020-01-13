@@ -48,8 +48,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     if (self = [super init]) {
         _arrayDataSource = [[NSMutableArray alloc]initWithCapacity:0];
 //        _strParameter = @"1";
-//        _arrayButtonTitle = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"交易码",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"商学院",@"视频",
-//        _arrayButtonImageName = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"交易码",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"商学院",@"视频",
+//        _arrayButtonTitle = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"认筹股",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"商学院",@"视频",
+//        _arrayButtonImageName = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"认筹股",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"商学院",@"视频",
     }
     return self;
 }
@@ -118,7 +118,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     for (NSInteger i = 0; i < arrayLabelText.count; i++) {
         
         _labelTemp[i] = [UILabel initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:arrayLabelText[i]];
-        _labelTemp[i].lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTemp[i].lineBreakMode = LineBreakModeDefault;
         _labelTemp[i].backgroundColor = [UIColor clearColor];
         [_labelTemp[i] setTextColor:[UIColor blackColor]];
         _labelTemp[i].textAlignment = NSTextAlignmentLeft;
@@ -264,7 +264,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     {
         
     }
-    else if([buttonName containsString:@"交易码"])
+    else if([buttonName containsString:@"认筹股"])
     {
         
     }

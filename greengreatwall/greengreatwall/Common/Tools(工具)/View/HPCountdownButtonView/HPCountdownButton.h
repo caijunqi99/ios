@@ -13,7 +13,7 @@
 
 typedef void(^CountingBlock)(HPCountdownButton *codeTimeButton);
 typedef void(^CdCompleteBlock)(void);
-static CGFloat const countFontSize = 14;
+static CGFloat const countFontSize = 12;
 
 typedef NS_ENUM(NSInteger,HPTimeModel) {
     HPTimeModelTimeDown  = 0,//倒计时

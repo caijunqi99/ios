@@ -19,7 +19,7 @@
         
         _labelState = [[UILabelAlignToTopLeft alloc] init];
         _labelState.numberOfLines = 1;
-        _labelState.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelState.lineBreakMode = LineBreakModeDefault;
         _labelState.textColor = kColorTheme;
         _labelState.backgroundColor = [UIColor whiteColor];
         _labelState.textAlignment = NSTextAlignmentRight;

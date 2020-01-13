@@ -65,7 +65,7 @@
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-    CGSize cSize = [@"A" sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20]}];//计算单个字所需空间
+    CGSize cSize = [@"A" sizeWithAttributes:@{NSFontAttributeName:FontRegularWithSize(20)}];//计算单个字所需空间
     int width = rect.size.width / self.CodeStr.length - cSize.width;//间距
     int height = rect.size.height - cSize.height;//可浮动高度
     CGPoint point;
@@ -78,7 +78,7 @@
         point = CGPointMake(pX, pY);
         unichar c = [self.CodeStr characterAtIndex:i];
         NSString *textC = [NSString stringWithFormat:@"%C", c];
-        [textC drawAtPoint:point withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20]}];
+        [textC drawAtPoint:point withAttributes:@{NSFontAttributeName:FontRegularWithSize(20)}];
     }
     
     //干扰线

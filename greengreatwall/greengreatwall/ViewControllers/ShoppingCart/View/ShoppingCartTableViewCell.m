@@ -39,7 +39,7 @@
         
         _labelTitle = [[UILabelAlignToTopLeft alloc] init];
         _labelTitle.numberOfLines = 3;
-        _labelTitle.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTitle.lineBreakMode = LineBreakModeDefault;
         _labelTitle.textColor = kColorFontMedium;
         _labelTitle.backgroundColor = [UIColor clearColor];
         _labelTitle.textAlignment = NSTextAlignmentLeft;
@@ -47,7 +47,7 @@
         
         _labelCount = [[UILabel alloc] init];
         _labelCount.numberOfLines = 1;
-        _labelCount.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelCount.lineBreakMode = LineBreakModeDefault;
         _labelCount.textColor = kColorFontMedium;
         _labelCount.backgroundColor = [UIColor clearColor];
         _labelCount.textAlignment = NSTextAlignmentCenter;
@@ -55,7 +55,7 @@
         
         _labelPrice = [[UILabel alloc] init];
         _labelPrice.numberOfLines = 1;
-        _labelPrice.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelPrice.lineBreakMode = LineBreakModeDefault;
         _labelPrice.textColor = rgb(255, 140, 0);
         _labelPrice.backgroundColor = [UIColor clearColor];
         _labelPrice.textAlignment = NSTextAlignmentLeft;
@@ -64,7 +64,7 @@
         
         _labelGoodsType = [[UILabelAlignToTopLeft alloc] init];
         _labelGoodsType.numberOfLines = 1;
-        _labelGoodsType.lineBreakMode = NSLineBreakByTruncatingTail;
+        _labelGoodsType.lineBreakMode = LineBreakModeDefault;
         _labelGoodsType.textColor = [UIColor blackColor];
         _labelGoodsType.backgroundColor = rgb(239, 240, 241);
         _labelGoodsType.textAlignment = NSTextAlignmentLeft;

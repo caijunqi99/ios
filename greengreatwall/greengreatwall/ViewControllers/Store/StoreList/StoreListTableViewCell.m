@@ -163,7 +163,7 @@
         
         _labelTitle = [[UILabel alloc] init];
         _labelTitle.numberOfLines = 2;
-        _labelTitle.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTitle.lineBreakMode = LineBreakModeDefault;
         _labelTitle.textColor = kColorFontMedium;
         _labelTitle.backgroundColor = [UIColor clearColor];
         _labelTitle.textAlignment = NSTextAlignmentLeft;
@@ -173,7 +173,7 @@
         
         _labelSales = [[UILabel alloc] init];
         _labelSales.numberOfLines = 1;
-        _labelSales.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelSales.lineBreakMode = LineBreakModeDefault;
         _labelSales.textColor = [UIColor lightGrayColor];
         _labelSales.backgroundColor = [UIColor clearColor];
         _labelSales.textAlignment = NSTextAlignmentLeft;
@@ -184,7 +184,7 @@
         
         _labelStoreType = [[UILabel alloc] init];
         _labelStoreType.numberOfLines = 1;
-        _labelStoreType.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelStoreType.lineBreakMode = LineBreakModeDefault;
         _labelStoreType.textColor = [UIColor whiteColor];
         _labelStoreType.backgroundColor = [UIColor redColor];
         _labelStoreType.textAlignment = NSTextAlignmentCenter;

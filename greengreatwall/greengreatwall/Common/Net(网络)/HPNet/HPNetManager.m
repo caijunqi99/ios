@@ -319,7 +319,7 @@ static NSMutableArray *tasks;
                         [HPAlertTools showAlertWith:currentVC title:@"提示信息" message:@"登录失效,请登录" callbackBlock:^(NSInteger btnIndex) {
                             
                             if (btnIndex == 1) {
-                                [currentVC.navigationController popToRootViewControllerAnimated:NO];
+                                [currentVC.navigationController popToRootViewControllerAnimated:YES];
                                 currentVC.tabBarController.tabBar.hidden = NO;
                                 [HPUserDefault removeUserDefaultObjectFromKey:@"token"];
                                 
@@ -329,14 +329,14 @@ static NSMutableArray *tasks;
                                 GPKeyWindow.rootViewController = nav;
                                 [GPKeyWindow makeKeyAndVisible];
                             }else if (btnIndex == 0){
+//                                //设置indextabbar为主窗口的根视图控制器
+//                                [currentVC.navigationController popToRootViewControllerAnimated:YES];
+//                                currentVC.tabBarController.tabBar.hidden = NO;
                                 //设置indextabbar为主窗口的根视图控制器
-                                [currentVC.navigationController popToRootViewControllerAnimated:YES];
-                                
-                                IndexTabBarViewController *vc = [IndexTabBarViewController shareInstance];
+                                IndexTabBarViewController *vc = [[IndexTabBarViewController alloc] init];
                                 [vc setSelectedIndex:0];
-                                vc.tabBar.hidden = NO;
-                                //                                GPKeyWindow.rootViewController = vc;
-                                //                                [GPKeyWindow makeKeyAndVisible];
+                                GPKeyWindow.rootViewController = vc;
+                                [GPKeyWindow makeKeyAndVisible];
                             }
                         } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
                     }
@@ -386,7 +386,7 @@ static NSMutableArray *tasks;
                         [HPAlertTools showAlertWith:currentVC title:@"提示信息" message:@"登录失效,请登录" callbackBlock:^(NSInteger btnIndex) {
                             
                             if (btnIndex == 1) {
-                                [currentVC.navigationController popToRootViewControllerAnimated:NO];
+                                [currentVC.navigationController popToRootViewControllerAnimated:YES];
                                 currentVC.tabBarController.tabBar.hidden = NO;
                                 [HPUserDefault removeUserDefaultObjectFromKey:@"token"];
                                 
@@ -396,14 +396,14 @@ static NSMutableArray *tasks;
                                 GPKeyWindow.rootViewController = nav;
                                 [GPKeyWindow makeKeyAndVisible];
                             }else if (btnIndex == 0){
+//                                //设置indextabbar为主窗口的根视图控制器
+//                                [currentVC.navigationController popToRootViewControllerAnimated:YES];
+//                                currentVC.tabBarController.tabBar.hidden = NO;
                                 //设置indextabbar为主窗口的根视图控制器
-                                [currentVC.navigationController popToRootViewControllerAnimated:YES];
-                                
-                                IndexTabBarViewController *vc = [IndexTabBarViewController shareInstance];
+                                IndexTabBarViewController *vc = [[IndexTabBarViewController alloc] init];
                                 [vc setSelectedIndex:0];
-                                vc.tabBar.hidden = NO;
-                                //                                GPKeyWindow.rootViewController = vc;
-                                //                                [GPKeyWindow makeKeyAndVisible];
+                                GPKeyWindow.rootViewController = vc;
+                                [GPKeyWindow makeKeyAndVisible];
                             }
                         } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
                     }

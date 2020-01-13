@@ -317,17 +317,17 @@ void ShowMessageInSeconds(NSString * message,NSTimeInterval time)
     UILabel *label = [[UILabel alloc]init];
     
     
-    CGFloat height = CGRectGetHeight(RectWithTextAndFontAndBreakModeAndWidth(message, FontRegularWithSize(13), NSLineBreakByCharWrapping, screenSize.width - 40));
+    CGFloat height = CGRectGetHeight(RectWithTextAndFontAndBreakModeAndWidth(message, FontRegularWithSize(16), LineBreakModeDefault, screenSize.width - 40));
     
     label.frame = CGRectMake(10, 5, screenSize.width -40, height);
     label.text = message;
     label.numberOfLines = 0;
-    label.lineBreakMode = NSLineBreakByCharWrapping;
+    label.lineBreakMode = LineBreakModeDefault;
     
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
-    label.font = FontRegularWithSize(13);
+    label.font = FontRegularWithSize(16);
     [showview addSubview:label];
     
     showview.frame = CGRectMake(10,

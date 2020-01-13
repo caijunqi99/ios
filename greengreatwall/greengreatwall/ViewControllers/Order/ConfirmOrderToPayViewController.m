@@ -91,7 +91,7 @@
     for (NSInteger i = 0; i<5; i++) {
         
         _labelTemp[i] = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:arrayLabelText[i]];
-        _labelTemp[i].lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTemp[i].lineBreakMode = LineBreakModeDefault;
         _labelTemp[i].backgroundColor = [UIColor clearColor];
     }
     

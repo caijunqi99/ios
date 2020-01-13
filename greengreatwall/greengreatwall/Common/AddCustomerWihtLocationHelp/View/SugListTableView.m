@@ -72,7 +72,7 @@ static NSString *const UITableViewCellID = @"UITableViewCellID";
     }
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     cell.textLabel.text = self.dataArry[indexPath.row];
-    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.font = FontRegularWithSize(16);
     cell.textLabel.textColor = [UIColor getHEXRGB:@"222222"];
     return cell;
 }

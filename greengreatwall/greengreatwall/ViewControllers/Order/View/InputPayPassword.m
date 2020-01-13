@@ -78,8 +78,8 @@
     if (!_titleL) {
         _titleL = [[UILabel alloc]initWithFrame:CGRectMake(20, 20, self.contentView.width - 40, 30)];
         _titleL.numberOfLines = 1;
-        _titleL.lineBreakMode = NSLineBreakByCharWrapping;
-        _titleL.font = [UIFont systemFontOfSize:12];
+        _titleL.lineBreakMode = LineBreakModeDefault;
+        _titleL.font = FontRegularWithSize(12);
         _titleL.text = @"请输入支付密码";
         _titleL.textColor = [UIColor blackColor];
         _titleL.backgroundColor = [UIColor whiteColor];

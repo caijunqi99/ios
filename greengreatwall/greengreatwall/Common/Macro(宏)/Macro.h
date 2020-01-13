@@ -20,13 +20,14 @@
 #pragma mark - ------ 字体 -------
 
 /*苹方简体常规*/
-#define FontRegularWithSize(fontSize)           [UIFont fontWithName:@"PingFangSC-Regular" size:fontSize]
+#define FontRegularWithSize(fontSize)           [UIFont fontWithName:@"PingFangSC-Regular" size:(fontSize*SizeScale)]
 /*苹方简体中黑体*/
-#define FontMediumWithSize(fontSize)           [UIFont fontWithName:@"PingFangSC-Medium" size:fontSize]
+#define FontMediumWithSize(fontSize)           [UIFont fontWithName:@"PingFangSC-Medium" size:(fontSize*SizeScale)]
+//不同设备的屏幕比例(当然倍数可以自己控制)
+#define SizeScale (([[UIScreen mainScreen] bounds].size.width)/414.0)
 
-
-
-
+#define LineBreakModeDefault (NSLineBreakByTruncatingTail)
+//NSLineBreakByCharWrapping|
 #pragma mark - ----- 颜色 -------
 
 //rgb颜色转换（16进制->10进制）

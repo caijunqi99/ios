@@ -91,7 +91,7 @@
     [self.viewContent setFrame:CGRectMake(0, 30*GPCommonLayoutScaleSizeWidthIndex, GPScreenWidth, 190*GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelTemp = [UILabel initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:@"头像"];
-    _labelTemp.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelTemp.lineBreakMode = LineBreakModeDefault;
     _labelTemp.backgroundColor = [UIColor clearColor];
     [_labelTemp setFrame:RectWithScale(CGRectMake(30, 25, 200, 120), GPCommonLayoutScaleSizeWidthIndex)];
     [self.viewContent addSubview:_labelTemp];
@@ -140,7 +140,7 @@
             if (IsStringEmptyOrNull(_textFieldNickname.text)) {
                 [HPAlertTools showTipAlertViewWith:self title:@"提示信息" message:@"昵称不能为空" buttonTitle:@"确定" buttonStyle:HPAlertActionStyleDefault];
             }else{
-                [self netRequest];
+                [self netRequestEdit];
             }
             
         }
@@ -228,7 +228,8 @@
 
 -(void)netRequestEdit
 {
-    [HPNetManager POSTWithUrlString:Hostmembermy_edit isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"1",@"commit",_textFieldNickname.text,@"member_name",@"man",@"member_sex",@"1",@"member_email", nil] successBlock:^(id response) {
+    [HPNetManager POSTWithUrlString:Hostmembermy_edit isNeedCache:NO parameters:[NSDictionary dictionaryWithObjectsAndKeys:[HPUserDefault objectForKey:@"token"],@"key",@"1",@"commit",_textFieldNickname.text,@"member_name", nil] successBlock:^(id response) {
+        //@"man",@"member_sex",@"1",@"member_email",
         //GPDebugLog(@"response:%@",response);
 
         if ([response[@"code"] integerValue] == 200) {

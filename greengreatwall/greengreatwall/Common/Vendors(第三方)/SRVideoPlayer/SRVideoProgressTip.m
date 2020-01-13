@@ -35,7 +35,7 @@
     
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc]init];
-        _tipLabel.font = [UIFont systemFontOfSize:15];
+        _tipLabel.font = FontRegularWithSize(16);
         _tipLabel.textColor = [UIColor whiteColor];
         _tipLabel.textAlignment = NSTextAlignmentCenter;
     }

@@ -19,7 +19,7 @@
         
         _labelTotalPrice = [[UILabel alloc] init];
         _labelTotalPrice.numberOfLines = 1;
-        _labelTotalPrice.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTotalPrice.lineBreakMode = LineBreakModeDefault;
         _labelTotalPrice.textColor = [UIColor blackColor];
         _labelTotalPrice.backgroundColor = [UIColor clearColor];
         _labelTotalPrice.textAlignment = NSTextAlignmentLeft;

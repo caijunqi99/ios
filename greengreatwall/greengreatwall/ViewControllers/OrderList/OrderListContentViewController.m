@@ -453,7 +453,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         [view rounded:10 rectCorners:(UIRectCornerBottomLeft|UIRectCornerBottomRight)];
         NSString *stringAmount = _arrayDataSource[section][@"order_amount"];
         UILabel *labelAmount = [[UILabel alloc]init];
-        [labelAmount setText:[NSString stringWithFormat:@"订单总价:%@",stringAmount]];
+        [labelAmount setText:[NSString stringWithFormat:@"订单总价:%@元",stringAmount]];
         [labelAmount setFrame:RectWithScale(CGRectMake(200, 0, 750, 60), GPCommonLayoutScaleSizeWidthIndex)];
         [labelAmount setTextAlignment:NSTextAlignmentRight];
         [viewFooter addSubview:labelAmount];

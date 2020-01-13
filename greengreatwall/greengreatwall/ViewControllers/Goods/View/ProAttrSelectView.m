@@ -172,8 +172,8 @@
     if (!_titleL) {
         _titleL = [[UILabelAlignToBottomLeft alloc]initWithFrame:CGRectMake(self.imageV.right + 10, 10, GPScreenWidth - self.imageV.right - 20, 100)];
         _titleL.numberOfLines = 5;
-        _titleL.lineBreakMode = NSLineBreakByCharWrapping;
-        _titleL.font = [UIFont systemFontOfSize:12];
+        _titleL.lineBreakMode = LineBreakModeDefault;
+        _titleL.font = FontRegularWithSize(12);
         _titleL.text = @"商品名称";
         _titleL.textColor = [UIColor blackColor];
         _titleL.backgroundColor = [UIColor whiteColor];
@@ -185,7 +185,7 @@
 - (UILabel *)priceL {
     if (!_priceL) {
         _priceL = [[UILabel alloc]initWithFrame:CGRectMake(self.imageV.right + 10, 70, GPScreenWidth - 50, 20)];
-        _priceL.font = [UIFont systemFontOfSize:15];
+        _priceL.font = FontRegularWithSize(15);
         _priceL.text = @"商品价格暂无";
         _priceL.textColor = [UIColor blackColor];
         _priceL.backgroundColor = [UIColor whiteColor];
@@ -203,7 +203,7 @@
 - (UILabel *)desL {
     if (!_desL) {
         _desL = [[UILabel alloc]initWithFrame:CGRectMake(self.priceL.left, self.priceL.maxY, self.priceL.width, 20)];
-        _desL.font = [UIFont systemFontOfSize:14];
+        _desL.font = FontRegularWithSize(14);
         _desL.text = @"请选择商品属性";
         _desL.textColor = [UIColor blackColor];
         _desL.backgroundColor = [UIColor whiteColor];
@@ -380,7 +380,7 @@
 - (UILabel *)attrTypeL {
     if (!_attrTypeL) {
         _attrTypeL = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, GPScreenWidth, 40)];
-        _attrTypeL.font = [UIFont systemFontOfSize:15];
+        _attrTypeL.font = FontRegularWithSize(15);
         _attrTypeL.textColor = [UIColor blackColor];
         _attrTypeL.text = self.data.allKeys.firstObject;
     }
@@ -394,7 +394,7 @@
 + (AttrBtn *)attrBtnWithTitle:(NSString *)title {
     AttrBtn *btn = [super buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:13];
+    btn.titleLabel.font = FontRegularWithSize(13);
     btn.layer.cornerRadius = 5;
     btn.layer.masksToBounds = YES;
     //设置处于未点击状态下的按钮

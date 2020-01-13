@@ -31,7 +31,7 @@
     cutbtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [cutbtn setTitle:@"➖" forState:UIControlStateNormal];
     [cutbtn setTitleColor:[UIColor darkGrayColor]  forState:UIControlStateNormal];
-    [cutbtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [cutbtn.titleLabel setFont:FontRegularWithSize(16)];
     cutbtn.frame = CGRectMake(0, 0, self.bounds.size.width/3, self.bounds.size.height);
     cutbtn.tag = 101;
     [cutbtn addTarget:self action:@selector(goodsCountNumClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -45,7 +45,7 @@
     countfiled.layer.cornerRadius = 0;
     
     countfiled.text = @"1";
-    countfiled.font = [UIFont systemFontOfSize:12];
+    countfiled.font = FontRegularWithSize(12);
     countfiled.textAlignment = NSTextAlignmentCenter;
     countfiled.keyboardType = UIKeyboardTypeNumberPad;
     countfiled.delegate = self;
@@ -53,7 +53,7 @@
     addbtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addbtn setTitle:@"➕" forState:UIControlStateNormal];
     [addbtn setTitleColor:[UIColor darkGrayColor]  forState:UIControlStateNormal];
-    [addbtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [addbtn.titleLabel setFont:FontRegularWithSize(16)];
     [self addSubview:addbtn];
     addbtn.frame = CGRectMake(CGRectGetMaxX(countfiled.frame), 0, self.bounds.size.width/3, self.bounds.size.height);
     addbtn.tag = 102;

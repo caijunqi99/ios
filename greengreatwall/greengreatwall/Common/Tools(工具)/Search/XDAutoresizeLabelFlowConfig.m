@@ -34,7 +34,7 @@
         self.textMargin = 20;
         self.textColor = kColorFontRegular;
         self.textSelectedColor = [UIColor whiteColor];
-        self.textFont = [UIFont systemFontOfSize:15];
+        self.textFont = FontRegularWithSize(16);
         self.backgroundColor = kColorSearchBackGround;
         self.sectionHeight = 40;
     }

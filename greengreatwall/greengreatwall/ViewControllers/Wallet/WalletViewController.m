@@ -68,8 +68,8 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     if (self = [super init]) {
         _arrayDataSource = [[NSMutableArray alloc]initWithCapacity:0];
         _strParameter = @"1";
-        _arrayButtonTitle = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"交易码",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"提现",@"互转",@"储值卡",@"交易码",@"积分",           @"商学院",@"视频",
-        _arrayButtonImageName = [[NSMutableArray alloc]initWithObjects:@"充值钱包",@"提现钱包",@"互转钱包",@"储值卡",@"交易码",@"积分钱包",@"实名",@"团队钱包",@"邀请好友钱包", nil];//@"提现",@"互转",@"储值卡",@"交易码",@"积分",           @"商学院",@"视频",
+        _arrayButtonTitle = [[NSMutableArray alloc]initWithObjects:@"充值",@"提现",@"互转",@"储值卡",@"认筹股",@"积分",@"实名",@"团队",@"邀请好友", nil];//@"提现",@"互转",@"储值卡",@"认筹股",@"积分",           @"商学院",@"视频",
+        _arrayButtonImageName = [[NSMutableArray alloc]initWithObjects:@"充值钱包",@"提现钱包",@"互转钱包",@"储值卡",@"认筹股",@"积分钱包",@"实名",@"团队钱包",@"邀请好友钱包", nil];//@"提现",@"互转",@"储值卡",@"认筹股",@"积分",           @"商学院",@"视频",
     }
     return self;
 }
@@ -137,7 +137,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     for (NSInteger i = 0; i<11; i++) {
         
         _labelTemp[i] = [UILabel initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor blackColor] title:arrayLabelText[i]];
-        _labelTemp[i].lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTemp[i].lineBreakMode = LineBreakModeDefault;
         _labelTemp[i].backgroundColor = [UIColor clearColor];
     }
     
@@ -343,7 +343,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if([buttonName containsString:@"交易码"])
+    else if([buttonName containsString:@"认筹股"])
     {
         TransationViewController *vc = [[TransationViewController alloc]init];
         vc.hidesBottomBarWhenPushed = YES;

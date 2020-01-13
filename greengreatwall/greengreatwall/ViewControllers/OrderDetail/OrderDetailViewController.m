@@ -108,13 +108,13 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_viewState setFrame:RectWithScale(CGRectMake(0, 0-1000, 1080, 380+1000), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelState = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor whiteColor] title:@"卖家已发货"];
-    _labelState.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelState.lineBreakMode = LineBreakModeDefault;
     _labelState.backgroundColor = [UIColor clearColor];
     [_viewState addSubview:_labelState];
     [_labelState setFrame:RectWithScale(CGRectMake(120, 170+1000, 840, 60), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelDescribe = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor whiteColor] title:@""];
-    _labelDescribe.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelDescribe.lineBreakMode = LineBreakModeDefault;
     _labelDescribe.backgroundColor = [UIColor clearColor];
     //    [_viewState addSubview:_labelDescribe];
     [_labelDescribe setFrame:RectWithScale(CGRectMake(120, 230+1000, 840, 120), GPCommonLayoutScaleSizeWidthIndex)];
@@ -130,13 +130,13 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_imageViewExpress setFrame:RectWithScale(CGRectMake(30, 50, 90, 90), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelExpressState = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:rgb(38, 152, 217) title:@"到达【河南省邮件处理中心】（经转）"];
-    _labelExpressState.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelExpressState.lineBreakMode = LineBreakModeDefault;
     _labelExpressState.backgroundColor = [UIColor clearColor];
     [_viewExpress addSubview:_labelExpressState];
     [_labelExpressState setFrame:RectWithScale(CGRectMake(150, 50, 780, 40), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelExpressTime = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:rgb(152, 152, 152) title:@"2020-01-04 09:30:00"];
-    _labelExpressTime.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelExpressTime.lineBreakMode = LineBreakModeDefault;
     _labelExpressTime.backgroundColor = [UIColor clearColor];
     [_viewExpress addSubview:_labelExpressTime];
     [_labelExpressTime setFrame:RectWithScale(CGRectMake(150, 100, 780, 40), GPCommonLayoutScaleSizeWidthIndex)];
@@ -155,20 +155,20 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_imageViewDelivery setFrame:RectWithScale(CGRectMake(30, 75, 60, 80), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelDeliveryName = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:@"葛朋"];
-    _labelDeliveryName.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelDeliveryName.lineBreakMode = LineBreakModeDefault;
     _labelDeliveryName.backgroundColor = [UIColor clearColor];
     [_viewDelivery addSubview:_labelDeliveryName];
     [_labelDeliveryName setFrame:RectWithScale(CGRectMake(150, 50, 300, 40), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelDeliveryMobile = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:rgb(152, 152, 152) title:@"17777868624"];
-    _labelDeliveryMobile.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelDeliveryMobile.lineBreakMode = LineBreakModeDefault;
     _labelDeliveryMobile.backgroundColor = [UIColor clearColor];
     [_viewDelivery addSubview:_labelDeliveryMobile];
     [_labelDeliveryMobile setFrame:RectWithScale(CGRectMake(450, 50, 600, 40), GPCommonLayoutScaleSizeWidthIndex)];
     _labelDeliveryMobile.textAlignment = NSTextAlignmentRight;
     
     _labelDeliveryAddress = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:@"河北省 廊坊市 三河市"];
-    _labelDeliveryAddress.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelDeliveryAddress.lineBreakMode = LineBreakModeDefault;
     _labelDeliveryAddress.backgroundColor = [UIColor clearColor];
     [_viewDelivery addSubview:_labelDeliveryAddress];
     [_labelDeliveryAddress setFrame:RectWithScale(CGRectMake(150, 100, 780, 80), GPCommonLayoutScaleSizeWidthIndex)];
@@ -180,43 +180,43 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_viewFooter setFrame:RectWithScale(CGRectMake(0, 830, 1080, 400), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelOrderIntro = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(16) textColor:[UIColor blackColor] title:@"订单信息"];
-    _labelOrderIntro.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelOrderIntro.lineBreakMode = LineBreakModeDefault;
     _labelOrderIntro.backgroundColor = [UIColor clearColor];
     [_viewFooter addSubview:_labelOrderIntro];
     [_labelOrderIntro setFrame:RectWithScale(CGRectMake(40, 40, 1000, 50), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelOrderIDIntro = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@"订单编号:"];
-    _labelOrderIDIntro.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelOrderIDIntro.lineBreakMode = LineBreakModeDefault;
     _labelOrderIDIntro.backgroundColor = [UIColor clearColor];
     [_viewFooter addSubview:_labelOrderIDIntro];
     [_labelOrderIDIntro setFrame:RectWithScale(CGRectMake(40, 120, 260, 80), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelOrderID = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@"1234567"];
-    _labelOrderID.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelOrderID.lineBreakMode = LineBreakModeDefault;
     _labelOrderID.backgroundColor = [UIColor clearColor];
     [_viewFooter addSubview:_labelOrderID];
     [_labelOrderID setFrame:RectWithScale(CGRectMake(300, 120, 700, 80), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelOrderCreateTimeIntro = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@"订单创建时间:"];
-    _labelOrderCreateTimeIntro.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelOrderCreateTimeIntro.lineBreakMode = LineBreakModeDefault;
     _labelOrderCreateTimeIntro.backgroundColor = [UIColor clearColor];
     [_viewFooter addSubview:_labelOrderCreateTimeIntro];
     [_labelOrderCreateTimeIntro setFrame:RectWithScale(CGRectMake(40, 200, 260, 80), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelOrderCreateTime = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@"2020-01-04 09:30:00"];
-    _labelOrderCreateTime.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelOrderCreateTime.lineBreakMode = LineBreakModeDefault;
     _labelOrderCreateTime.backgroundColor = [UIColor clearColor];
     [_viewFooter addSubview:_labelOrderCreateTime];
     [_labelOrderCreateTime setFrame:RectWithScale(CGRectMake(300, 200, 700, 80), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelOrderPriceIntro = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@"订单总价:"];
-    _labelOrderPriceIntro.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelOrderPriceIntro.lineBreakMode = LineBreakModeDefault;
     _labelOrderPriceIntro.backgroundColor = [UIColor clearColor];
     [_viewFooter addSubview:_labelOrderPriceIntro];
     [_labelOrderPriceIntro setFrame:RectWithScale(CGRectMake(40, 280, 260, 80), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelOrderPrice = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@"¥ 200"];
-    _labelOrderPrice.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelOrderPrice.lineBreakMode = LineBreakModeDefault;
     _labelOrderPrice.backgroundColor = [UIColor clearColor];
     [_viewFooter addSubview:_labelOrderPrice];
     [_labelOrderPrice setFrame:RectWithScale(CGRectMake(300, 280, 700, 80), GPCommonLayoutScaleSizeWidthIndex)];
@@ -488,7 +488,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     
     _labelOrderCreateTime.text = stringadd_time;
     _labelOrderID.text = [NSString stringWithFormat:@"%@",dic[@"order_sn"]];
-    _labelOrderPrice.text = [NSString stringWithFormat:@"%@",dic[@"order_amount"]];
+    _labelOrderPrice.text = [NSString stringWithFormat:@"%@元",dic[@"order_amount"]];
 }
 
 -(void)buttonClickToPay

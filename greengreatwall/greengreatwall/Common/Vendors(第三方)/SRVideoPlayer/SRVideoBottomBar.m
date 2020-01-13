@@ -40,7 +40,7 @@
     if (!_currentTimeLabel) {
         _currentTimeLabel = [[UILabel alloc] init];
         _currentTimeLabel.textColor = [UIColor whiteColor];
-        _currentTimeLabel.font = [UIFont systemFontOfSize:12.0];
+        _currentTimeLabel.font = FontRegularWithSize(12);
         _currentTimeLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _currentTimeLabel;
@@ -51,7 +51,7 @@
     if (!_totalTimeLabel) {
         _totalTimeLabel = [[UILabel alloc]init];
         _totalTimeLabel.textColor = [UIColor whiteColor];
-        _totalTimeLabel.font = [UIFont systemFontOfSize:12.0];
+        _totalTimeLabel.font = FontRegularWithSize(12);
         _totalTimeLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _totalTimeLabel;

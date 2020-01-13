@@ -25,7 +25,7 @@
         
         _labelSelectAll = [[UILabel alloc] init];
         _labelSelectAll.numberOfLines = 1;
-        _labelSelectAll.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelSelectAll.lineBreakMode = LineBreakModeDefault;
         _labelSelectAll.textColor = [UIColor whiteColor];
         _labelSelectAll.backgroundColor = [UIColor clearColor];
         _labelSelectAll.textAlignment = NSTextAlignmentLeft;
@@ -35,7 +35,7 @@
         
         _labelTotalPrice = [[UILabel alloc] init];
         _labelTotalPrice.numberOfLines = 1;
-        _labelTotalPrice.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTotalPrice.lineBreakMode = LineBreakModeDefault;
         _labelTotalPrice.textColor = [UIColor whiteColor];
         _labelTotalPrice.backgroundColor = [UIColor clearColor];
         _labelTotalPrice.textAlignment = NSTextAlignmentLeft;

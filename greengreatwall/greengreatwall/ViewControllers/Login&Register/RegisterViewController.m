@@ -124,7 +124,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [self.viewLineV setFrame:CGRectMake(_textFieldInvitationCode.left, _textFieldInvitationCode.bottom, _textFieldInvitationCode.width, 1)];
     
     [self.viewTemp addSubview:self.buttonDocument];
-    [self.buttonDocument setFrame:CGRectMake(self.viewTemp.centerX - 150*GPCommonLayoutScaleSizeWidthIndex, self.textFieldInvitationCode.bottom + 10*GPCommonLayoutScaleSizeWidthIndex, 300*GPCommonLayoutScaleSizeWidthIndex, 120*GPCommonLayoutScaleSizeWidthIndex)];
+    [self.buttonDocument setFrame:CGRectMake(self.viewTemp.centerX - 200*GPCommonLayoutScaleSizeWidthIndex, self.textFieldInvitationCode.bottom + 10*GPCommonLayoutScaleSizeWidthIndex, 400*GPCommonLayoutScaleSizeWidthIndex, 120*GPCommonLayoutScaleSizeWidthIndex)];
     
     [self.viewTemp addSubview:self.imageViewSelect];
     [self.imageViewSelect setFrame:CGRectMake(_buttonDocument.left - 50*GPCommonLayoutScaleSizeWidthIndex, self.textFieldInvitationCode.bottom + 50*GPCommonLayoutScaleSizeWidthIndex, 40*GPCommonLayoutScaleSizeWidthIndex, 40*GPCommonLayoutScaleSizeWidthIndex)];
@@ -389,9 +389,9 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
         _textFieldVerify.leftViewMode = UITextFieldViewModeAlways;
         
         
-        [self.buttonGetVerifyCode setFrame:CGRectMake(10*GPCommonLayoutScaleSizeWidthIndex, 20*GPCommonLayoutScaleSizeWidthIndex, 200*GPCommonLayoutScaleSizeWidthIndex, 80*GPCommonLayoutScaleSizeWidthIndex)];
+        [self.buttonGetVerifyCode setFrame:CGRectMake(10*GPCommonLayoutScaleSizeWidthIndex, 20*GPCommonLayoutScaleSizeWidthIndex, 300*GPCommonLayoutScaleSizeWidthIndex, 80*GPCommonLayoutScaleSizeWidthIndex)];
         UIView *viewRight = [UIView initViewBackColor:[UIColor whiteColor]];
-        [viewRight setFrame:CGRectMake(0*GPCommonLayoutScaleSizeWidthIndex, 0*GPCommonLayoutScaleSizeWidthIndex, 220*GPCommonLayoutScaleSizeWidthIndex, 120*GPCommonLayoutScaleSizeWidthIndex)];
+        [viewRight setFrame:CGRectMake(0*GPCommonLayoutScaleSizeWidthIndex, 0*GPCommonLayoutScaleSizeWidthIndex, 320*GPCommonLayoutScaleSizeWidthIndex, 120*GPCommonLayoutScaleSizeWidthIndex)];
         [viewRight addSubview:self.buttonGetVerifyCode];
         _textFieldVerify.rightView = viewRight;
         _textFieldVerify.rightView.contentMode = UIViewContentModeScaleAspectFit;

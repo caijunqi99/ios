@@ -49,21 +49,21 @@
         
         _labelTitle = [[UILabel alloc] init];
         _labelTitle.numberOfLines = 2;
-        _labelTitle.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelTitle.lineBreakMode = LineBreakModeDefault;
         _labelTitle.textColor = kColorFontMedium;
         _labelTitle.backgroundColor = [UIColor clearColor];
         _labelTitle.textAlignment = NSTextAlignmentLeft;
         
         _labelPrice = [[UILabel alloc] init];
         _labelPrice.numberOfLines = 1;
-        _labelPrice.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelPrice.lineBreakMode = LineBreakModeDefault;
         _labelPrice.textColor = [UIColor redColor];
         _labelPrice.backgroundColor = [UIColor clearColor];
         _labelPrice.textAlignment = NSTextAlignmentLeft;
         
         _labelPriceOrigin = [[UILabel alloc] init];
         _labelPriceOrigin.numberOfLines = 1;
-        _labelPriceOrigin.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelPriceOrigin.lineBreakMode = LineBreakModeDefault;
         _labelPriceOrigin.textColor = [UIColor grayColor];
         _labelPriceOrigin.backgroundColor = [UIColor clearColor];
         _labelPriceOrigin.textAlignment = NSTextAlignmentRight;

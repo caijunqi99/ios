@@ -57,7 +57,7 @@
         
         {
             UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, self.bounds.size.width, 30)];
-            title.font = [UIFont boldSystemFontOfSize:16];
+            title.font = FontRegularWithSize(16);
             title.textColor = [UIColor colorWithRed:0.25f green:0.22f blue:0.21f alpha:1.00f];
             title.textAlignment = NSTextAlignmentCenter;
             title.text = @"亮度";

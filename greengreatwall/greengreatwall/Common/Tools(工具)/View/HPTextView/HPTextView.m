@@ -26,7 +26,7 @@
 - (void)createInterface {
     self.backgroundColor = [UIColor whiteColor];
     _textView = [[UITextView alloc]initWithFrame:CGRectMake(10, 10, self.bounds.size.width - 20 ,self.bounds.size.height - 20)];
-    _textView.font = [UIFont systemFontOfSize:14];
+    _textView.font = FontRegularWithSize(12);
     _textView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _textView.delegate = self;
     [self addSubview:_textView];
@@ -35,13 +35,13 @@
     _textViewPlaceHolderLanel.textColor = [UIColor lightGrayColor];
     _textViewPlaceHolderLanel.text = @"请输入您需要填写的内容？";
     _textViewPlaceHolderLanel.numberOfLines = 0;
-    _textViewPlaceHolderLanel.font = [UIFont systemFontOfSize:14];
+    _textViewPlaceHolderLanel.font = FontRegularWithSize(12);
     [_textView addSubview:_textViewPlaceHolderLanel];
     
 
     _lenghLabel = [[UILabel alloc]init];
     _lenghLabel.textColor = [UIColor redColor];
-    _lenghLabel.font = [UIFont systemFontOfSize:11];
+    _lenghLabel.font = FontRegularWithSize(12);
     [_textView addSubview:_lenghLabel];
     _lenghLabel.textAlignment = NSTextAlignmentRight;
     _lenghLabel.frame = CGRectMake(_textView.bounds.size.width-55, _textView.bounds.size.height-15, 50, 10);
@@ -49,7 +49,7 @@
 
 - (void)setPlaceholdertext:(NSString *)Placeholdertext {
      _textViewPlaceHolderLanel.text = Placeholdertext;
-    CGSize titleSize = [Placeholdertext boundingRectWithSize:CGSizeMake(_textViewPlaceHolderLanel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.fontSize ? : 14]} context:nil].size;
+    CGSize titleSize = [Placeholdertext boundingRectWithSize:CGSizeMake(_textViewPlaceHolderLanel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:FontRegularWithSize(12)} context:nil].size;
     _textViewPlaceHolderLanel.frame = CGRectMake(5, 5, CGRectGetWidth(_textView.frame), titleSize.height);
 }
 
@@ -76,8 +76,8 @@
 -(void)setFontSize:(CGFloat)fontSize
 {
     _fontSize = fontSize;
-    _textView.font = [UIFont systemFontOfSize:_fontSize];
-    _textViewPlaceHolderLanel.font = [UIFont systemFontOfSize:_fontSize];
+    _textView.font = FontRegularWithSize(_fontSize);
+    _textViewPlaceHolderLanel.font = FontRegularWithSize(_fontSize);
 }
 
 #pragma mark - UITextViewDelegate

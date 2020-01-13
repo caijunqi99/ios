@@ -44,7 +44,7 @@
         [self addSubview:button];
         button.tag = 100 + i;
         [button addTarget:self action:@selector(handleClick:) forControlEvents:UIControlEventTouchUpInside];
-        button.titleLabel.font = [UIFont systemFontOfSize:_buttonTextFont ? : 13];
+        button.titleLabel.font = FontRegularWithSize(_buttonTextFont?:13);
         [button setTitleColor:_buttonTextColor forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [button setBackgroundImage:[self imageWithColor:_buttonBackgroundColor] forState:UIControlStateNormal];
@@ -86,7 +86,7 @@
         [self addSubview:button];
         button.tag = 100 + i;
         [button addTarget:self action:@selector(handleClick:) forControlEvents:UIControlEventTouchUpInside];
-        button.titleLabel.font = [UIFont systemFontOfSize:_buttonTextFont ? : 15];
+        button.titleLabel.font = FontRegularWithSize(_buttonTextFont?:15);
         [button setTitleColor:_buttonTextColor forState:UIControlStateNormal];
         [button setTitleColor:[_buttonTextColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
         button.backgroundColor = _buttonBackgroundColor;

@@ -54,7 +54,7 @@
         
         _labelName = [[UILabel alloc] init];
         _labelName.numberOfLines = 1;
-        _labelName.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelName.lineBreakMode = LineBreakModeDefault;
         _labelName.textColor = kColorFontMedium;
         _labelName.backgroundColor = [UIColor clearColor];
         _labelName.textAlignment = NSTextAlignmentLeft;
@@ -62,7 +62,7 @@
         
         _labelMobilePhone = [[UILabel alloc] init];
         _labelMobilePhone.numberOfLines = 1;
-        _labelMobilePhone.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelMobilePhone.lineBreakMode = LineBreakModeDefault;
         _labelMobilePhone.textColor = kColorFontMedium;
         _labelMobilePhone.backgroundColor = [UIColor clearColor];
         _labelMobilePhone.textAlignment = NSTextAlignmentLeft;
@@ -70,7 +70,7 @@
         
         _labelAddressDetail = [[UILabelAlignToTopLeft alloc] init];
         _labelAddressDetail.numberOfLines = 2;
-        _labelAddressDetail.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelAddressDetail.lineBreakMode = LineBreakModeDefault;
         _labelAddressDetail.textColor = [UIColor grayColor];
         _labelAddressDetail.backgroundColor = [UIColor clearColor];
         _labelAddressDetail.textAlignment = NSTextAlignmentLeft;
@@ -79,7 +79,7 @@
         
         _labelIsDefault = [[UILabel alloc] init];
         _labelIsDefault.numberOfLines = 1;
-        _labelIsDefault.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelIsDefault.lineBreakMode = LineBreakModeDefault;
         _labelIsDefault.textColor = [UIColor whiteColor];
         _labelIsDefault.backgroundColor = kColorTheme;
         _labelIsDefault.textAlignment = NSTextAlignmentCenter;

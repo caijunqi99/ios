@@ -85,25 +85,25 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_viewTemp setFrame:CGRectMake(0, 0, GPScreenWidth, 300*GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelPhoneIntro = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@"收货人电话:"];
-    _labelPhoneIntro.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelPhoneIntro.lineBreakMode = LineBreakModeDefault;
     _labelPhoneIntro.backgroundColor = [UIColor clearColor];
     [_viewTemp addSubview:_labelPhoneIntro];
     [_labelPhoneIntro setFrame:RectWithScale(CGRectMake(50, 50, 200, 80), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelShipping_codeIntro = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@"物流号:"];
-    _labelShipping_codeIntro.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelShipping_codeIntro.lineBreakMode = LineBreakModeDefault;
     _labelShipping_codeIntro.backgroundColor = [UIColor clearColor];
     [_viewTemp addSubview:_labelShipping_codeIntro];
     [_labelShipping_codeIntro setFrame:RectWithScale(CGRectMake(50, 150, 200, 80), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelPhone = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@""];
-    _labelPhone.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelPhone.lineBreakMode = LineBreakModeDefault;
     _labelPhone.backgroundColor = [UIColor clearColor];
     [_viewTemp addSubview:_labelPhone];
     [_labelPhone setFrame:RectWithScale(CGRectMake(300, 50, 700, 80), GPCommonLayoutScaleSizeWidthIndex)];
     
     _labelShipping_code = [UILabelAlignToTopLeft initLabelTextFont:FontRegularWithSize(12) textColor:[UIColor grayColor] title:@""];
-    _labelShipping_code.lineBreakMode = NSLineBreakByCharWrapping;
+    _labelShipping_code.lineBreakMode = LineBreakModeDefault;
     _labelShipping_code.backgroundColor = [UIColor clearColor];
     [_viewTemp addSubview:_labelShipping_code];
     [_labelShipping_code setFrame:RectWithScale(CGRectMake(300, 150, 700, 80), GPCommonLayoutScaleSizeWidthIndex)];

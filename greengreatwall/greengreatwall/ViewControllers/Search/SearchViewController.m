@@ -148,7 +148,7 @@
     topRightButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -5);
     topRightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     topRightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    topRightButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    topRightButton.titleLabel.font = FontRegularWithSize(15);
     topRightButton.frame = CGRectMake(0, 0, 40, 25);
     [topRightButton addTarget:self action:@selector(topRightButtonDidClicked) forControlEvents:UIControlEventTouchUpInside];
     topRightButton.backgroundColor = [UIColor clearColor];

@@ -14,7 +14,7 @@
     
     UITextField *textField = [[UITextField alloc]init];
     textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    textField.font = [UIFont hp_systemFontOfSize:font];
+    textField.font = FontRegularWithSize(font);
     textField.textColor = [UIColor darkGrayColor];
     textField.borderStyle = UITextBorderStyleNone;
     textField.placeholder = placeholder;

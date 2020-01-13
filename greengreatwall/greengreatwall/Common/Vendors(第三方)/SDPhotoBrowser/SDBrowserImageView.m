@@ -115,7 +115,7 @@
             label.bounds = CGRectMake(0, 0, 160, 30);
             label.center = CGPointMake(imageViewWeak.bounds.size.width * 0.5, imageViewWeak.bounds.size.height * 0.5);
             label.text = @"图片加载失败";
-            label.font = [UIFont systemFontOfSize:16];
+            label.font = FontRegularWithSize(16);
             label.textColor = [UIColor whiteColor];
             label.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
             label.layer.cornerRadius = 5;

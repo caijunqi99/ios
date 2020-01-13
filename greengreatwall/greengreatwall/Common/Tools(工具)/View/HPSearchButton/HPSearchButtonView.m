@@ -21,7 +21,7 @@
 - (void)createInterface {
     [self setImage:[UIImage imageNamed:@"search_gray"] forState:UIControlStateNormal];
     [self setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [self.titleLabel setFont:[UIFont systemFontOfSize:18]];
+    [self.titleLabel setFont:FontRegularWithSize(18)];
     self.backgroundColor = [UIColor whiteColor];
     self.layer.cornerRadius = 5;
     [self addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];

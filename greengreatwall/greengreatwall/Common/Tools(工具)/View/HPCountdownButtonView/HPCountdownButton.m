@@ -37,7 +37,7 @@
         self.completeBlock = completeBlock;
         
         [self setTitle:title forState:UIControlStateNormal];
-        [self.titleLabel setFont:[UIFont systemFontOfSize:countFontSize]];
+        [self.titleLabel setFont:FontRegularWithSize(countFontSize)];
         [self setTitleColor:[UIColor hex:@"424242"] forState:0];
         self.backgroundColor = [UIColor hex:@"ebebeb"];
         [self addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
@@ -75,14 +75,14 @@
 //    
 //    self.dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, lableWidth, height)];
 //    self.dayLabel.textAlignment = NSTextAlignmentCenter;
-//    self.dayLabel.font = [UIFont systemFontOfSize:12];
+//    self.dayLabel.font = FontRegularWithSize(12);
 //    self.dayLabel.textColor = [UIColor darkGrayColor];
 //    [self.dayLabel setLayerUIBorderColor:[UIColor grayColor] BorderWidth:1 cornerRadius:2];
 //    [self addSubview:_dayLabel];
 //    
     self.hourLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, lableWidth, height)];
     self.hourLabel.textAlignment = NSTextAlignmentCenter;
-    self.hourLabel.font = [UIFont systemFontOfSize:12];
+    self.hourLabel.font = FontRegularWithSize(12);
     self.hourLabel.textColor = [UIColor darkGrayColor];
     self.hourLabel.layer.borderColor = [[UIColor grayColor]CGColor];
     self.hourLabel.layer.borderWidth = 1;
@@ -92,12 +92,12 @@
     UILabel *firstLable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_hourLabel.frame), 0, offset, height)];
     firstLable.text = @":";
     firstLable.textAlignment = NSTextAlignmentCenter;
-    firstLable.font = [UIFont systemFontOfSize:12];
+    firstLable.font = FontRegularWithSize(12);
     [self addSubview:firstLable];
     
     self.minuteLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_hourLabel.frame) + offset, 0, lableWidth, height)];
     self.minuteLabel.textAlignment = NSTextAlignmentCenter;
-    self.minuteLabel.font = [UIFont systemFontOfSize:12];
+    self.minuteLabel.font = FontRegularWithSize(12);
     self.minuteLabel.textColor = [UIColor darkGrayColor];
     self.minuteLabel.layer.borderColor = [[UIColor grayColor]CGColor];
     self.minuteLabel.layer.borderWidth = 1;
@@ -107,12 +107,12 @@
     UILabel *secondLable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_minuteLabel.frame), 0, offset, height)];
     secondLable.text = @":";
     secondLable.textAlignment = NSTextAlignmentCenter;
-    secondLable.font = [UIFont systemFontOfSize:12];
+    secondLable.font = FontRegularWithSize(12);
     [self addSubview:secondLable];
     
     self.secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_minuteLabel.frame) + offset, 0, lableWidth, height)];
     self.secondLabel.textAlignment = NSTextAlignmentCenter;
-    self.secondLabel.font = [UIFont systemFontOfSize:12];
+    self.secondLabel.font = FontRegularWithSize(12);
     self.secondLabel.textColor = [UIColor darkGrayColor];
     self.secondLabel.layer.borderColor = [[UIColor grayColor]CGColor];
     self.secondLabel.layer.borderWidth = 1;

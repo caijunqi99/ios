@@ -32,14 +32,14 @@
 + (UIFont *)hp_systemFontOfSize:(CGFloat)pxSize{
     
     CGFloat pt = (pxSize/96)*72;
-    UIFont *font = [UIFont systemFontOfSize:pt];
+    UIFont *font = FontRegularWithSize(pt);
     return font;
 }
 
 + (UIFont *)hp_boldSystemFontOfSize:(CGFloat)pxSize {
     
     CGFloat pt = (pxSize/96)*72;
-    UIFont *font = [UIFont boldSystemFontOfSize:pt];
+    UIFont *font = FontRegularWithSize(pt);
     return font;
 }
 

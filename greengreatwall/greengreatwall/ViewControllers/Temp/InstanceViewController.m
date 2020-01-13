@@ -180,7 +180,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_cycleScrollViewTemp setFrame:CGRectMake(80, 50, 100, 20)];
     
     
-    _categoryBarTemp = [[CategoryBar alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, GPScreenWidth , 30)];
+    _categoryBarTemp = [[CategoryBar alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, GPScreenWidth , 44)];
     _categoryBarTemp.backgroundColor = [UIColor clearColor];
     _categoryBarTemp.delegate = self;
     _categoryBarTemp.lineColor = rgb(0, 185, 142);

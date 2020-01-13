@@ -98,7 +98,7 @@ static NSString * const ReuseIdentify  = @"ReuseIdentify";
     [_viewTop addSubview:_imageViewStoreIcon];
     
     
-    _categoryBar = [[CategoryBar alloc] initWithFrame:CGRectMake(0, _viewTop.bottom, GPScreenWidth , 30)];
+    _categoryBar = [[CategoryBar alloc] initWithFrame:CGRectMake(0, _viewTop.bottom, GPScreenWidth , 44)];
     _categoryBar.backgroundColor = [UIColor clearColor];
     _categoryBar.delegate = self;
     _categoryBar.lineColor = kColorTheme;

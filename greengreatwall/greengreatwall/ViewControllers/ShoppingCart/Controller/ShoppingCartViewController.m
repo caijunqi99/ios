@@ -575,7 +575,7 @@
     
     ShoppingCartHeaderView *headerView = [[ShoppingCartHeaderView alloc]initWithFrame:CGRectMake(0*GPCommonLayoutScaleSizeWidthIndex, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex, 100*GPCommonLayoutScaleSizeWidthIndex)];
     headerView.userInteractionEnabled = YES;
-    headerView.backgroundColor = [UIColor whiteColor];
+//    headerView.backgroundColor = [UIColor whiteColor];
     StoreModel *storeModel = self.storeArray[section];
     headerView.storeModel = storeModel;
     //分区区头点击事件--- 把事件分离出去
@@ -603,13 +603,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ShoppingCartTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     StoreModel *storeModel = self.storeArray[indexPath.section];
     GoodsModel *goodsModel = storeModel.goodsArray[indexPath.row];
-//    goodsModel.isSelect = !goodsModel.isSelect;
-    cell.goodsModel = goodsModel;
-    //把事件的处理分离出去
-    [self shoppingCartCellClickAction:cell storeModel:storeModel goodsModel:goodsModel indexPath:indexPath];
     
     GoodsViewController *vc = [[GoodsViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;

@@ -99,25 +99,15 @@
 - (void)setBackButtonWithTarget:(id)target
                         action:(SEL)action
 {
-    UIImage *tmpImage = GetImage(@"黑色左箭头");
-    CGSize newSize = CGSizeMake(14, 24);
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0f);
-    [tmpImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *backButtonImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [self setLeftNavButtonImage:backButtonImage Title:@"" Frame:CGRectMake(10, 10, 14, 24) Target:target action:action];
+    UIImage *backButtonImage = GetImage(@"黑色左按钮-1");
+    [self setLeftNavButtonImage:backButtonImage Title:@"" Frame:CGRectMake(0, 0, 30, 44) Target:target action:action];
 }
 
 - (void)setBackButtonWhiteWithTarget:(id)target
                               action:(SEL)action
 {
-    UIImage *tmpImage = GetImage(@"白色左箭头");
-    CGSize newSize = CGSizeMake(14, 24);
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0f);
-    [tmpImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *backButtonImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [self setLeftNavButtonImage:backButtonImage Title:@"" Frame:CGRectMake(10, 10, 14, 24) Target:target action:action];
+    UIImage *backButtonImage = GetImage(@"白色左按钮-1");
+    [self setLeftNavButtonImage:backButtonImage Title:@"" Frame:CGRectMake(0, 0, 30, 44) Target:target action:action];
 }
 
 
@@ -159,7 +149,7 @@
     
 //    [navButton.widthAnchor constraintEqualToConstant:frame.size.width].active = YES;
 //    [navButton.heightAnchor constraintEqualToConstant:frame.size.height].active = YES;
-    [navButton setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
+    [navButton setEnlargeEdgeWithTop:10 right:10 bottom:10 left:10];
     
     [navButton setClipsToBounds:YES];
     [navButton.layer setMasksToBounds:YES];
@@ -177,13 +167,11 @@
     
     [navButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *navItem = [[UIBarButtonItem alloc] initWithCustomView:navButton];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0)
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=11.0)
     { // iOS 7以上
-//        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-//                                                                                        target:nil
-//                                                                                        action:nil];
-//        negativeSpacer.width = -6;
-        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects: navItem, nil] animated:NO];//negativeSpacer,
+        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        negativeSpacer.width = 6;
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects: negativeSpacer,navItem, nil] animated:NO];//negativeSpacer,
     }
     else
     {
@@ -205,7 +193,7 @@
     
 //    [navButton.widthAnchor constraintEqualToConstant:frame.size.width].active = YES;
 //    [navButton.heightAnchor constraintEqualToConstant:frame.size.height].active = YES;
-    [navButton setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
+    [navButton setEnlargeEdgeWithTop:10 right:10 bottom:10 left:10];
     
     [navButton setClipsToBounds:YES];
     [navButton.layer setMasksToBounds:YES];
@@ -223,18 +211,43 @@
     
     [navButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *navItem = [[UIBarButtonItem alloc] initWithCustomView:navButton];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0)
-    { // iOS 7以上
-        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                                                                        target:nil
-                                                                                        action:nil];
-        negativeSpacer.width = -6;
-        [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, navItem, nil] animated:NO];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=11.0)
+    { // iOS 11以上
+        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        negativeSpacer.width = 10;
+        [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects: navItem,negativeSpacer, nil] animated:NO];
     }
     else
     {
         self.navigationItem.leftBarButtonItem = navItem;
     }
+//    ios 10以下
+//    UIButton *btnLeft = [[UIButton alloc] initWithFrame:frame];
+//    [btnLeft setTitle:title forState:UIControlStateNormal];
+//    [btnLeft setBackgroundImage:image forState:UIControlStateNormal];
+//    btnLeft.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    [btnLeft addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btnLeft];
+//
+//    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+//                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+//                                       target:nil action:nil];
+//    negativeSpacer.width = -5;
+//    [self.navigationItem setLeftBarButtonItems:@[negativeSpacer,leftItem]];
+    
+//    ios11
+//    UIButton *btnLeft = [[UIButton alloc] initWithFrame:frame];
+//    [btnLeft setTitle:title forState:UIControlStateNormal];
+//    [btnLeft setImage:image forState:UIControlStateNormal];
+//    btnLeft.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    [btnLeft addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btnLeft];
+//
+//    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+//                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+//                                       target:nil action:nil];
+//    negativeSpacer.width = 0;
+//    [self.navigationItem setLeftBarButtonItems:@[negativeSpacer,leftItem]];
 }
 
 // 设置导航栏右侧按钮
@@ -266,7 +279,7 @@
                                                              frame:secondFrame
                                                             Target:secondtarget
                                                             action:secondAction];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0)
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=11.0)
     { // iOS 7以上
         UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                                                                         target:nil

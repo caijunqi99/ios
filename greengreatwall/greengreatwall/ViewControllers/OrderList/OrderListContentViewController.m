@@ -87,7 +87,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
 {
     viewSetBackgroundColor([UIColor groupTableViewBackgroundColor]);
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(50*GPCommonLayoutScaleSizeWidthIndex, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex , GPScreenHeight - kNavBarAndStatusBarHeight - 30) style:(UITableViewStyleGrouped)];//UITableViewStyleGrouped
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(50*GPCommonLayoutScaleSizeWidthIndex, 0, GPScreenWidth - 100*GPCommonLayoutScaleSizeWidthIndex , GPScreenHeight - kNavBarAndStatusBarHeight - 55) style:(UITableViewStyleGrouped)];//UITableViewStyleGrouped
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

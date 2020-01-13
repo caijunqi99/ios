@@ -64,7 +64,7 @@ static NSString * const ReuseIdentify  = @"ReuseIdentify";
     
     viewSetBackgroundColor(kColorViewBackground);
     
-    _categoryBar = [[CategoryBar alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, GPScreenWidth , 30)];
+    _categoryBar = [[CategoryBar alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, GPScreenWidth , 44)];
     _categoryBar.backgroundColor = [UIColor clearColor];
     _categoryBar.delegate = self;
     _categoryBar.lineColor = rgb(0, 185, 142);

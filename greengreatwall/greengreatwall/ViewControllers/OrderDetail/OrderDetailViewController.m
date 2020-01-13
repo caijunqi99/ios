@@ -288,16 +288,11 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_tableViewOrder setContentOffset:CGPointMake(0, -_viewh)];
     
     
-    UIImage *tmpImage = GetImage(@"白色左箭头");
-    CGSize newSize = CGSizeMake(14, 24);
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0f);
-    [tmpImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *backButtonImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *backButtonImage = GetImage(@"白色左按钮-1");
     
     UIButton *navButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [navButton setFrame:CGRectMake(20, kStatusBarHeight +10, 14, 24)];
-    [navButton setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
+    [navButton setFrame:CGRectMake(20, kStatusBarHeight, 30, 44)];
+    [navButton setEnlargeEdgeWithTop:10 right:10 bottom:10 left:10];
     [navButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [navButton setImage:backButtonImage forState:UIControlStateNormal];
     navButton.imageView.contentMode = UIViewContentModeScaleToFill;

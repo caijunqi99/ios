@@ -637,7 +637,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[UINavigationBar appearance]setShadowImage:[UIImage new]];
     
     //设置导航条默认返回按钮的样式
-    UIImage *tmpImage = GetImage(@"黑色左箭头");
+//    UIImage *tmpImage = GetImage(@"黑色左箭头");
+    UIImage *tmpImage = [UIImage new];
     CGSize newSize = CGSizeMake(14, 24);
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0f);
     [tmpImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
@@ -645,6 +646,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     UIGraphicsEndImageContext();
     [[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
     [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backButtonImage];
+    
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
     //translucent：这是iOS7中给UITabBar、UINavigationBar新增的属性，如果为YES，那么显示的是半透明的效果，能够模糊看到被bar遮盖的东西，如果设置为NO，则没有模糊透明的效果。
     //https://www.jianshu.com/p/a75632bab095
     

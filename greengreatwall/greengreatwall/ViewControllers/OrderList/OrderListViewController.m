@@ -80,7 +80,7 @@ static NSString * const ReuseIdentify  = @"ReuseIdentify";
     [self settingNavTitle:@"订单列表"];
     viewSetBackgroundColor([UIColor groupTableViewBackgroundColor]);
     
-    _categoryBar = [[CategoryBar alloc] initWithFrame:CGRectMake(0, 0, GPScreenWidth , 20)];
+    _categoryBar = [[CategoryBar alloc] initWithFrame:CGRectMake(0, 0, GPScreenWidth , 44)];
     _categoryBar.backgroundColor = [UIColor whiteColor];
     _categoryBar.delegate = self;
     _categoryBar.lineColor = [UIColor clearColor];

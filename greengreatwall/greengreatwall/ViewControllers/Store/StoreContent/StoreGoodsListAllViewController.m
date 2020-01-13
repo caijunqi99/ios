@@ -82,7 +82,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_tableView setShowsHorizontalScrollIndicator:NO];
     [self setupRefreshWithScrollView:_tableView];
     [self.view addSubview:_tableView];
-    CGFloat height = GPScreenHeight - kNavBarAndStatusBarHeight - 400*GPCommonLayoutScaleSizeWidthIndex - 30 - 10;
+    CGFloat height = GPScreenHeight - kNavBarAndStatusBarHeight - 400*GPCommonLayoutScaleSizeWidthIndex - 44 - 10;
     [_tableView setFrame:CGRectMake(0, 0, GPScreenWidth, height)];
     
 }

@@ -86,7 +86,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     viewSetBackgroundColor(kColorBasic);
     
     // 高度 = 屏幕高度 - 导航栏高度64 - 频道视图高度44
-    CGFloat height = GPScreenHeight - kNavBarAndStatusBarHeight - 400*GPCommonLayoutScaleSizeWidthIndex - 30 - 10;
+    CGFloat height = GPScreenHeight - kNavBarAndStatusBarHeight - 400*GPCommonLayoutScaleSizeWidthIndex - 44 - 10;
     CGRect frame = CGRectMake(0, 0, GPScreenWidth, height);
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];

@@ -69,7 +69,7 @@ static NSString * const ReuseIdentify  = @"ReuseIdentify";
     
     viewSetBackgroundColor(kColorViewBackground);
     
-    _categoryBar = [[CategoryBar alloc] initWithFrame:CGRectMake(0, 0, GPScreenWidth , 20)];
+    _categoryBar = [[CategoryBar alloc] initWithFrame:CGRectMake(0, 0, GPScreenWidth , 44)];
     _categoryBar.backgroundColor = [UIColor clearColor];
     _categoryBar.delegate = self;
     _categoryBar.lineColor = [UIColor clearColor];
@@ -90,7 +90,7 @@ static NSString * const ReuseIdentify  = @"ReuseIdentify";
     
     
     // 高度 = 屏幕高度 - 导航栏高度64 - 频道视图高度44
-    CGFloat h = GPScreenHeight - kTabBarHeight - 70 - _categoryBar.height - 10 - kStatusBarHeight;
+    CGFloat h = GPScreenHeight - kTabBarHeight - 85 - _categoryBar.height - 10 - kStatusBarHeight;
     CGRect frame = CGRectMake(0, _categoryBar.bottom+10, GPScreenWidth, h);
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];

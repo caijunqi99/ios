@@ -124,10 +124,10 @@
     
     _buttonGetVerifyCode = [UIButton initButtonTitleFont:16 titleColor:[UIColor whiteColor] titleName:@"获取验证码" backgroundColor:kColorTheme radius:5];
     [_buttonGetVerifyCode addTarget:self tag:14 action:@selector(buttonClick:)];
-    [_buttonGetVerifyCode setFrame:RectWithScale(CGRectMake(0, 40, 250, 40), GPCommonLayoutScaleSizeWidthIndex)];
+    [_buttonGetVerifyCode setFrame:RectWithScale(CGRectMake(0, 20, 300, 80), GPCommonLayoutScaleSizeWidthIndex)];
     
     UIView *viewRight1 = [UIView initViewBackColor:[UIColor clearColor]];
-    [viewRight1 setFrame:RectWithScale(CGRectMake(0, 0, 300, 120), GPCommonLayoutScaleSizeWidthIndex)];
+    [viewRight1 setFrame:RectWithScale(CGRectMake(0, 0, 370, 120), GPCommonLayoutScaleSizeWidthIndex)];
     [viewRight1 addSubview:_buttonGetVerifyCode];
     _textFieldTemp[1].rightView = viewRight1;
     _textFieldTemp[1].rightView.contentMode = UIViewContentModeScaleAspectFit;

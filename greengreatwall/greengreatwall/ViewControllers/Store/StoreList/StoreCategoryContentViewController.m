@@ -82,7 +82,7 @@ static NSString * const ReuseIdentify = @"ReuseIdentify";
     [_tableView setShowsHorizontalScrollIndicator:NO];
     [self setupRefreshWithScrollView:_tableView];
     [self.view addSubview:_tableView];
-    [_tableView setFrame:CGRectMake(0, 0, GPScreenWidth , GPScreenHeight - kStatusBarHeight - kTabBarHeight - 100)];
+    [_tableView setFrame:CGRectMake(0, 0, GPScreenWidth , GPScreenHeight - kStatusBarHeight - kTabBarHeight - 130)];
 }
 
 - (void)setupRefreshWithScrollView:(UIScrollView *)scrollView
